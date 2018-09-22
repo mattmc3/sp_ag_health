@@ -1,0 +1,5 @@
+The road to v1.0
+
+Features:
+	- Add functionality to specify select/order by columns @done(2018-09-22)
+	- pretty format for KB
