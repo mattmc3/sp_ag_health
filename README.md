@@ -40,10 +40,18 @@ You can view even more detail [here][very-detailed-erd].
 This proc is not 1.0 yet, and as such **is subject to change!** Changes may
 include:
 
-- Columns (additional, datatypes, names, default order, etc)
-- Proc parameters (name, order)
+- Columns (additional, datatypes, names, order, etc)
+- Proc parameters (additional, names, order)
 - Others changes as necessary for design, performance, features, and maintainability
 
+### Resources
+
+- Get the Microsoft System Views Map [here][ms-system-views-map]
+- Microsoft docs [here](ms-docs1) and [here][ms-docs2]
+
+[ms-system-views-map]: https://www.microsoft.com/en-us/download/details.aspx?id=39083
+[ms-docs1]: https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-availability-groups-transact-sql?view=sql-server-2017
+[ms-docs2]: https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/always-on-availability-groups-dynamic-management-views-functions?view=sql-server-2017
 [overview-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/System%20Views%20Map%20Always%20On.png
 [detail-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/AlwaysOn.png
 [very-detailed-erd]: https://cdn.rawgit.com/mattmc3/sp_ag_health/8abff33d/erd/AlwaysOn.html
