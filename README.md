@@ -44,13 +44,13 @@ include:
 - Proc parameters (additional, names, order)
 - Others changes as necessary for design, performance, features, and maintainability
 
-### References
+### Resources
 
 - Get the Microsoft System Views Map [here][ms-system-views-map]
 - See Microsoft system view docs [here][ms-docs1] and [here][ms-docs2]
 
 [ms-system-views-map]: https://www.microsoft.com/en-us/download/details.aspx?id=39083
-[ms-docs1]: https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-availability-groups-transact-sql?view=sql-server-2017
+[ms-docs1]: https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/always-on-availability-groups-catalog-views-transact-sql?view=sql-server-2017
 [ms-docs2]: https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/always-on-availability-groups-dynamic-management-views-functions?view=sql-server-2017
 [overview-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/System%20Views%20Map%20Always%20On.png
 [detail-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/AlwaysOn.png
