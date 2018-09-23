@@ -13,7 +13,7 @@ NULL = database is not part of an availability replica of in availability group.
 
 NULL = database is not part of an availability replica in any availability group.]]></comment>
 			</column>
-			<column name="database_name" type="sysname" length="128" decimal="0" jt="12" >
+			<column name="database_name" type="sysname" length="128" decimal="0" jt="12" todo="2" >
 				<comment><![CDATA[Name of the database that was added to the availability group.]]></comment>
 			</column>
 			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
@@ -117,7 +117,7 @@ IPv6 address: 2001::4898:23:1002:20f:1fff:feff:b3a3]]></comment>
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
 				<comment><![CDATA[Unique identifier (GUID) of the availability group.]]></comment>
 			</column>
-			<column name="name" type="sysname" length="128" decimal="0" jt="12" >
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" todo="2" >
 				<comment><![CDATA[Name of the availability group. This is a user-specified name that must be unique within the Windows Server Failover Cluster (WSFC).]]></comment>
 			</column>
 			<column name="resource_id" type="nvarchar" length="40" decimal="0" jt="12" >
@@ -264,7 +264,7 @@ If the local server instance is unable to talk to the WSFC failover cluster, for
 			<column name="replica_metadata_id" type="int" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[ID for the local metadata object for availability replicas in the Database Engine.]]></comment>
 			</column>
-			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" >
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" todo="2" >
 				<comment><![CDATA[Server name of the instance of SQL Server that is hosting this replica and, for a non-default instance, its instance name.]]></comment>
 			</column>
 			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" >
@@ -279,7 +279,7 @@ NULL = Unable to talk to the WSFC failover cluster.
 
 To change this endpoint, use the ENDPOINT_URL option of ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
 			</column>
-			<column name="availability_mode" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="availability_mode" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[The availability mode of the replica, one of:
 
 0 | Asynchronous commit. The primary replica can commit transactions without waiting for the secondary to write the log to disk.
@@ -504,7 +504,7 @@ For more information, see Active Secondaries: Backup on Secondary Replicas (Alwa
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
 				<comment><![CDATA[Unique identifier of the availability group.]]></comment>
 			</column>
-			<column name="primary_replica" type="nvarchar" length="128" decimal="0" jt="12" >
+			<column name="primary_replica" type="nvarchar" length="128" decimal="0" jt="12" todo="2" >
 				<comment><![CDATA[Name of the server instance that is hosting the current primary replica.
 
 NULL = Not the primary replica or unable to communicate with the WSFC failover cluster.]]></comment>
@@ -549,7 +549,7 @@ ONLINE
 
 NULL]]></comment>
 			</column>
-			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[Reflects a rollup of the synchronization_health of all availability replicas in the availability group. Below are the possible values and their descriptions.
 
 0: Not healthy. None of the availability replicas have a healthy synchronization_health (2 = HEALTHY).
@@ -622,14 +622,14 @@ JOINED_FAILOVER_CLUSTER_INSTANCE]]></comment>
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
 				<comment><![CDATA[Unique identifier of the availability group.]]></comment>
 			</column>
-			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" mandatory="y" todo="2" >
 				<comment><![CDATA[Whether the replica is local, one of:
 
 0 = Indicates a remote secondary replica in an availability group whose primary replica is hosted by the local server instance. This value occurs only on the primary replica location.
 
 1 = Indicates a local replica. On secondary replicas, this is the only available value for the availability group to which the replica belongs.]]></comment>
 			</column>
-			<column name="role" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="role" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[Current Always On availability groups role of a local replica or a connected remote replica, one of:
 
 0 = Resolving
@@ -685,7 +685,7 @@ FAILED_NO_QUORUM
 
 NULL]]></comment>
 			</column>
-			<column name="connected_state" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="connected_state" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[Whether a secondary replica is currently connected to the primary replica. The possible values are shown below with their descriptions.
 
 0 : Disconnected. The response of an availability replica to the DISCONNECTED state depends on its role: On the primary replica, if a secondary replica is disconnected, its secondary databases are marked as NOT SYNCHRONIZED on the primary replica, which waits for the secondary to reconnect; On a secondary replica, upon detecting that it is disconnected, the secondary replica attempts to reconnect to the primary replica.
@@ -804,7 +804,7 @@ HEALTHY]]></comment>
 
 NULL = Unknown (no quorum)]]></comment>
 			</column>
-			<column name="is_database_joined" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+			<column name="is_database_joined" type="bit" length="1" decimal="0" jt="-7" mandatory="y" todo="2" >
 				<comment><![CDATA[Indicates whether the database on this availability replica has been joined to the availability group, one of:
 
 0 = Database is not joined to the availability group on this availability replica.
@@ -857,7 +857,7 @@ Depending on the action and higher-level states, database-state information may 
 
 Applies to: SQL Server 2014 (12.x) through SQL Server 2017.]]></comment>
 			</column>
-			<column name="synchronization_state" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="synchronization_state" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[Data-movement state, one of the following values.
 
 0 = Not synchronizing. For a primary database, indicates that the database is not ready to synchronize its transaction log with the corresponding secondary databases. For a secondary database, indicates that the database has not started log synchronization because of a connection issue, is being suspended, or is going through transition states during startup or a role switch.
@@ -894,7 +894,7 @@ For a database on an asynchronous-commit availability replica, this value is alw
 
 For a database on a synchronous-commit availability replica, this value is accurate only on the primary database.]]></comment>
 			</column>
-			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" >
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
 				<comment><![CDATA[Reflects the intersection of the synchronization state of a database that is joined to the availability group on the availability replica and the availability mode of the availability replica (synchronous-commit or asynchronous-commit mode), one of the following values.
 
 0 = Not healthy. The synchronization_state of the database is 0 (NOT SYNCHRONIZING).
@@ -948,7 +948,7 @@ OFFLINE
 
 Note: Same as state_desc column in sys.databases.]]></comment>
 			</column>
-			<column name="is_suspended" type="bit" length="1" decimal="0" jt="-7" >
+			<column name="is_suspended" type="bit" length="1" decimal="0" jt="-7" todo="2" >
 				<comment><![CDATA[Database state, one of:
 
 0 = Resumed
@@ -1041,16 +1041,16 @@ Note: last_hardened_lsn reflects a log-block ID padded with zeroes. It is not an
 			<column name="last_redone_time" type="datetime" length="23" decimal="3" jt="93" >
 				<comment><![CDATA[Time when the last log record was redone on the secondary database.]]></comment>
 			</column>
-			<column name="log_send_queue_size" type="bigint" length="19" decimal="0" jt="-5" >
+			<column name="log_send_queue_size" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
 				<comment><![CDATA[Amount of log records of the primary database that has not been sent to the secondary databases, in kilobytes (KB).]]></comment>
 			</column>
-			<column name="log_send_rate" type="bigint" length="19" decimal="0" jt="-5" >
+			<column name="log_send_rate" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
 				<comment><![CDATA[Average rate at which primary replica instance sent data during last active period, in kilobytes (KB)/second.]]></comment>
 			</column>
-			<column name="redo_queue_size" type="bigint" length="19" decimal="0" jt="-5" >
+			<column name="redo_queue_size" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
 				<comment><![CDATA[Amount of log records in the log files of the secondary replica that has not yet been redone, in kilobytes (KB).]]></comment>
 			</column>
-			<column name="redo_rate" type="bigint" length="19" decimal="0" jt="-5" >
+			<column name="redo_rate" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
 				<comment><![CDATA[Average Rate at which the log records are being redone on a given secondary database, in kilobytes (KB)/second.]]></comment>
 			</column>
 			<column name="filestream_send_rate" type="bigint" length="19" decimal="0" jt="-5" >
@@ -1131,20 +1131,20 @@ Applies to: SQL Server 2016 (13.x) through SQL Server 2017.]]></comment>
 	</schema>
 	<layout name="AlwaysOn" id="Layout_3a41df9" show_column_type="y" show_schema_name="y" show_relation="columns" >
 		<comment><![CDATA[AlwaysOn]]></comment>
-		<entity schema="sys" name="databases" color="3986C1" x="752" y="1568" />
-		<entity schema="sys" name="availability_groups" color="3986C1" x="448" y="512" />
-		<entity schema="sys" name="availability_replicas" color="3986C1" x="896" y="496" />
-		<entity schema="sys" name="availability_databases_cluster" color="3986C1" x="272" y="1120" />
-		<entity schema="sys" name="availability_group_listeners" color="3986C1" x="448" y="240" />
-		<entity schema="sys" name="availability_groups_cluster" color="669999" x="48" y="512" />
-		<entity schema="sys" name="availability_group_listener_ip_addresses" color="B3801A" x="992" y="240" />
-		<entity schema="sys" name="dm_hadr_availability_group_states" color="B3801A" x="64" y="752" />
-		<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" color="B3801A" x="912" y="912" />
-		<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" color="B3801A" x="1376" y="512" />
-		<entity schema="sys" name="dm_hadr_availability_replica_states" color="B3801A" x="1376" y="656" />
-		<entity schema="sys" name="dm_hadr_database_replica_cluster_states" color="B3801A" x="960" y="1104" />
-		<entity schema="sys" name="dm_hadr_database_replica_states" color="B3801A" x="1392" y="1104" />
-		<callout x="704" y="80" pointer="Round" >
+		<entity schema="sys" name="databases" color="3986C1" x="752" y="1408" />
+		<entity schema="sys" name="availability_groups_cluster" color="669999" x="48" y="352" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" color="B3801A" x="912" y="752" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" color="B3801A" x="1376" y="352" />
+		<entity schema="sys" name="availability_databases_cluster" color="3986C1" x="272" y="960" />
+		<entity schema="sys" name="availability_groups" color="3986C1" x="448" y="352" />
+		<entity schema="sys" name="dm_hadr_availability_replica_states" color="B3801A" x="1376" y="496" />
+		<entity schema="sys" name="dm_hadr_availability_group_states" color="B3801A" x="64" y="592" />
+		<entity schema="sys" name="availability_replicas" color="3986C1" x="896" y="336" />
+		<entity schema="sys" name="dm_hadr_database_replica_cluster_states" color="B3801A" x="960" y="944" />
+		<entity schema="sys" name="dm_hadr_database_replica_states" color="B3801A" x="1392" y="944" />
+		<entity schema="sys" name="availability_group_listeners" color="3986C1" x="448" y="96" />
+		<entity schema="sys" name="availability_group_listener_ip_addresses" color="B3801A" x="944" y="80" />
+		<callout x="48" y="112" pointer="Round" >
 			<comment><![CDATA[SQL Server 2017 Availability Groups Schema   
 
 author: mattmc3
