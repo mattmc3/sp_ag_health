@@ -1131,7 +1131,6 @@ Applies to: SQL Server 2016 (13.x) through SQL Server 2017.]]></comment>
 	</schema>
 	<layout name="AlwaysOn" id="Layout_3a41df9" show_column_type="y" show_schema_name="y" show_relation="columns" >
 		<comment><![CDATA[AlwaysOn]]></comment>
-		<entity schema="sys" name="databases" color="3986C1" x="752" y="1408" />
 		<entity schema="sys" name="availability_groups_cluster" color="669999" x="48" y="352" />
 		<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" color="B3801A" x="912" y="752" />
 		<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" color="B3801A" x="1376" y="352" />
