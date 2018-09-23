@@ -46,4 +46,4 @@ include:
 
 [overview-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/System%20Views%20Map%20Always%20On.png
 [detail-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/AlwaysOn.png
-[very-detailed-erd]: http://htmlpreview.github.io/?https://github.com/mattmc3/sp_ag_health/blob/master/erd/AlwaysOn.html
+[very-detailed-erd]: https://cdn.rawgit.com/mattmc3/sp_ag_health/8abff33d/erd/AlwaysOn.html
