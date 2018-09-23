@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="AlwaysOn" id="Project_200b7ad" template="Default" database="SqlServer" >
+	<schema name="sys" catalogname="sandbox" schemaname="sys" >
+		<table name="availability_databases_cluster" >
+			<comment><![CDATA[Contains one row for each availability database on the instance of SQL Server that is hosting an availability replica for any Always On availability group in the Windows Server Failover Clustering (WSFC) cluster, regardless of whether the local copy database has been joined to the availability group yet.]]></comment>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the availability group in which the availability group, if any, in which the database is participating.
+
+NULL = database is not part of an availability replica of in availability group.]]></comment>
+			</column>
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the database within the availability group, if any, in which the database is participating. group_database_id is the same for this database on the primary replica and on every secondary replica on which the database has been joined to the availability group.
+
+NULL = database is not part of an availability replica in any availability group.]]></comment>
+			</column>
+			<column name="database_name" type="sysname" length="128" decimal="0" jt="12" todo="2" >
+				<comment><![CDATA[Name of the database that was added to the availability group.]]></comment>
+			</column>
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<fk name="Fk_availability_databases_cluster_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
+		</table>
+		<table name="availability_group_listener_ip_addresses" >
+			<comment><![CDATA[Returns a row for every IP address that is associated with any Always On availability group listener in the Windows Server Failover Clustering (WSFC) cluster.]]></comment>
+			<column name="listener_id" type="nvarchar" length="36" jt="12" mandatory="y" >
+				<comment><![CDATA[Resource GUID from Windows Server Failover Clustering (WSFC) cluster.]]></comment>
+			</column>
+			<column name="ip_address" type="nvarchar" length="48" decimal="0" jt="12" >
+				<comment><![CDATA[Configured virtual IP address of the availability group listener. Returns a single IPv4 or IPv6 address.]]></comment>
+			</column>
+			<column name="ip_subnet_mask" type="nvarchar" length="15" decimal="0" jt="12" >
+				<comment><![CDATA[Configured IP subnet mask for the IPv4 address, if any, that is configured for the availability group listener.
+
+NULL = IPv6 subnet]]></comment>
+			</column>
+			<column name="is_dhcp" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+				<comment><![CDATA[Whether the IP address is configured by DHCP, one of:
+
+0 = IP address is not configured by DHCP.
+
+1 = IP address is configured by DHCP]]></comment>
+			</column>
+			<column name="network_subnet_ip" type="nvarchar" length="48" decimal="0" jt="12" >
+				<comment><![CDATA[Network subnet IP address that specifies the subnet to which the IP address belongs.]]></comment>
+			</column>
+			<column name="network_subnet_prefix_length" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[Network subnet prefix length of the subnet to which the IP address belongs.]]></comment>
+			</column>
+			<column name="network_subnet_ipv4_mask" type="nvarchar" length="48" decimal="0" jt="12" >
+				<comment><![CDATA[Network subnet mask of the subnet to which the IP address belongs. network_subnet_ipv4_mask to specify the DHCP <network_subnet_option> options in a WITH DHCP clause of the CREATE AVAILABILITY GROUP or ALTER AVAILABILITY GROUP Transact-SQL statement.
+
+NULL = IPv6 subnet]]></comment>
+			</column>
+			<column name="state" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[IP resource ONLINE/OFFLINE state from the WSFC cluster, one of:
+
+1 = Online. IP resource is online.
+
+0 = Offline. IP resource is offline.
+
+2 = Online Pending. IP resource is offline but is being brought online.
+
+3 = Failed. IP resource was being brought online but failed.]]></comment>
+			</column>
+			<column name="state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of state, one of:
+
+ONLINE
+
+OFFLINE
+
+ONLINE_PENDING
+
+FAILED]]></comment>
+			</column>
+			<fk name="Fk_availability_group_listener_ip_addresses_availability_group_listeners" virtual="y" to_schema="sys" to_table="availability_group_listeners" >
+				<fk_column name="listener_id" pk="listener_id" />
+			</fk>
+		</table>
+		<table name="availability_group_listeners" >
+			<comment><![CDATA[For each Always On availability group, returns either zero rows indicating that no network name is associated with the availability group, or returns a row for each availability-group listener configuration in the Windows Server Failover Clustering (WSFC) cluster. This view displays the real-time configuration gathered from cluster.]]></comment>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Availability group ID (group_id) from sys.availability_groups.]]></comment>
+			</column>
+			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[GUID from the cluster resource ID.]]></comment>
+			</column>
+			<column name="dns_name" type="nvarchar" length="63" decimal="0" jt="12" >
+				<comment><![CDATA[Configured network name (hostname) of the availability group listener.]]></comment>
+			</column>
+			<column name="port" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[The TCP port number configured for the availability group listener.
+
+NULL = Listener was configured outside SQL Server and its port number has not been added to the availability group. To add the port, pleaseuse the MODIFY LISTENER option of the ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="is_conformant" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+				<comment><![CDATA[Whether this IP configuration is conformant, one of:
+
+1 = Listener is conformant. Only “OR” relations exist among its Internet Protocol (IP) addresses. Conformant encompasses every an IP configuration that was created by the CREATE AVAILABILITY GROUP Transact-SQL statement. In addition, if an IP configuration that was created outside of SQL Server, for example by using the WSFC Failover Cluster Manager, but can be modified by the ALTER AVAILABILITY GROUP tsql statement, the IP configuration qualifies as conformant.
+
+0 = Listener is nonconformant. Typically, this indicates an IP address that could not be configured by using SQL Server commands and, instead, was defined directly in the WSFC cluster.]]></comment>
+			</column>
+			<column name="ip_configuration_string_from_cluster" type="nvarchar" length="4000" decimal="0" jt="12" >
+				<comment><![CDATA[Cluster IP configuration strings, if any, for this listener. NULL = Listener has no virtual IP addresses. For example:
+
+IPv4 address: 65.55.39.10.
+
+IPv6 address: 2001::4898:23:1002:20f:1fff:feff:b3a3]]></comment>
+			</column>
+			<fk name="Fk_availability_group_listeners_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
+		</table>
+		<table name="availability_groups" >
+			<comment><![CDATA[Returns a row for each availability group for which the local instance of SQL Server hosts an availability replica. Each row contains a cached copy of the availability group metadata.]]></comment>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier (GUID) of the availability group.]]></comment>
+			</column>
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" todo="2" >
+				<comment><![CDATA[Name of the availability group. This is a user-specified name that must be unique within the Windows Server Failover Cluster (WSFC).]]></comment>
+			</column>
+			<column name="resource_id" type="nvarchar" length="40" decimal="0" jt="12" >
+				<comment><![CDATA[Resource ID for the WSFC cluster resource.]]></comment>
+			</column>
+			<column name="resource_group_id" type="nvarchar" length="40" decimal="0" jt="12" >
+				<comment><![CDATA[Resource Group ID for the WSFC cluster resource group of the availability group.]]></comment>
+			</column>
+			<column name="failure_condition_level" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[User-defined failure condition level under which an automatic failover must be triggered, one of the integer values shown in the table immediately below this table.
+
+The failure-condition levels (1–5) range from the least restrictive, level 1, to the most restrictive, level 5. A given condition level encompasses all of the less restrictive levels. Thus, the strictest condition level, 5, includes the four less restrictive condition levels (1-4), level 4 includes levels 1-3, and so forth.
+
+To change this value, use the FAILURE_CONDITION_LEVEL option of the ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="health_check_timeout" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[Wait time (in milliseconds) for the sp_server_diagnostics system stored procedure to return server-health information, before the server instance is assumed to be slow or hung. The default value is 30000 milliseconds (30 seconds).
+
+To change this value, use the HEALTH_CHECK_TIMEOUT option of the ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="automated_backup_preference" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Preferred location for performing backups on the availability databases in this availability group. The following are the possible values and their descriptions.
+
+
+
+0 : Primary. Backups should always occur on the primary replica.
+
+1 : Secondary only. Performing backups on a secondary replica is preferable.
+
+2 : Prefer Secondary. Performing backups on a secondary replica preferable, but performing backups on the primary replica is acceptable if no secondary replica is available for backup operations. This is the default behavior.
+
+3 : Any Replica. No preference about whether backups are performed on the primary replica or on a secondary replica.
+
+
+
+For more information, see Active Secondaries: Backup on Secondary Replicas (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="automated_backup_preference_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of automated_backup_preference, one of:
+
+PRIMARY
+
+SECONDARY_ONLY
+
+SECONDARY
+
+NONE]]></comment>
+			</column>
+			<column name="version" type="smallint" length="5" decimal="0" jt="5" >
+				<comment><![CDATA[The version of the availability group metadata stored in the Windows Failover Cluster. This version number is incremented when new features are added.]]></comment>
+			</column>
+			<column name="basic_features" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Specifies whether this is a Basic availability group. For more information, see Basic Availability Groups (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="dtc_support" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Specifies whether DTC support has been enabled for this availability group. The DTC_SUPPORT option of CREATE AVAILABILITY GROUP controls this setting.]]></comment>
+			</column>
+			<column name="db_failover" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Specifies whether the availability group supports failover for database health conditions. The DB_FAILOVER option of CREATE AVAILABILITY GROUP controls this setting.]]></comment>
+			</column>
+			<column name="is_distributed" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Specifies whether this is a distributed availability group. For more information, see Distributed Availability Groups (Always On Availability Groups).]]></comment>
+			</column>
+		</table>
+		<table name="availability_groups_cluster" >
+			<comment><![CDATA[Returns a row for each Always On availability group in the Windows Server Failover Clustering (WSFC) . Each row contains the availability group metadata from the WSFC cluster.]]></comment>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier (GUID) of the availability group.]]></comment>
+			</column>
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" >
+				<comment><![CDATA[Name of the availability group. This is a user-specified name that must be unique within the Windows Server Failover Cluster (WSFC).]]></comment>
+			</column>
+			<column name="resource_id" type="nvarchar" length="40" decimal="0" jt="12" >
+				<comment><![CDATA[Resource ID for the WSFC cluster resource.]]></comment>
+			</column>
+			<column name="resource_group_id" type="nvarchar" length="40" decimal="0" jt="12" >
+				<comment><![CDATA[Resource Group ID for the WSFC cluster resource group of the availability group.]]></comment>
+			</column>
+			<column name="failure_condition_level" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[User-defined failure condition level under which an automatic failover must be triggered, one of the following integer values:
+
+1: Specifies that an automatic failover should be initiated when any of the following occurs: 
+- The SQL Server service is down.
+- The lease of the availability group for connecting to the WSFC failover cluster expires because no ACK is received from the server instance. For more information, see How It Works: SQL Server Always On Lease Timeout.
+
+2: Specifies that an automatic failover should be initiated when any of the following occurs: 
+- The instance of SQL Server does not connect to cluster, and the user-specified health_check_timeout threshold of the availability group is exceeded. 
+- The availability replica is in failed state. 
+3: Specifies that an automatic failover should be initiated on critical SQL Server internal errors, such as orphaned spinlocks, serious write-access violations, or too much dumping. This is the default value. 
+4: Specifies that an automatic failover should be initiated on moderate SQL Server internal errors, such as a persistent out-of-memory condition in the SQL Server internal resource pool.
+5: Specifies that an automatic failover should be initiated on any qualified failure conditions, including:
+- Exhaustion of SQL Engine worker-threads. 
+- Detection of an unsolvable deadlock.
+
+The failure-condition levels (1–5) range from the least restrictive, level 1, to the most restrictive, level 5. A given condition level encompasses all of the less restrictive levels. Thus, the strictest condition level, 5, includes the four less restrictive condition levels (1-4), level 4 includes levels 1-3, and so forth.
+
+To change this value, use the FAILURE_CONDITION_LEVEL option of the ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="health_check_timeout" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[Wait time (in milliseconds) for the sp_server_diagnostics system stored procedure to return server-health information, before the server instance is assumed to be slow or hung. The default value is 30000 milliseconds (30 seconds).
+
+To change this value, use the HEALTH_CHECK_TIMEOUT option of ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="automated_backup_preference" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Preferred location for performing backups on the availability databases in this availability group. One of the following values:
+
+0: Primary. Backups should always occur on the primary replica.
+1: Secondary only. Performing backups on a secondary replica is preferable.
+2: Prefer Secondary. Performing backups on a secondary replica preferable, but performing backups on the primary replica is acceptable if no secondary replica is available for backup operations. This is the default behavior.
+3: Any Replica. No preference about whether backups are performed on the primary replica or on a secondary replica.
+
+For more information, see Active Secondaries: Backup on Secondary Replicas (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="automated_backup_preference_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of automated_backup_preference, one of:
+
+PRIMARY
+
+SECONDARY_ONLY
+
+SECONDARY
+
+NONE]]></comment>
+			</column>
+			<fk name="Fk_availability_groups_cluster_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
+		</table>
+		<table name="availability_read_only_routing_lists" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="routing_priority" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="read_only_replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+		</table>
+		<table name="availability_replicas" >
+			<comment><![CDATA[Returns a row for each of the availability replicas that belong to any Always On availability group in the WSFC failover cluster.
+
+If the local server instance is unable to talk to the WSFC failover cluster, for example because the cluster is down or quorum has been lost, only rows for local availability replicas are returned. These rows will contain only the columns of data that are cached locally in metadata.]]></comment>
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" >
+				<comment><![CDATA[Unique ID of the replica.]]></comment>
+			</column>
+			<column name="group_id" type="uniqueidentifier" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique ID of the availability group to which the replica belongs.]]></comment>
+			</column>
+			<column name="replica_metadata_id" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[ID for the local metadata object for availability replicas in the Database Engine.]]></comment>
+			</column>
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" todo="2" >
+				<comment><![CDATA[Server name of the instance of SQL Server that is hosting this replica and, for a non-default instance, its instance name.]]></comment>
+			</column>
+			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" >
+				<comment><![CDATA[Security identifier (SID) registered to this server instance for the external owner of this availability replica.
+
+NULL for non-local availability replicas.]]></comment>
+			</column>
+			<column name="endpoint_url" type="nvarchar" length="256" decimal="0" jt="12" >
+				<comment><![CDATA[String representation of the user-specified database mirroring endpoint that is used by connections between primary and secondary replicas for data synchronization. For information about the syntax of endpoint URLs, see Specify the Endpoint URL When Adding or Modifying an Availability Replica (SQL Server).
+
+NULL = Unable to talk to the WSFC failover cluster.
+
+To change this endpoint, use the ENDPOINT_URL option of ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="availability_mode" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[The availability mode of the replica, one of:
+
+0 | Asynchronous commit. The primary replica can commit transactions without waiting for the secondary to write the log to disk.
+
+1 | Synchronous commit. The primary replica waits to commit a given transaction until the secondary replica has written the transaction to disk.
+
+4 | Configuration only. The primary replica sends availability group configuration metadata to the replica synchronously. User data is not transmitted to the replica. Available in SQL Server 2017 CU1 and later.
+
+For more information, see Availability Modes (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="availability_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of availability_mode, one of:
+
+ASYNCHRONOUS_COMMIT
+
+SYNCHRONOUS_COMMIT
+
+CONFIGURATION_ONLY
+
+To change this the availability mode of an availability replica, use the AVAILABILITY_MODE option of ALTER AVAILABILITY GROUP Transact-SQL statement.
+
+You cannot change the availability mode of a replica to CONFIGURATION_ONLY. You cannot change a CONFIGURATION_ONLY replica to a secondary or primary replica.]]></comment>
+			</column>
+			<column name="failover_mode" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[The failover mode of the availability replica, one of:
+
+0 | Manual failover. A failover to a secondary replica set to manual failover must be manually initiated by the database administrator. The type of failover that is performed will depend on whether the secondary replica is synchronized, as follows:
+
+If the availability replica is not synchronizing or is still synchronizing, only forced failover (with possible data loss) can occur.
+
+If the availability mode is set to synchronous commit (availability_mode = 1) and the availability replica is currently synchronized, manual failover without data loss can occur.
+
+1 | Automatic failover. The replica is a potential target for automatic failovers. Automatic failover is supported only if the availability mode is set to synchronous commit (availability_mode = 1) and the availability replica is currently synchronized.
+
+To view a rollup of the database synchronization health of every availability database in an availability replica, use the synchronization_health and synchronization_health_desc columns of the sys.dm_hadr_availability_replica_states dynamic management view. The rollup considers the synchronization state of every availability database and the availability mode of its availability replica.
+
+Note: To view the synchronization health of a given availability database, query the synchronization_state and synchronization_health columns of the sys.dm_hadr_database_replica_states dynamic management view.]]></comment>
+			</column>
+			<column name="failover_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of failover_mode, one of:
+
+MANUAL
+
+AUTOMATIC
+
+To change the failover mode, use the FAILOVER_MODE option of ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="session_timeout" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[The time-out period, in seconds. The time-out period is the maximum time that the replica waits to receive a message from another replica before considering connection between the primary and secondary replica have failed. Session timeout detects whether secondaries are connected the primary replica.
+
+On detecting a failed connection with a secondary replica, the primary replica considers the secondary replica to be NOT_SYNCHRONIZED. On detecting a failed connection with the primary replica, a secondary replica simply attempts to reconnect.
+
+Note: Session timeouts do not cause automatic failovers.
+
+To change this value, use the SESSION_TIMEOUT option of ALTER AVAILABILITY GROUP Transact-SQL statement.]]></comment>
+			</column>
+			<column name="primary_role_allow_connections" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Whether the availability allows all connections or only read-write connections, one of:
+
+2 = All (default)
+
+3 = Read write]]></comment>
+			</column>
+			<column name="primary_role_allow_connections_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of primary_role_allow_connections, one of:
+
+ALL
+
+READ_WRITE]]></comment>
+			</column>
+			<column name="secondary_role_allow_connections" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Whether an availability replica that is performing the secondary role (that is, a secondary replica) can accept connections from clients, one of:
+
+0 = No. No connections are allowed to the databases in the secondary replica, and the databases are not available for read access. This is the default setting.
+
+1 = Read only. Only read-only connections are allowed to the databases in the secondary replica. All database(s) in the replica are available for read access.
+
+2 = All. All connections are allowed to the databases in the secondary replica for read-only access.
+
+For more information, see Active Secondaries: Readable Secondary Replicas (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="secondary_role_allow_connections_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of secondary_role_allow_connections, one of:
+
+NO
+
+READ_ONLY
+
+ALL]]></comment>
+			</column>
+			<column name="create_date" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Date that the replica was created.
+
+NULL = Replica not on this server instance.]]></comment>
+			</column>
+			<column name="modify_date" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Date that the replica was last modified.
+
+NULL = Replica not on this server instance.]]></comment>
+			</column>
+			<column name="backup_priority" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[Represents the user-specified priority for performing backups on this replica relative to the other replicas in the same availability group. The value is an integer in the range of 0..100.
+
+For more information, see Active Secondaries: Backup on Secondary Replicas (Always On Availability Groups).]]></comment>
+			</column>
+			<column name="read_only_routing_url" type="nvarchar" length="256" decimal="0" jt="12" >
+				<comment><![CDATA[Connectivity endpoint (URL) of the read only availability replica. For more information, see Configure Read-Only Routing for an Availability Group (SQL Server).]]></comment>
+			</column>
+			<column name="seeding_mode" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="seeding_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_availability_replicas_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
+		</table>
+		<table name="databases" >
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="source_database_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" />
+			<column name="create_date" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="compatibility_level" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="collation_name" type="sysname" length="128" decimal="0" jt="12" />
+			<column name="user_access" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="user_access_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_read_only" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_close_on" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_auto_shrink_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_in_standby" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_cleanly_shutdown" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_supplemental_logging_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="snapshot_isolation_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="snapshot_isolation_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_read_committed_snapshot_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="recovery_model" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="recovery_model_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="page_verify_option" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="page_verify_option_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_auto_create_stats_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_create_stats_incremental_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_update_stats_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_update_stats_async_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_null_default_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_nulls_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_padding_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_warnings_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_arithabort_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_concat_null_yields_null_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_numeric_roundabort_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_quoted_identifier_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_recursive_triggers_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_cursor_close_on_commit_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_local_cursor_default" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_fulltext_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_trustworthy_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_db_chaining_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_parameterization_forced" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_master_key_encrypted_by_server" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_query_store_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_published" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_subscribed" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_merge_published" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_distributor" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_sync_with_backup" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="service_broker_guid" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_broker_enabled" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="log_reuse_wait" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="log_reuse_wait_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_date_correlation_on" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_cdc_enabled" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_encrypted" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_honor_broker_priority_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="resource_pool_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="default_language_lcid" type="smallint" length="5" decimal="0" jt="5" />
+			<column name="default_language_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="default_fulltext_language_lcid" type="int" length="10" decimal="0" jt="4" />
+			<column name="default_fulltext_language_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="is_nested_triggers_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_transform_noise_words_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="two_digit_year_cutoff" type="smallint" length="5" decimal="0" jt="5" />
+			<column name="containment" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="containment_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="target_recovery_time_in_seconds" type="int" length="10" decimal="0" jt="4" />
+			<column name="delayed_durability" type="int" length="10" decimal="0" jt="4" />
+			<column name="delayed_durability_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_memory_optimized_elevate_to_snapshot_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_federation_member" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_remote_data_archive_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_mixed_page_allocation_on" type="bit" length="1" decimal="0" jt="-7" />
+			<index name="Unq_databases_database_id" unique="UNIQUE" >
+				<column name="database_id" />
+			</index>
+		</table>
+		<table name="dm_hadr_auto_page_repair" >
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="file_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="page_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="error_type" type="smallint" length="5" decimal="0" jt="5" mandatory="y" />
+			<column name="page_status" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="modification_time" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+		</table>
+		<table name="dm_hadr_automatic_seeding" >
+			<column name="start_time" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="completion_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="ag_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_db_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_remote_replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="operation_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_source" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="current_state" type="nvarchar" length="4000" decimal="0" jt="12" mandatory="y" />
+			<column name="performed_seeding" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="failure_state" type="int" length="10" decimal="0" jt="4" />
+			<column name="failure_state_desc" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="error_code" type="int" length="10" decimal="0" jt="4" />
+			<column name="number_of_attempts" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+		</table>
+		<table name="dm_hadr_availability_group_states" >
+			<comment><![CDATA[Returns a row for each Always On availability group that possesses an availability replica on the local instance of SQL Server. Each row displays the states that define the health of a given availability group.]]></comment>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the availability group.]]></comment>
+			</column>
+			<column name="primary_replica" type="nvarchar" length="128" decimal="0" jt="12" todo="2" >
+				<comment><![CDATA[Name of the server instance that is hosting the current primary replica.
+
+NULL = Not the primary replica or unable to communicate with the WSFC failover cluster.]]></comment>
+			</column>
+			<column name="primary_recovery_health" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Indicates the recovery health of the primary replica, one of:
+
+0 = In progress
+
+1 = Online
+
+NULL
+
+On secondary replicas the primary_recovery_health column is NULL.]]></comment>
+			</column>
+			<column name="primary_recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of primary_replica_health, one of:
+
+ONLINE_IN_PROGRESS
+
+ONLINE
+
+NULL]]></comment>
+			</column>
+			<column name="secondary_recovery_health" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Indicates the recovery health of a secondary replica replica,one of:
+
+0 = In progress
+
+1 = Online
+
+NULL
+
+On the primary replica, the secondary_recovery_health column is NULL.]]></comment>
+			</column>
+			<column name="secondary_recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of secondary_recovery_health, one of:
+
+ONLINE_IN_PROGRESS
+
+ONLINE
+
+NULL]]></comment>
+			</column>
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[Reflects a rollup of the synchronization_health of all availability replicas in the availability group. Below are the possible values and their descriptions.
+
+0: Not healthy. None of the availability replicas have a healthy synchronization_health (2 = HEALTHY).
+
+1: Partially healthy. The synchronization health of some, but not all, availability replicas is healthy.
+
+2: Healthy. The synchronization health of every availability replica is healthy.
+
+For information about replica synchronization health, see the synchronization_health column in sys.dm_hadr_availability_replica_states (Transact-SQL).]]></comment>
+			</column>
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of synchronization_health, one of:
+
+NOT_HEALTHY
+
+PARTIALLY_HEALTHY
+
+HEALTHY]]></comment>
+			</column>
+			<fk name="Fk_dm_hadr_availability_group_states_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
+		</table>
+		<table name="dm_hadr_availability_replica_cluster_nodes" >
+			<comment><![CDATA[Returns a row for every availability replica (regardless of join state) of the Always On availability groups in the Windows Server Failover Clustering (WSFC) cluster.]]></comment>
+			<column name="group_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of the availability group.]]></comment>
+			</column>
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of the instance of SQL Server hosting the replica.]]></comment>
+			</column>
+			<column name="node_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of the cluster node.]]></comment>
+			</column>
+		</table>
+		<table name="dm_hadr_availability_replica_cluster_states" >
+			<comment><![CDATA[Returns a row for each Always On availability replica (regardless of its join state) of all Always On availability groups (regardless of replica location) in the Windows Server Failover Clustering (WSFC) cluster.]]></comment>
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the availability replica.]]></comment>
+			</column>
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of the instance of SQL Server hosting the replica.]]></comment>
+			</column>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the availability group.]]></comment>
+			</column>
+			<column name="join_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" >
+				<comment><![CDATA[0 = Not joined
+
+1 = Joined, standalone instance
+
+2 = Joined, failover cluster instance]]></comment>
+			</column>
+			<column name="join_state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[NOT_JOINED
+
+JOINED_STANDALONE_INSTANCE
+
+JOINED_FAILOVER_CLUSTER_INSTANCE]]></comment>
+			</column>
+			<fk name="Fk_dm_hadr_availability_replica_cluster_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
+		</table>
+		<table name="dm_hadr_availability_replica_states" >
+			<comment><![CDATA[Returns a row for each local replica and a row for each remote replica in the same Always On availability group as a local replica. Each row contains information about the state of a given replica.]]></comment>
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the replica.]]></comment>
+			</column>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Unique identifier of the availability group.]]></comment>
+			</column>
+			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" mandatory="y" todo="2" >
+				<comment><![CDATA[Whether the replica is local, one of:
+
+0 = Indicates a remote secondary replica in an availability group whose primary replica is hosted by the local server instance. This value occurs only on the primary replica location.
+
+1 = Indicates a local replica. On secondary replicas, this is the only available value for the availability group to which the replica belongs.]]></comment>
+			</column>
+			<column name="role" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[Current Always On availability groups role of a local replica or a connected remote replica, one of:
+
+0 = Resolving
+
+1 = Primary
+
+2 = Secondary
+
+For information about Always On availability groups roles, see Overview of Always On Availability Groups (SQL Server).]]></comment>
+			</column>
+			<column name="role_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of role, one of:
+
+RESOLVING
+
+PRIMARY
+
+SECONDARY]]></comment>
+			</column>
+			<column name="operational_state" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Current operational state of the replica, one of:
+
+0 = Pending failover
+
+1 = Pending
+
+2 = Online
+
+3 = Offline
+
+4 = Failed
+
+5 = Failed, no quorum
+
+NULL = Replica is not local.
+
+For more information, see Roles and Operational States, later in this topic.]]></comment>
+			</column>
+			<column name="operational_state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of operational_state, one of:
+
+PENDING_FAILOVER
+
+PENDING
+
+ONLINE
+
+OFFLINE
+
+FAILED
+
+FAILED_NO_QUORUM
+
+NULL]]></comment>
+			</column>
+			<column name="connected_state" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[Whether a secondary replica is currently connected to the primary replica. The possible values are shown below with their descriptions.
+
+0 : Disconnected. The response of an availability replica to the DISCONNECTED state depends on its role: On the primary replica, if a secondary replica is disconnected, its secondary databases are marked as NOT SYNCHRONIZED on the primary replica, which waits for the secondary to reconnect; On a secondary replica, upon detecting that it is disconnected, the secondary replica attempts to reconnect to the primary replica.
+
+1 : Connected.
+
+Each primary replica tracks the connection state for every secondary replica in the same availability group. Secondary replicas track the connection state of only the primary replica.]]></comment>
+			</column>
+			<column name="connected_state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of connection_state, one of:
+
+DISCONNECTED
+
+CONNECTED]]></comment>
+			</column>
+			<column name="recovery_health" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Rollup of the database_state column of the sys.dm_hadr_database_replica_states dynamic management view. The following are the possible values and their descriptions.
+
+0 : In progress. At least one joined database has a database state other than ONLINE (database_state is not 0).
+
+1 : Online. All the joined databases have a database state of ONLINE (database_state is 0).
+
+NULL : is_local = 0]]></comment>
+			</column>
+			<column name="recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of recovery_health, one of:
+
+ONLINE_IN_PROGRESS
+
+ONLINE
+
+NULL]]></comment>
+			</column>
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Reflects a rollup of the database synchronization state (synchronization_state)of all joined availability databases (also known as replicas) and the availability mode of the replica (synchronous-commit or asynchronous-commit mode). The rollup will reflect the least healthy accumulated state the databases on the replica. Below are the possible values and their descriptions.
+
+0 : Not healthy. At least one joined database is in the NOT SYNCHRONIZING state.
+
+1 : Partially healthy. Some replicas are not in the target synchronization state: synchronous-commit replicas should be synchronized, and asynchronous-commit replicas should be synchronizing.
+
+2 : Healthy. All replicas are in the target synchronization state: synchronous-commit replicas are synchronized, and asynchronous-commit replicas are synchronizing.]]></comment>
+			</column>
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of synchronization_health, one of:
+
+NOT_HEALTHY
+
+PARTIALLY_HEALTHY
+
+HEALTHY]]></comment>
+			</column>
+			<column name="last_connect_error_number" type="int" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[Number of the last connection error.]]></comment>
+			</column>
+			<column name="last_connect_error_description" type="nvarchar" length="1024" decimal="0" jt="12" >
+				<comment><![CDATA[Text of the last_connect_error_number message.]]></comment>
+			</column>
+			<column name="last_connect_error_timestamp" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Date and time timestamp indicating when the last_connect_error_number error occurred.]]></comment>
+			</column>
+			<fk name="Fk_dm_hadr_availability_replica_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
+		</table>
+		<table name="dm_hadr_cluster" >
+			<column name="cluster_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="quorum_type" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="quorum_type_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="quorum_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="quorum_state_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_cluster_members" >
+			<column name="member_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="member_type" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="member_type_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="member_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="member_state_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="number_of_quorum_votes" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="dm_hadr_cluster_networks" >
+			<column name="member_name" type="nvarchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="network_subnet_ip" type="nvarchar" length="64" decimal="0" jt="12" mandatory="y" />
+			<column name="network_subnet_ipv4_mask" type="nvarchar" length="45" decimal="0" jt="12" />
+			<column name="network_subnet_prefix_length" type="int" length="10" decimal="0" jt="4" />
+			<column name="is_public" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_ipv4" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+		</table>
+		<table name="dm_hadr_database_replica_cluster_states" >
+			<comment><![CDATA[Returns a row containing information intended to provide you with insight into the health of the availability databases in the Always On availability groups in each Always On availability group on the Windows Server Failover Clustering (WSFC) cluster. Query sys.dm_hadr_database_replica_states to answer the following questions:
+* Are all databases in an availability group ready for a failover?
+* After a forced failover, has a secondary database suspended itself locally and acknowledged its suspended state to the new primary replica?
+* If the primary replica is currently unavailable, which secondary replica would allow the minimum data loss if it becomes the primary replica?
+* When the value of the sys.databases log_reuse_wait_desc column is "AVAILABILITY_REPLICA", which secondary replica in an availability group is holding up log truncation on a given primary database?]]></comment>
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Identifier of the availability replica within the availability group.]]></comment>
+			</column>
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Identifier of the database within the availability group. This identifier is identical on every replica to which this database is joined.]]></comment>
+			</column>
+			<column name="database_name" type="nvarchar" length="128" decimal="0" jt="12" >
+				<comment><![CDATA[Name of a database that belongs to the availability group.]]></comment>
+			</column>
+			<column name="is_failover_ready" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+				<comment><![CDATA[Indicates whether the secondary database is synchronized with the corresponding primary database. one of:
+
+0 = The database is not marked as synchronized in the cluster. The database is not ready for a failover.
+
+1 = The database is marked as synchronized in the cluster. The database is ready for a failover.]]></comment>
+			</column>
+			<column name="is_pending_secondary_suspend" type="bit" length="1" decimal="0" jt="-7" mandatory="y" >
+				<comment><![CDATA[Indicates whether, after a forced failover, the database is pending suspension, one of:
+
+0 = Any states except for HADR_SYNCHRONIZED_ SUSPENDED.
+
+1 = HADR_SYNCHRONIZED_ SUSPENDED. When a forced failover completes, each of the secondary databases is set to HADR_SYNCHONIZED_SUSPENDED and remains in this state until the new primary replica receives an acknowledgement from that secondary database to the SUSPEND message.
+
+NULL = Unknown (no quorum)]]></comment>
+			</column>
+			<column name="is_database_joined" type="bit" length="1" decimal="0" jt="-7" mandatory="y" todo="2" >
+				<comment><![CDATA[Indicates whether the database on this availability replica has been joined to the availability group, one of:
+
+0 = Database is not joined to the availability group on this availability replica.
+
+1 = Database is joined to the availability group on this availability replica.
+
+NULL = unknown (The availability replica lacks quorum.)]]></comment>
+			</column>
+			<column name="recovery_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[On the primary replica, the end of the transaction log before the replica writes any new log records after recovery or failover. On the primary replica, the row for a given secondary database will have the value to which the primary replica needs the secondary replica to synchronize to (that is, to revert to and reinitialize to).
+
+On secondary replicas this value is NULL. Note that each secondary replica will have either the MAX value or a lower value that the primary replica has told the secondary replica to go back to.]]></comment>
+			</column>
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[The Always On availability groups log truncation value, which may be higher than the local truncation LSN if local log truncation is blocked (such as by a backup operation).]]></comment>
+			</column>
+			<fk name="Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster" virtual="y" to_schema="sys" to_table="availability_databases_cluster" >
+				<fk_column name="group_database_id" pk="group_database_id" />
+			</fk>
+			<fk name="Fk_dm_hadr_database_replica_cluster_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
+		</table>
+		<table name="dm_hadr_database_replica_states" >
+			<comment><![CDATA[Returns a row for each database that is participating in an Always On availability group for which the local instance of SQL Server is hosting an availability replica. This dynamic management view exposes state information on both the primary and secondary replicas. On a secondary replica, this view returns a row for every secondary database on the server instance. On the primary replica, this view returns a row for each primary database and an additional row for the corresponding secondary database.
+
+!IMPORTANT
+Depending on the action and higher-level states, database-state information may be unavailable or out of date. Furthermore, the values have only local relevance. For example, on the primary replica, the value of the last_hardened_lsn column reflects the information about a given secondary database that is currently available to the primary replica, not the actual hardened LSN value that the secondary replica might have currently.]]></comment>
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" >
+				<comment><![CDATA[Identifier of the database, unique within an instance of SQL Server. This is the same value as displayed in the sys.databases catalog view.]]></comment>
+			</column>
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Identifier of the availability group to which the database belongs.]]></comment>
+			</column>
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Identifier of the availability replica within the availability group.]]></comment>
+			</column>
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" >
+				<comment><![CDATA[Identifier of the database within the availability group. This identifier is identical on every replica to which this database is joined.]]></comment>
+			</column>
+			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Whether the availability database is local, one of:
+
+0 = The database is not local to the SQL Server instance.
+
+1 = The database is local to the server instance.]]></comment>
+			</column>
+			<column name="is_primary_replica" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[Returns 1 if the replica is primary, or 0 if it is a secondary replica.
+
+Applies to: SQL Server 2014 (12.x) through SQL Server 2017.]]></comment>
+			</column>
+			<column name="synchronization_state" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[Data-movement state, one of the following values.
+
+0 = Not synchronizing. For a primary database, indicates that the database is not ready to synchronize its transaction log with the corresponding secondary databases. For a secondary database, indicates that the database has not started log synchronization because of a connection issue, is being suspended, or is going through transition states during startup or a role switch.
+
+1 = Synchronizing. For a primary database, indicates that the database is ready to accept a scan request from a secondary database. For a secondary database, indicates that active data movement is occurring for the database.
+
+2 = Synchronized. A primary database shows SYNCHRONIZED in place of SYNCHRONIZING. A synchronous-commit secondary database shows synchronized when the local cache says the database is failover ready and is synchronizing.
+
+3 = Reverting. Indicates the phase in the undo process when a secondary database is actively getting pages from the primary database.
+Caution: When a database on a secondary replica is in the REVERTING state, forcing failover to the secondary replica leaves the database in a state in which it cannot be started as a primary database. Either the database will need to reconnect as a secondary database, or you will need to apply new log records from a log backup.
+
+4 = Initializing. Indicates the phase of undo when the transaction log required for a secondary database to catch up to the undo LSN is being shipped and hardened on a secondary replica.
+Caution: When a database on a secondary replica is in the INITIALIZING state, forcing failover to the secondary replica leaves the database in a state in which it be started as a primary database. Either the database will need to reconnect as a secondary database, or you will need to apply new log records from a log backup.]]></comment>
+			</column>
+			<column name="synchronization_state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of the data-movement state, one of:
+
+NOT SYNCHRONIZING
+
+SYNCHRONIZING
+
+SYNCHRONIZED
+
+REVERTING
+
+INITIALIZING]]></comment>
+			</column>
+			<column name="is_commit_participant" type="bit" length="1" decimal="0" jt="-7" >
+				<comment><![CDATA[0 = Transaction commit is not synchronized with respect to this database.
+
+1 = Transaction commit is synchronized with respect to this database.
+
+For a database on an asynchronous-commit availability replica, this value is always 0.
+
+For a database on a synchronous-commit availability replica, this value is accurate only on the primary database.]]></comment>
+			</column>
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" todo="2" >
+				<comment><![CDATA[Reflects the intersection of the synchronization state of a database that is joined to the availability group on the availability replica and the availability mode of the availability replica (synchronous-commit or asynchronous-commit mode), one of the following values.
+
+0 = Not healthy. The synchronization_state of the database is 0 (NOT SYNCHRONIZING).
+
+1 = Partially healthy. A database on a synchronous-commit availability replica is considered partially healthy if synchronization_state is 1 (SYNCHRONIZING).
+
+2 = Healthy. A database on an synchronous-commit availability replica is considered healthy if synchronization_state is 2 (SYNCHRONIZED), and a database on an asynchronous-commit availability replica is considered healthy if synchronization_state is 1 (SYNCHRONIZING).]]></comment>
+			</column>
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of the synchronization_health of the availability database.
+
+NOT_HEALTHY
+
+PARTIALLY_HEALTHY
+
+HEALTHY]]></comment>
+			</column>
+			<column name="database_state" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[0 = Online
+
+1 = Restoring
+
+2 = Recovering
+
+3 = Recovery pending
+
+4 = Suspect
+
+5 = Emergency
+
+6 = Offline
+
+Note: Same as state column in sys.databases.]]></comment>
+			</column>
+			<column name="database_state_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of the database_state of the availability replica.
+
+ONLINE
+
+RESTORING
+
+RECOVERING
+
+RECOVERY_PENDING
+
+SUSPECT
+
+EMERGENCY
+
+OFFLINE
+
+Note: Same as state_desc column in sys.databases.]]></comment>
+			</column>
+			<column name="is_suspended" type="bit" length="1" decimal="0" jt="-7" todo="2" >
+				<comment><![CDATA[Database state, one of:
+
+0 = Resumed
+
+1 = Suspended]]></comment>
+			</column>
+			<column name="suspend_reason" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[If the database is suspended, the reason for the suspended state, one of:
+
+0 = User action
+
+1 = Suspend from partner
+
+2 = Redo
+
+3 = Capture
+
+4 = Apply
+
+5 = Restart
+
+6 = Undo
+
+7 = Revalidation
+
+8 = Error in the calculation of the secondary-replica synchronization point]]></comment>
+			</column>
+			<column name="suspend_reason_desc" type="nvarchar" length="60" decimal="0" jt="12" >
+				<comment><![CDATA[Description of the database suspended state reason, one of:
+
+SUSPEND_FROM_USER = A user manually suspended data movement
+
+SUSPEND_FROM_PARTNER = The database replica is suspended after a forced failover
+
+SUSPEND_FROM_REDO = An error occurred during the redo phase
+
+SUSPEND_FROM_APPLY = An error occurred when writing the log to file (see error log)
+
+SUSPEND_FROM_CAPTURE = An error occurred while capturing log on the primary replica
+
+SUSPEND_FROM_RESTART = The database replica was suspended before the database was restarted (see error log)
+
+SUSPEND_FROM_UNDO = An error occurred during the undo phase (see error log)
+
+SUSPEND_FROM_REVALIDATION = Log change mismatch is detected on reconnection (see error log)
+
+SUSPEND_FROM_XRF_UPDATE = Unable to find the common log point (see error log)]]></comment>
+			</column>
+			<column name="recovery_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[On the primary replica, the end of the transaction log before the primary database writes any new log records after recovery or failover. For a given secondary database, if this value is less than the current hardened LSN (last_hardened_lsn), recovery_lsn is the value to which this secondary database would need to resynchronize (that is, to revert to and reinitialize to). If this value is greater than or equal to the current hardened LSN, resynchronization would be unnecessary and would not occur.
+
+recovery_lsn reflects a log-block ID padded with zeroes. It is not an actual log sequence number (LSN). For information about how this value is derived, see Understanding the LSN Column Values, later in this topic.]]></comment>
+			</column>
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[On the primary replica, for the primary database, reflects the minimum log truncation LSN across all the corresponding secondary databases. If local log truncation is blocked (such as by a backup operation), this LSN might be higher than the local truncation LSN.
+
+For a given secondary database, reflects the truncation point of that database.
+
+truncation_lsn reflects a log-block ID padded with zeroes. It is not an actual log sequence number.]]></comment>
+			</column>
+			<column name="last_sent_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[The log block identifier that indicates the point up to which all log blocks have been sent by the primary. This is the ID of the next log block that will be sent, rather than the ID of the most recently sent log block.
+
+last_sent_lsn reflects a log-block ID padded with zeroes, It is not an actual log sequence number.]]></comment>
+			</column>
+			<column name="last_sent_time" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Time when the last log block was sent.]]></comment>
+			</column>
+			<column name="last_received_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[Log block ID identifying the point up to which all log blocks have been received by the secondary replica that hosts this secondary database.
+
+last_received_lsn reflects a log-block ID padded with zeroes. It is not an actual log sequence number.]]></comment>
+			</column>
+			<column name="last_received_time" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Time when the log block ID in last message received was read on the secondary replica.]]></comment>
+			</column>
+			<column name="last_hardened_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[Start of the Log Block containing the log records of last hardened LSN on a secondary database.
+
+On an asynchronous-commit primary database or on a synchronous-commit database whose current policy is "delay", the value is NULL. For other synchronous-commit primary databases, last_hardened_lsn indicates the minimum of the hardened LSN across all the secondary databases.
+
+Note: last_hardened_lsn reflects a log-block ID padded with zeroes. It is not an actual log sequence number. For more information, see Understanding the LSN Column Values, later in this topic.]]></comment>
+			</column>
+			<column name="last_hardened_time" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[On a secondary database, time of the log-block identifier for the last hardened LSN (last_hardened_lsn). On a primary database, reflects the time corresponding to minimum hardened LSN.]]></comment>
+			</column>
+			<column name="last_redone_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[Actual log sequence number of the last log record that was redone on the secondary database. last_redone_lsn is always less than last_hardened_lsn.]]></comment>
+			</column>
+			<column name="last_redone_time" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Time when the last log record was redone on the secondary database.]]></comment>
+			</column>
+			<column name="log_send_queue_size" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
+				<comment><![CDATA[Amount of log records of the primary database that has not been sent to the secondary databases, in kilobytes (KB).]]></comment>
+			</column>
+			<column name="log_send_rate" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
+				<comment><![CDATA[Average rate at which primary replica instance sent data during last active period, in kilobytes (KB)/second.]]></comment>
+			</column>
+			<column name="redo_queue_size" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
+				<comment><![CDATA[Amount of log records in the log files of the secondary replica that has not yet been redone, in kilobytes (KB).]]></comment>
+			</column>
+			<column name="redo_rate" type="bigint" length="19" decimal="0" jt="-5" todo="2" >
+				<comment><![CDATA[Average Rate at which the log records are being redone on a given secondary database, in kilobytes (KB)/second.]]></comment>
+			</column>
+			<column name="filestream_send_rate" type="bigint" length="19" decimal="0" jt="-5" >
+				<comment><![CDATA[The rate at which the FILESTREAM files are shipped to the secondary replica, in kilobytes (KB)/second.]]></comment>
+			</column>
+			<column name="end_of_log_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[Local end of log LSN. Actual LSN corresponding to the last log record in the log cache on the primary and secondary databases. On the primary replica, the secondary rows reflect the end of log LSN from the latest progress messages that the secondary replicas have sent to the primary replica.
+
+end_of_log_lsn reflects a log-block ID padded with zeroes. It is not an actual log sequence number. For more information, see Understanding the LSN Column Values, later in this topic.]]></comment>
+			</column>
+			<column name="last_commit_lsn" type="numeric" length="25" decimal="0" jt="2" >
+				<comment><![CDATA[Actual log sequence number corresponding to the last commit record in the transaction log.
+
+On the primary database, this corresponds to the last commit record processed. Rows for secondary databases show the log sequence number that the secondary replica has sent to the primary replica.
+
+On the secondary replica, this is the last commit record that was redone.]]></comment>
+			</column>
+			<column name="last_commit_time" type="datetime" length="23" decimal="3" jt="93" >
+				<comment><![CDATA[Time corresponding to the last commit record.
+
+On the secondary database, this time is the same as on the primary database.
+
+On the primary replica, each secondary database row displays the time that the secondary replica that hosts that secondary database has reported back to the primary replica. The difference in time between the primary-database row and a given secondary-database row represents approximately the recovery point objective (RPO), assuming that the redo process is caught up and that the progress has been reported back to the primary replica by the secondary replica.]]></comment>
+			</column>
+			<column name="low_water_mark_for_ghosts" type="bigint" length="19" decimal="0" jt="-5" >
+				<comment><![CDATA[A monotonically increasing number for the database indicating a low water mark used by ghost cleanup on the primary database. If this number is not increasing over time, it implies that ghost cleanup might not happen. To decide which ghost rows to clean up, the primary replica uses the minimum value of this column for this database across all availability replicas (including the primary replica).]]></comment>
+			</column>
+			<column name="secondary_lag_seconds" type="bigint" length="19" decimal="0" jt="-5" >
+				<comment><![CDATA[The number of seconds that the secondary replica is behind the primary replica during synchronization.
+
+Applies to: SQL Server 2016 (13.x) through SQL Server 2017.]]></comment>
+			</column>
+			<index name="Idx_dm_hadr_database_replica_states_database_id" unique="NORMAL" >
+				<column name="database_id" />
+			</index>
+			<fk name="Fk_dm_hadr_database_replica_states_availability_databases_cluster" virtual="y" to_schema="sys" to_table="availability_databases_cluster" >
+				<fk_column name="group_database_id" pk="group_database_id" />
+			</fk>
+			<fk name="fk_dm_hadr_database_replica_states" to_schema="sys" to_table="databases" >
+				<fk_column name="database_id" pk="database_id" />
+			</fk>
+			<fk name="Fk_dm_hadr_database_replica_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
+		</table>
+		<table name="dm_hadr_instance_node_map" >
+			<column name="ag_resource_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="instance_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="node_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_name_id_map" >
+			<column name="ag_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="ag_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_resource_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="ag_group_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_physical_seeding_stats" >
+			<column name="local_physical_seeding_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="remote_physical_seeding_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="local_database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="local_database_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="remote_machine_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="role_desc" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="internal_state_desc" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="transfer_rate_bytes_per_second" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="transferred_size_bytes" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="database_size_bytes" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="start_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="end_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="estimate_time_complete_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="total_disk_io_wait_time_ms" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="total_network_wait_time_ms" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="failure_code" type="int" length="10" decimal="0" jt="4" />
+			<column name="failure_message" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="failure_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="is_compression_enabled" type="bit" length="1" decimal="0" jt="-7" />
+		</table>
+	</schema>
+	<layout name="AlwaysOn" id="Layout_3a41df9" show_column_type="y" show_schema_name="y" show_relation="columns" >
+		<comment><![CDATA[AlwaysOn]]></comment>
+		<entity schema="sys" name="databases" color="3986C1" x="752" y="1408" />
+		<entity schema="sys" name="availability_groups_cluster" color="669999" x="48" y="352" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" color="B3801A" x="912" y="752" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" color="B3801A" x="1376" y="352" />
+		<entity schema="sys" name="availability_databases_cluster" color="3986C1" x="272" y="960" />
+		<entity schema="sys" name="availability_groups" color="3986C1" x="448" y="352" />
+		<entity schema="sys" name="dm_hadr_availability_replica_states" color="B3801A" x="1376" y="496" />
+		<entity schema="sys" name="dm_hadr_availability_group_states" color="B3801A" x="64" y="592" />
+		<entity schema="sys" name="availability_replicas" color="3986C1" x="896" y="336" />
+		<entity schema="sys" name="dm_hadr_database_replica_cluster_states" color="B3801A" x="960" y="944" />
+		<entity schema="sys" name="dm_hadr_database_replica_states" color="B3801A" x="1392" y="944" />
+		<entity schema="sys" name="availability_group_listeners" color="3986C1" x="448" y="96" />
+		<entity schema="sys" name="availability_group_listener_ip_addresses" color="B3801A" x="944" y="80" />
+		<callout x="48" y="112" pointer="Round" >
+			<comment><![CDATA[SQL Server 2017 Availability Groups Schema   
+
+author: mattmc3
+homepage: https://github.com/mattmc3/sp_ag_health
+
+MS docs: https://bit.ly/2xGe3BK
+]]></comment>
+		</callout>
+		<group name="Availability Groups" color="C4E0F9" >
+			<entity schema="sys" name="availability_groups" />
+			<entity schema="sys" name="availability_groups_cluster" />
+			<entity schema="sys" name="dm_hadr_availability_group_states" />
+		</group>
+		<group name="Availability Replicas" color="C4E0F9" >
+			<entity schema="sys" name="availability_replicas" />
+			<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" />
+			<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" />
+			<entity schema="sys" name="dm_hadr_availability_replica_states" />
+		</group>
+		<group name="Availability Databases" color="C4E0F9" >
+			<entity schema="sys" name="availability_databases_cluster" />
+		</group>
+		<group name="Database Replicas" color="C4E0F9" >
+			<entity schema="sys" name="dm_hadr_database_replica_cluster_states" />
+			<entity schema="sys" name="dm_hadr_database_replica_states" />
+		</group>
+	</layout>
+</project>

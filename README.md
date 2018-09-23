@@ -22,6 +22,17 @@ exec sp_ag_health
      ,@orderby_columns='-alerts,ag_name,-database_name'
 ```
 
+## Diagrams
+
+Microsoft provides an overview of their system views. The "Always On" section
+highlights the following structure:
+
+![System Views Map Always On][overview-erd]
+
+Here is a more detailed ERD of the field from sp_ag_health flagged.
+
+![AlwaysOn][detail-erd]
+
 ## Notes
 
 This proc is not 1.0 yet, and as such **is subject to change!** Changes may
@@ -30,3 +41,6 @@ include:
 - Columns (additional, datatypes, names, default order, etc)
 - Proc parameters (name, order)
 - Others changes as necessary for design, performance, features, and maintainability
+
+[overview-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/System%20Views%20Map%20Always%20On.png
+[detail-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/AlwaysOn.png
