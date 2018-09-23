@@ -19,7 +19,7 @@ body {
 
 <body>
 <div class='svg-container'>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1728' height='1758' viewBox='0 0 1728 1758' >
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1728' height='2878' viewBox='0 0 1728 2878' >
   <script type='text/ecmascript'>
   <![CDATA[
   function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
@@ -222,8 +222,8 @@ body {
 </defs>
 
 <!-- == Desktop == -->
-<rect x='1' y='1' width='1726' height='1756' rx='8' ry='8' style='fill:url(#layoutBgB); stroke:#777777; stroke-width:0.5;' />
-<rect x='1' y='1' width='1726' height='1756' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#777777; stroke-width:0.5;' />
+<rect x='1' y='1' width='1726' height='2876' rx='8' ry='8' style='fill:url(#layoutBgB); stroke:#777777; stroke-width:0.5;' />
+<rect x='1' y='1' width='1726' height='2876' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#777777; stroke-width:0.5;' />
 
 <!-- == Legend == -->
 <g transform='translate(10,10)'>
@@ -327,11 +327,11 @@ dm_hadr_database_replica_states ref availability_databases_cluster ( group_datab
 <text x='1279' y='1131' transform='rotate(0 1279,1131)' title='Fk Fk_dm_hadr_database_replica_states_availability_databases_cluster
 dm_hadr_database_replica_states ref availability_databases_cluster ( group_database_id )' class='relName' style='fill:#748EA7'>group_database_id</text>
 <!-- == Fk 'dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states' == -->
-<path id='dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states'  onmouseover="hghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" transform='translate(8,0)' class='scene' d='M 1376 1424 L 848,1424' >
+<path id='dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states'  onmouseover="hghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" transform='translate(8,0)' class='scene' d='M 1376 1424 L 1072,1424' >
 	<title>Fk fk_dm_hadr_database_replica_states
 dm_hadr_database_replica_states ref databases ( database_id )</title>
 </path>
-<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 1376 1424 L 848,1424' ></path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 1376 1424 L 1072,1424' ></path>
 <text x='1318' y='1419' transform='rotate(0 1318,1419)' title='Fk fk_dm_hadr_database_replica_states
 dm_hadr_database_replica_states ref databases ( database_id )' class='relName' style='fill:#748EA7'>database_id</text>
 <!-- == Fk 'dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas' == -->
@@ -359,11 +359,166 @@ availability_group_listener_ip_addresses ref availability_group_listeners ( list
 <text x='880' y='107' transform='rotate(0 880,107)' title='Fk Fk_availability_group_listener_ip_addresses_availability_group_listeners
 availability_group_listener_ip_addresses ref availability_group_listeners ( listener_id )' class='relName' style='fill:#748EA7'>listener_id</text>
 <!-- == Table 'databases' == -->
-<rect class='entity' x='752' y='1400' width='96' height='48' rx='8' ry='8' style='stroke:none'/>
-<path d='M 752 1428 L 752 1408 Q 752 1400 760 1400 L 840 1400 Q 848 1400 848 1408 L 848 1428 L752 1428 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='752' y='1400' width='96' height='48' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
-<a xlink:href='#databases'><text x='755' y='1420'>sys.databases</text><title>Table sys.databases</title></a>
-<text x='768' y='1444'>--more--</text>
+<rect class='entity' x='752' y='1400' width='320' height='1280' rx='8' ry='8' style='stroke:none'/>
+<path d='M 752 1428 L 752 1408 Q 752 1400 760 1400 L 1064 1400 Q 1072 1400 1072 1408 L 1072 1428 L752 1428 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='752' y='1400' width='320' height='1280' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#databases'><text x='867' y='1420'>sys.databases</text><title>Table sys.databases</title></a>
+  <use id='nn' x='754' y='1437' xlink:href='#nn'/><a xlink:href='#databases.name'><text id='sys.databases.name' x='771' y='1447'>name</text><text x='1056' y='1448' text-anchor='end' class='colType'>sysname</text><title>name
+* sysname</title></a>
+  <use id='nn' x='754' y='1453' xlink:href='#nn'/><a xlink:href='#databases.database_id'><use id='unq' x='754' y='1452' xlink:href='#unq'/><title>Unq Unq_databases_database_id ( database_id ) </title></a>
+<a xlink:href='#databases.database_id'><text id='sys.databases.database_id' x='771' y='1463' onmouseover="hghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id'])">database_id</text><text x='1056' y='1464' text-anchor='end' class='colType'>int</text><title>database_id
+* int</title></a>
+<a xlink:href='#databases.database_id'><use id='ref' x='1060' y='1452' xlink:href='#ref'/><title>Referred by dm_hadr_database_replica_states ( database_id ) </title></a>
+  <a xlink:href='#databases.source_database_id'><text id='sys.databases.source_database_id' x='771' y='1479'>source_database_id</text><text x='1056' y='1480' text-anchor='end' class='colType'>int</text><title>source_database_id
+int</title></a>
+  <a xlink:href='#databases.owner_sid'><text id='sys.databases.owner_sid' x='771' y='1495'>owner_sid</text><text x='1056' y='1496' text-anchor='end' class='colType'>varbinary(85)</text><title>owner_sid
+varbinary(85)</title></a>
+  <use id='nn' x='754' y='1501' xlink:href='#nn'/><a xlink:href='#databases.create_date'><text id='sys.databases.create_date' x='771' y='1511'>create_date</text><text x='1056' y='1512' text-anchor='end' class='colType'>datetime</text><title>create_date
+* datetime</title></a>
+  <use id='nn' x='754' y='1517' xlink:href='#nn'/><a xlink:href='#databases.compatibility_level'><text id='sys.databases.compatibility_level' x='771' y='1527'>compatibility_level</text><text x='1056' y='1528' text-anchor='end' class='colType'>tinyint</text><title>compatibility_level
+* tinyint</title></a>
+  <a xlink:href='#databases.collation_name'><text id='sys.databases.collation_name' x='771' y='1543'>collation_name</text><text x='1056' y='1544' text-anchor='end' class='colType'>sysname</text><title>collation_name
+sysname</title></a>
+  <a xlink:href='#databases.user_access'><text id='sys.databases.user_access' x='771' y='1559'>user_access</text><text x='1056' y='1560' text-anchor='end' class='colType'>tinyint</text><title>user_access
+tinyint</title></a>
+  <a xlink:href='#databases.user_access_desc'><text id='sys.databases.user_access_desc' x='771' y='1575'>user_access_desc</text><text x='1056' y='1576' text-anchor='end' class='colType'>nvarchar(60)</text><title>user_access_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.is_read_only'><text id='sys.databases.is_read_only' x='771' y='1591'>is_read_only</text><text x='1056' y='1592' text-anchor='end' class='colType'>bit</text><title>is_read_only
+bit</title></a>
+  <use id='nn' x='754' y='1597' xlink:href='#nn'/><a xlink:href='#databases.is_auto_close_on'><text id='sys.databases.is_auto_close_on' x='771' y='1607'>is_auto_close_on</text><text x='1056' y='1608' text-anchor='end' class='colType'>bit</text><title>is_auto_close_on
+* bit</title></a>
+  <a xlink:href='#databases.is_auto_shrink_on'><text id='sys.databases.is_auto_shrink_on' x='771' y='1623'>is_auto_shrink_on</text><text x='1056' y='1624' text-anchor='end' class='colType'>bit</text><title>is_auto_shrink_on
+bit</title></a>
+  <a xlink:href='#databases.state'><text id='sys.databases.state' x='771' y='1639'>state</text><text x='1056' y='1640' text-anchor='end' class='colType'>tinyint</text><title>state
+tinyint</title></a>
+  <a xlink:href='#databases.state_desc'><text id='sys.databases.state_desc' x='771' y='1655'>state_desc</text><text x='1056' y='1656' text-anchor='end' class='colType'>nvarchar(60)</text><title>state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.is_in_standby'><text id='sys.databases.is_in_standby' x='771' y='1671'>is_in_standby</text><text x='1056' y='1672' text-anchor='end' class='colType'>bit</text><title>is_in_standby
+bit</title></a>
+  <a xlink:href='#databases.is_cleanly_shutdown'><text id='sys.databases.is_cleanly_shutdown' x='771' y='1687'>is_cleanly_shutdown</text><text x='1056' y='1688' text-anchor='end' class='colType'>bit</text><title>is_cleanly_shutdown
+bit</title></a>
+  <a xlink:href='#databases.is_supplemental_logging_enabled'><text id='sys.databases.is_supplemental_logging_enabled' x='771' y='1703'>is_supplemental_logging_enabled</text><text x='1056' y='1704' text-anchor='end' class='colType'>bit</text><title>is_supplemental_logging_enabled
+bit</title></a>
+  <a xlink:href='#databases.snapshot_isolation_state'><text id='sys.databases.snapshot_isolation_state' x='771' y='1719'>snapshot_isolation_state</text><text x='1056' y='1720' text-anchor='end' class='colType'>tinyint</text><title>snapshot_isolation_state
+tinyint</title></a>
+  <a xlink:href='#databases.snapshot_isolation_state_desc'><text id='sys.databases.snapshot_isolation_state_desc' x='771' y='1735'>snapshot_isolation_state_desc</text><text x='1056' y='1736' text-anchor='end' class='colType'>nvarchar(60)</text><title>snapshot_isolation_state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.is_read_committed_snapshot_on'><text id='sys.databases.is_read_committed_snapshot_on' x='771' y='1751'>is_read_committed_snapshot_on</text><text x='1056' y='1752' text-anchor='end' class='colType'>bit</text><title>is_read_committed_snapshot_on
+bit</title></a>
+  <a xlink:href='#databases.recovery_model'><text id='sys.databases.recovery_model' x='771' y='1767'>recovery_model</text><text x='1056' y='1768' text-anchor='end' class='colType'>tinyint</text><title>recovery_model
+tinyint</title></a>
+  <a xlink:href='#databases.recovery_model_desc'><text id='sys.databases.recovery_model_desc' x='771' y='1783'>recovery_model_desc</text><text x='1056' y='1784' text-anchor='end' class='colType'>nvarchar(60)</text><title>recovery_model_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.page_verify_option'><text id='sys.databases.page_verify_option' x='771' y='1799'>page_verify_option</text><text x='1056' y='1800' text-anchor='end' class='colType'>tinyint</text><title>page_verify_option
+tinyint</title></a>
+  <a xlink:href='#databases.page_verify_option_desc'><text id='sys.databases.page_verify_option_desc' x='771' y='1815'>page_verify_option_desc</text><text x='1056' y='1816' text-anchor='end' class='colType'>nvarchar(60)</text><title>page_verify_option_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.is_auto_create_stats_on'><text id='sys.databases.is_auto_create_stats_on' x='771' y='1831'>is_auto_create_stats_on</text><text x='1056' y='1832' text-anchor='end' class='colType'>bit</text><title>is_auto_create_stats_on
+bit</title></a>
+  <a xlink:href='#databases.is_auto_create_stats_incremental_on'><text id='sys.databases.is_auto_create_stats_incremental_on' x='771' y='1847'>is_auto_create_stats_incremental_on</text><text x='1056' y='1848' text-anchor='end' class='colType'>bit</text><title>is_auto_create_stats_incremental_on
+bit</title></a>
+  <a xlink:href='#databases.is_auto_update_stats_on'><text id='sys.databases.is_auto_update_stats_on' x='771' y='1863'>is_auto_update_stats_on</text><text x='1056' y='1864' text-anchor='end' class='colType'>bit</text><title>is_auto_update_stats_on
+bit</title></a>
+  <a xlink:href='#databases.is_auto_update_stats_async_on'><text id='sys.databases.is_auto_update_stats_async_on' x='771' y='1879'>is_auto_update_stats_async_on</text><text x='1056' y='1880' text-anchor='end' class='colType'>bit</text><title>is_auto_update_stats_async_on
+bit</title></a>
+  <a xlink:href='#databases.is_ansi_null_default_on'><text id='sys.databases.is_ansi_null_default_on' x='771' y='1895'>is_ansi_null_default_on</text><text x='1056' y='1896' text-anchor='end' class='colType'>bit</text><title>is_ansi_null_default_on
+bit</title></a>
+  <a xlink:href='#databases.is_ansi_nulls_on'><text id='sys.databases.is_ansi_nulls_on' x='771' y='1911'>is_ansi_nulls_on</text><text x='1056' y='1912' text-anchor='end' class='colType'>bit</text><title>is_ansi_nulls_on
+bit</title></a>
+  <a xlink:href='#databases.is_ansi_padding_on'><text id='sys.databases.is_ansi_padding_on' x='771' y='1927'>is_ansi_padding_on</text><text x='1056' y='1928' text-anchor='end' class='colType'>bit</text><title>is_ansi_padding_on
+bit</title></a>
+  <a xlink:href='#databases.is_ansi_warnings_on'><text id='sys.databases.is_ansi_warnings_on' x='771' y='1943'>is_ansi_warnings_on</text><text x='1056' y='1944' text-anchor='end' class='colType'>bit</text><title>is_ansi_warnings_on
+bit</title></a>
+  <a xlink:href='#databases.is_arithabort_on'><text id='sys.databases.is_arithabort_on' x='771' y='1959'>is_arithabort_on</text><text x='1056' y='1960' text-anchor='end' class='colType'>bit</text><title>is_arithabort_on
+bit</title></a>
+  <a xlink:href='#databases.is_concat_null_yields_null_on'><text id='sys.databases.is_concat_null_yields_null_on' x='771' y='1975'>is_concat_null_yields_null_on</text><text x='1056' y='1976' text-anchor='end' class='colType'>bit</text><title>is_concat_null_yields_null_on
+bit</title></a>
+  <a xlink:href='#databases.is_numeric_roundabort_on'><text id='sys.databases.is_numeric_roundabort_on' x='771' y='1991'>is_numeric_roundabort_on</text><text x='1056' y='1992' text-anchor='end' class='colType'>bit</text><title>is_numeric_roundabort_on
+bit</title></a>
+  <a xlink:href='#databases.is_quoted_identifier_on'><text id='sys.databases.is_quoted_identifier_on' x='771' y='2007'>is_quoted_identifier_on</text><text x='1056' y='2008' text-anchor='end' class='colType'>bit</text><title>is_quoted_identifier_on
+bit</title></a>
+  <a xlink:href='#databases.is_recursive_triggers_on'><text id='sys.databases.is_recursive_triggers_on' x='771' y='2023'>is_recursive_triggers_on</text><text x='1056' y='2024' text-anchor='end' class='colType'>bit</text><title>is_recursive_triggers_on
+bit</title></a>
+  <a xlink:href='#databases.is_cursor_close_on_commit_on'><text id='sys.databases.is_cursor_close_on_commit_on' x='771' y='2039'>is_cursor_close_on_commit_on</text><text x='1056' y='2040' text-anchor='end' class='colType'>bit</text><title>is_cursor_close_on_commit_on
+bit</title></a>
+  <a xlink:href='#databases.is_local_cursor_default'><text id='sys.databases.is_local_cursor_default' x='771' y='2055'>is_local_cursor_default</text><text x='1056' y='2056' text-anchor='end' class='colType'>bit</text><title>is_local_cursor_default
+bit</title></a>
+  <a xlink:href='#databases.is_fulltext_enabled'><text id='sys.databases.is_fulltext_enabled' x='771' y='2071'>is_fulltext_enabled</text><text x='1056' y='2072' text-anchor='end' class='colType'>bit</text><title>is_fulltext_enabled
+bit</title></a>
+  <a xlink:href='#databases.is_trustworthy_on'><text id='sys.databases.is_trustworthy_on' x='771' y='2087'>is_trustworthy_on</text><text x='1056' y='2088' text-anchor='end' class='colType'>bit</text><title>is_trustworthy_on
+bit</title></a>
+  <a xlink:href='#databases.is_db_chaining_on'><text id='sys.databases.is_db_chaining_on' x='771' y='2103'>is_db_chaining_on</text><text x='1056' y='2104' text-anchor='end' class='colType'>bit</text><title>is_db_chaining_on
+bit</title></a>
+  <a xlink:href='#databases.is_parameterization_forced'><text id='sys.databases.is_parameterization_forced' x='771' y='2119'>is_parameterization_forced</text><text x='1056' y='2120' text-anchor='end' class='colType'>bit</text><title>is_parameterization_forced
+bit</title></a>
+  <use id='nn' x='754' y='2125' xlink:href='#nn'/><a xlink:href='#databases.is_master_key_encrypted_by_server'><text id='sys.databases.is_master_key_encrypted_by_server' x='771' y='2135'>is_master_key_encrypted_by_server</text><text x='1056' y='2136' text-anchor='end' class='colType'>bit</text><title>is_master_key_encrypted_by_server
+* bit</title></a>
+  <a xlink:href='#databases.is_query_store_on'><text id='sys.databases.is_query_store_on' x='771' y='2151'>is_query_store_on</text><text x='1056' y='2152' text-anchor='end' class='colType'>bit</text><title>is_query_store_on
+bit</title></a>
+  <use id='nn' x='754' y='2157' xlink:href='#nn'/><a xlink:href='#databases.is_published'><text id='sys.databases.is_published' x='771' y='2167'>is_published</text><text x='1056' y='2168' text-anchor='end' class='colType'>bit</text><title>is_published
+* bit</title></a>
+  <use id='nn' x='754' y='2173' xlink:href='#nn'/><a xlink:href='#databases.is_subscribed'><text id='sys.databases.is_subscribed' x='771' y='2183'>is_subscribed</text><text x='1056' y='2184' text-anchor='end' class='colType'>bit</text><title>is_subscribed
+* bit</title></a>
+  <use id='nn' x='754' y='2189' xlink:href='#nn'/><a xlink:href='#databases.is_merge_published'><text id='sys.databases.is_merge_published' x='771' y='2199'>is_merge_published</text><text x='1056' y='2200' text-anchor='end' class='colType'>bit</text><title>is_merge_published
+* bit</title></a>
+  <use id='nn' x='754' y='2205' xlink:href='#nn'/><a xlink:href='#databases.is_distributor'><text id='sys.databases.is_distributor' x='771' y='2215'>is_distributor</text><text x='1056' y='2216' text-anchor='end' class='colType'>bit</text><title>is_distributor
+* bit</title></a>
+  <use id='nn' x='754' y='2221' xlink:href='#nn'/><a xlink:href='#databases.is_sync_with_backup'><text id='sys.databases.is_sync_with_backup' x='771' y='2231'>is_sync_with_backup</text><text x='1056' y='2232' text-anchor='end' class='colType'>bit</text><title>is_sync_with_backup
+* bit</title></a>
+  <use id='nn' x='754' y='2237' xlink:href='#nn'/><a xlink:href='#databases.service_broker_guid'><text id='sys.databases.service_broker_guid' x='771' y='2247'>service_broker_guid</text><text x='1056' y='2248' text-anchor='end' class='colType'>uniqueidentifier</text><title>service_broker_guid
+* uniqueidentifier</title></a>
+  <use id='nn' x='754' y='2253' xlink:href='#nn'/><a xlink:href='#databases.is_broker_enabled'><text id='sys.databases.is_broker_enabled' x='771' y='2263'>is_broker_enabled</text><text x='1056' y='2264' text-anchor='end' class='colType'>bit</text><title>is_broker_enabled
+* bit</title></a>
+  <a xlink:href='#databases.log_reuse_wait'><text id='sys.databases.log_reuse_wait' x='771' y='2279'>log_reuse_wait</text><text x='1056' y='2280' text-anchor='end' class='colType'>tinyint</text><title>log_reuse_wait
+tinyint</title></a>
+  <a xlink:href='#databases.log_reuse_wait_desc'><text id='sys.databases.log_reuse_wait_desc' x='771' y='2295'>log_reuse_wait_desc</text><text x='1056' y='2296' text-anchor='end' class='colType'>nvarchar(60)</text><title>log_reuse_wait_desc
+nvarchar(60)</title></a>
+  <use id='nn' x='754' y='2301' xlink:href='#nn'/><a xlink:href='#databases.is_date_correlation_on'><text id='sys.databases.is_date_correlation_on' x='771' y='2311'>is_date_correlation_on</text><text x='1056' y='2312' text-anchor='end' class='colType'>bit</text><title>is_date_correlation_on
+* bit</title></a>
+  <use id='nn' x='754' y='2317' xlink:href='#nn'/><a xlink:href='#databases.is_cdc_enabled'><text id='sys.databases.is_cdc_enabled' x='771' y='2327'>is_cdc_enabled</text><text x='1056' y='2328' text-anchor='end' class='colType'>bit</text><title>is_cdc_enabled
+* bit</title></a>
+  <a xlink:href='#databases.is_encrypted'><text id='sys.databases.is_encrypted' x='771' y='2343'>is_encrypted</text><text x='1056' y='2344' text-anchor='end' class='colType'>bit</text><title>is_encrypted
+bit</title></a>
+  <a xlink:href='#databases.is_honor_broker_priority_on'><text id='sys.databases.is_honor_broker_priority_on' x='771' y='2359'>is_honor_broker_priority_on</text><text x='1056' y='2360' text-anchor='end' class='colType'>bit</text><title>is_honor_broker_priority_on
+bit</title></a>
+  <a xlink:href='#databases.replica_id'><text id='sys.databases.replica_id' x='771' y='2375'>replica_id</text><text x='1056' y='2376' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+uniqueidentifier</title></a>
+  <a xlink:href='#databases.group_database_id'><text id='sys.databases.group_database_id' x='771' y='2391'>group_database_id</text><text x='1056' y='2392' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_database_id
+uniqueidentifier</title></a>
+  <a xlink:href='#databases.resource_pool_id'><text id='sys.databases.resource_pool_id' x='771' y='2407'>resource_pool_id</text><text x='1056' y='2408' text-anchor='end' class='colType'>int</text><title>resource_pool_id
+int</title></a>
+  <a xlink:href='#databases.default_language_lcid'><text id='sys.databases.default_language_lcid' x='771' y='2423'>default_language_lcid</text><text x='1056' y='2424' text-anchor='end' class='colType'>smallint</text><title>default_language_lcid
+smallint</title></a>
+  <a xlink:href='#databases.default_language_name'><text id='sys.databases.default_language_name' x='771' y='2439'>default_language_name</text><text x='1056' y='2440' text-anchor='end' class='colType'>nvarchar(128)</text><title>default_language_name
+nvarchar(128)</title></a>
+  <a xlink:href='#databases.default_fulltext_language_lcid'><text id='sys.databases.default_fulltext_language_lcid' x='771' y='2455'>default_fulltext_language_lcid</text><text x='1056' y='2456' text-anchor='end' class='colType'>int</text><title>default_fulltext_language_lcid
+int</title></a>
+  <a xlink:href='#databases.default_fulltext_language_name'><text id='sys.databases.default_fulltext_language_name' x='771' y='2471'>default_fulltext_language_name</text><text x='1056' y='2472' text-anchor='end' class='colType'>nvarchar(128)</text><title>default_fulltext_language_name
+nvarchar(128)</title></a>
+  <a xlink:href='#databases.is_nested_triggers_on'><text id='sys.databases.is_nested_triggers_on' x='771' y='2487'>is_nested_triggers_on</text><text x='1056' y='2488' text-anchor='end' class='colType'>bit</text><title>is_nested_triggers_on
+bit</title></a>
+  <a xlink:href='#databases.is_transform_noise_words_on'><text id='sys.databases.is_transform_noise_words_on' x='771' y='2503'>is_transform_noise_words_on</text><text x='1056' y='2504' text-anchor='end' class='colType'>bit</text><title>is_transform_noise_words_on
+bit</title></a>
+  <a xlink:href='#databases.two_digit_year_cutoff'><text id='sys.databases.two_digit_year_cutoff' x='771' y='2519'>two_digit_year_cutoff</text><text x='1056' y='2520' text-anchor='end' class='colType'>smallint</text><title>two_digit_year_cutoff
+smallint</title></a>
+  <a xlink:href='#databases.containment'><text id='sys.databases.containment' x='771' y='2535'>containment</text><text x='1056' y='2536' text-anchor='end' class='colType'>tinyint</text><title>containment
+tinyint</title></a>
+  <a xlink:href='#databases.containment_desc'><text id='sys.databases.containment_desc' x='771' y='2551'>containment_desc</text><text x='1056' y='2552' text-anchor='end' class='colType'>nvarchar(60)</text><title>containment_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.target_recovery_time_in_seconds'><text id='sys.databases.target_recovery_time_in_seconds' x='771' y='2567'>target_recovery_time_in_seconds</text><text x='1056' y='2568' text-anchor='end' class='colType'>int</text><title>target_recovery_time_in_seconds
+int</title></a>
+  <a xlink:href='#databases.delayed_durability'><text id='sys.databases.delayed_durability' x='771' y='2583'>delayed_durability</text><text x='1056' y='2584' text-anchor='end' class='colType'>int</text><title>delayed_durability
+int</title></a>
+  <a xlink:href='#databases.delayed_durability_desc'><text id='sys.databases.delayed_durability_desc' x='771' y='2599'>delayed_durability_desc</text><text x='1056' y='2600' text-anchor='end' class='colType'>nvarchar(60)</text><title>delayed_durability_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#databases.is_memory_optimized_elevate_to_snapshot_on'><text id='sys.databases.is_memory_optimized_elevate_to_snapshot_on' x='771' y='2615'>is_memory_optimized_elevate_to_snapshot_on</text><text x='1056' y='2616' text-anchor='end' class='colType'>bit</text><title>is_memory_optimized_elevate_to_snapshot_on
+bit</title></a>
+  <a xlink:href='#databases.is_federation_member'><text id='sys.databases.is_federation_member' x='771' y='2631'>is_federation_member</text><text x='1056' y='2632' text-anchor='end' class='colType'>bit</text><title>is_federation_member
+bit</title></a>
+  <a xlink:href='#databases.is_remote_data_archive_enabled'><text id='sys.databases.is_remote_data_archive_enabled' x='771' y='2647'>is_remote_data_archive_enabled</text><text x='1056' y='2648' text-anchor='end' class='colType'>bit</text><title>is_remote_data_archive_enabled
+bit</title></a>
+  <a xlink:href='#databases.is_mixed_page_allocation_on'><text id='sys.databases.is_mixed_page_allocation_on' x='771' y='2663'>is_mixed_page_allocation_on</text><text x='1056' y='2664' text-anchor='end' class='colType'>bit</text><title>is_mixed_page_allocation_on
+bit</title></a>
 
 <!-- == Table 'availability_groups_cluster' == -->
 <rect class='entity' x='48' y='344' width='320' height='176' rx='8' ry='8' style='stroke:none'/>
@@ -510,14 +665,13 @@ numeric(25,0)</title></a>
 <rect class='entity' x='448' y='344' width='320' height='256' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
 <a xlink:href='#availability_groups'><text x='540' y='364'>sys.availability_groups</text><title>Table sys.availability_groups
 Returns a row for each availability group for which the local instance of SQL Server hosts an availability replica. Each row contains a cached copy of the availability group metadata.</title></a>
-  <use id='nn' x='450' y='381' xlink:href='#nn'/><a xlink:href='#availability_groups.group_id'><text id='sys.availability_groups.group_id' x='467' y='391' onmouseover="hghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])" onmouseout="uhghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])">group_id</text><text x='752' y='392' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+  <use id='nn' x='450' y='381' xlink:href='#nn'/><a xlink:href='#availability_groups.group_id'><text id='sys.availability_groups.group_id' x='467' y='391' onmouseover="hghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])" onmouseout="uhghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])">group_id</text><text x='752' y='392' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
 * uniqueidentifier
 Unique identifier (GUID) of the availability group.</title></a>
 <a xlink:href='#availability_groups.group_id'><use id='ref' x='756' y='380' xlink:href='#ref'/><title>Referred by availability_databases_cluster ( group_id ) 
-Referred by availability_replicas ( group_id ) 
-Referred by availability_group_listeners ( group_id ) 
 Referred by availability_group_listeners ( group_id ) 
 Referred by availability_groups_cluster ( group_id ) 
+Referred by availability_replicas ( group_id ) 
 Referred by dm_hadr_availability_group_states ( group_id ) </title></a>
   <a xlink:href='#availability_groups.name'><use id='null' x='752' y='396' xlink:href='#flag2'/></a>
 <a xlink:href='#availability_groups.name'><text id='sys.availability_groups.name' x='467' y='407'>name</text><text x='752' y='408' text-anchor='end' class='colType'>sysname</text><title>name
@@ -812,11 +966,11 @@ HEALTHY</title></a>
 Returns a row for each of the availability replicas that belong to any Always On availability group in the WSFC failover cluster.
 
 If the local server instance is unable to talk to the WSFC failover cluster, for example because the cluster is down or quorum has been lost, only rows for local availability replicas are returned. These rows will contain only the columns of data that are cached locally in metadata.</title></a>
-  <a xlink:href='#availability_replicas.replica_id'><text id='sys.availability_replicas.replica_id' x='915' y='375' onmouseover="hghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])">replica_id</text><text x='1216' y='376' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+  <a xlink:href='#availability_replicas.replica_id'><text id='sys.availability_replicas.replica_id' x='915' y='375' onmouseover="hghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])">replica_id</text><text x='1216' y='376' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
 uniqueidentifier
 Unique ID of the replica.</title></a>
-<a xlink:href='#availability_replicas.replica_id'><use id='ref' x='1220' y='364' xlink:href='#ref'/><title>Referred by dm_hadr_availability_replica_states ( replica_id ) 
-Referred by dm_hadr_availability_replica_cluster_states ( replica_id ) 
+<a xlink:href='#availability_replicas.replica_id'><use id='ref' x='1220' y='364' xlink:href='#ref'/><title>Referred by dm_hadr_availability_replica_cluster_states ( replica_id ) 
+Referred by dm_hadr_availability_replica_states ( replica_id ) 
 Referred by dm_hadr_database_replica_cluster_states ( replica_id ) 
 Referred by dm_hadr_database_replica_states ( replica_id ) </title></a>
   <use id='nn' x='898' y='381' xlink:href='#nn'/><a xlink:href='#availability_replicas.group_id'><text id='sys.availability_replicas.group_id' x='915' y='391' onmouseover="hghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='1216' y='392' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
@@ -1428,12 +1582,6 @@ NULL &#61; database is not part of an availability replica in any availability g
 		<td> numeric&#40; 25&#44; 0 &#41;   </td>
 		<td>  </td>
 	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_databases_cluster_availability_groups</td>
-		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
@@ -1522,12 +1670,6 @@ ONLINE&#95;PENDING
 
 FAILED </td>
 	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_group_listener_ip_addresses_availability_group_listeners</td>
-		<td > ( listener&#95;id ) ref <a href='#availability&#95;group&#95;listeners'>availability&#95;group&#95;listeners</a> (listener&#95;id) </td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
@@ -1583,12 +1725,6 @@ NULL &#61; Listener was configured outside SQL Server and its port number has no
 IPv4 address&#58; 65&#46;55&#46;39&#46;10&#46;
 
 IPv6 address&#58; 2001&#58;&#58;4898&#58;23&#58;1002&#58;20f&#58;1fff&#58;feff&#58;b3a3 </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_group_listeners_availability_groups</td>
-		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
-		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>
@@ -1797,12 +1933,6 @@ SECONDARY&#95;ONLY
 SECONDARY
 
 NONE </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_groups_cluster_availability_groups</td>
-		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
-		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>
@@ -2016,12 +2146,6 @@ For more information&#44; see Active Secondaries&#58; Backup on Secondary Replic
 		<td>&nbsp;</td>
 		<td><a name='availability_replicas.seeding_mode_desc'>seeding&#95;mode&#95;desc</a></td>
 		<td> nvarchar&#40; 60 &#41;   </td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_replicas_availability_groups</td>
-		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
 		<td>  </td>
 	</tr>
 </tbody>
@@ -2495,11 +2619,6 @@ For more information&#44; see Active Secondaries&#58; Backup on Secondary Replic
 		<td> bit   </td>
 		<td>  </td>
 	</tr>
-<tr><th colspan='4'>Indexes</th></tr>
-	<tr>		<td><svg width='14' height='14'><use xlink:href='#unq'/></svg></td><td>Unq&#95;databases&#95;database&#95;id</td>
-		<td> ON database&#95;id</td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
@@ -2602,12 +2721,6 @@ PARTIALLY&#95;HEALTHY
 
 HEALTHY </td>
 	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_group_states_availability_groups</td>
-		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
@@ -2683,12 +2796,6 @@ HEALTHY </td>
 JOINED&#95;STANDALONE&#95;INSTANCE
 
 JOINED&#95;FAILOVER&#95;CLUSTER&#95;INSTANCE </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_replica_cluster_states_availability_replicas</td>
-		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
-		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>
@@ -2878,12 +2985,6 @@ HEALTHY </td>
 		<td> datetime   </td>
 		<td> Date and time timestamp indicating when the last&#95;connect&#95;error&#95;number error occurred&#46; </td>
 	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_replica_states_availability_replicas</td>
-		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
@@ -2963,17 +3064,6 @@ On secondary replicas this value is NULL&#46; Note that each secondary replica w
 		<td><a name='dm_hadr_database_replica_cluster_states.truncation_lsn'>truncation&#95;lsn</a></td>
 		<td> numeric&#40; 25&#44; 0 &#41;   </td>
 		<td> The Always On availability groups log truncation value&#44; which may be higher than the local truncation LSN if local log truncation is blocked &#40;such as by a backup operation&#41;&#46; </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster</td>
-		<td > ( group&#95;database&#95;id ) ref <a href='#availability&#95;databases&#95;cluster'>availability&#95;databases&#95;cluster</a> (group&#95;database&#95;id) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_cluster_states_availability_replicas</td>
-		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
-		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>
@@ -3345,27 +3435,6 @@ On the primary replica&#44; each secondary database row displays the time that t
 		<td> The number of seconds that the secondary replica is behind the primary replica during synchronization&#46;
 
 Applies to&#58; SQL Server 2016 &#40;13&#46;x&#41; through SQL Server 2017&#46; </td>
-	</tr>
-<tr><th colspan='4'>Indexes</th></tr>
-	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>Idx&#95;dm&#95;hadr&#95;database&#95;replica&#95;states&#95;database&#95;id</td>
-		<td> ON database&#95;id</td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_states_availability_databases_cluster</td>
-		<td > ( group&#95;database&#95;id ) ref <a href='#availability&#95;databases&#95;cluster'>availability&#95;databases&#95;cluster</a> (group&#95;database&#95;id) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>fk_dm_hadr_database_replica_states</td>
-		<td > ( database&#95;id ) ref <a href='#databases'>databases</a> (database&#95;id) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_states_availability_replicas</td>
-		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
-		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>

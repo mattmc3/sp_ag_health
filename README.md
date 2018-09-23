@@ -29,9 +29,11 @@ highlights the following structure:
 
 ![System Views Map Always On][overview-erd]
 
-Here is a more detailed ERD of the field from sp_ag_health flagged.
+Here is a more detailed ERD with the fields from sp_ag_health flagged.
 
 ![AlwaysOn][detail-erd]
+
+You can view even more detail [here][very-detailed-erd].
 
 ## Notes
 
@@ -44,3 +46,4 @@ include:
 
 [overview-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/System%20Views%20Map%20Always%20On.png
 [detail-erd]: https://raw.githubusercontent.com/mattmc3/sp_ag_health/master/erd/AlwaysOn.png
+[very-detailed-erd]: http://htmlpreview.github.io/?https://github.com/mattmc3/sp_ag_health/blob/master/erd/AlwaysOn.html
