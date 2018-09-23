@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="AlwaysOn" id="Project_200b7ad" template="Default" database="SqlServer" >
+	<schema name="sys" catalogname="sandbox" schemaname="sys" >
+		<table name="availability_databases_cluster" >
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="database_name" type="sysname" length="128" decimal="0" jt="12" />
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+		</table>
+		<table name="availability_group_listener_ip_addresses" >
+			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" />
+			<column name="ip_address" type="nvarchar" length="48" decimal="0" jt="12" />
+			<column name="ip_subnet_mask" type="nvarchar" length="15" decimal="0" jt="12" />
+			<column name="is_dhcp" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="network_subnet_ip" type="nvarchar" length="48" decimal="0" jt="12" />
+			<column name="network_subnet_prefix_length" type="int" length="10" decimal="0" jt="4" />
+			<column name="network_subnet_ipv4_mask" type="nvarchar" length="48" decimal="0" jt="12" />
+			<column name="state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+		</table>
+		<table name="availability_group_listeners" >
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" />
+			<column name="dns_name" type="nvarchar" length="63" decimal="0" jt="12" />
+			<column name="port" type="int" length="10" decimal="0" jt="4" />
+			<column name="is_conformant" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="ip_configuration_string_from_cluster" type="nvarchar" length="4000" decimal="0" jt="12" />
+		</table>
+		<table name="availability_groups" >
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" />
+			<column name="resource_id" type="nvarchar" length="40" decimal="0" jt="12" />
+			<column name="resource_group_id" type="nvarchar" length="40" decimal="0" jt="12" />
+			<column name="failure_condition_level" type="int" length="10" decimal="0" jt="4" />
+			<column name="health_check_timeout" type="int" length="10" decimal="0" jt="4" />
+			<column name="automated_backup_preference" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="automated_backup_preference_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="version" type="smallint" length="5" decimal="0" jt="5" />
+			<column name="basic_features" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="dtc_support" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="db_failover" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_distributed" type="bit" length="1" decimal="0" jt="-7" />
+		</table>
+		<table name="availability_groups_cluster" >
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" />
+			<column name="resource_id" type="nvarchar" length="40" decimal="0" jt="12" />
+			<column name="resource_group_id" type="nvarchar" length="40" decimal="0" jt="12" />
+			<column name="failure_condition_level" type="int" length="10" decimal="0" jt="4" />
+			<column name="health_check_timeout" type="int" length="10" decimal="0" jt="4" />
+			<column name="automated_backup_preference" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="automated_backup_preference_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+		</table>
+		<table name="availability_read_only_routing_lists" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="routing_priority" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="read_only_replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+		</table>
+		<table name="availability_replicas" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="replica_metadata_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" />
+			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" />
+			<column name="endpoint_url" type="nvarchar" length="256" decimal="0" jt="12" />
+			<column name="availability_mode" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="availability_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="failover_mode" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="failover_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="session_timeout" type="int" length="10" decimal="0" jt="4" />
+			<column name="primary_role_allow_connections" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="primary_role_allow_connections_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="secondary_role_allow_connections" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="secondary_role_allow_connections_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="create_date" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="modify_date" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="backup_priority" type="int" length="10" decimal="0" jt="4" />
+			<column name="read_only_routing_url" type="nvarchar" length="256" decimal="0" jt="12" />
+			<column name="seeding_mode" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="seeding_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+		</table>
+		<table name="databases" >
+			<column name="name" type="sysname" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="source_database_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" />
+			<column name="create_date" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="compatibility_level" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="collation_name" type="sysname" length="128" decimal="0" jt="12" />
+			<column name="user_access" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="user_access_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_read_only" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_close_on" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_auto_shrink_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_in_standby" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_cleanly_shutdown" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_supplemental_logging_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="snapshot_isolation_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="snapshot_isolation_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_read_committed_snapshot_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="recovery_model" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="recovery_model_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="page_verify_option" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="page_verify_option_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_auto_create_stats_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_create_stats_incremental_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_update_stats_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_auto_update_stats_async_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_null_default_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_nulls_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_padding_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_ansi_warnings_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_arithabort_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_concat_null_yields_null_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_numeric_roundabort_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_quoted_identifier_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_recursive_triggers_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_cursor_close_on_commit_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_local_cursor_default" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_fulltext_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_trustworthy_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_db_chaining_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_parameterization_forced" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_master_key_encrypted_by_server" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_query_store_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_published" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_subscribed" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_merge_published" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_distributor" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_sync_with_backup" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="service_broker_guid" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_broker_enabled" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="log_reuse_wait" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="log_reuse_wait_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_date_correlation_on" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_cdc_enabled" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_encrypted" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_honor_broker_priority_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="resource_pool_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="default_language_lcid" type="smallint" length="5" decimal="0" jt="5" />
+			<column name="default_language_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="default_fulltext_language_lcid" type="int" length="10" decimal="0" jt="4" />
+			<column name="default_fulltext_language_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="is_nested_triggers_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_transform_noise_words_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="two_digit_year_cutoff" type="smallint" length="5" decimal="0" jt="5" />
+			<column name="containment" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="containment_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="target_recovery_time_in_seconds" type="int" length="10" decimal="0" jt="4" />
+			<column name="delayed_durability" type="int" length="10" decimal="0" jt="4" />
+			<column name="delayed_durability_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_memory_optimized_elevate_to_snapshot_on" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_federation_member" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_remote_data_archive_enabled" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_mixed_page_allocation_on" type="bit" length="1" decimal="0" jt="-7" />
+		</table>
+		<table name="dm_hadr_auto_page_repair" >
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="file_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="page_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="error_type" type="smallint" length="5" decimal="0" jt="5" mandatory="y" />
+			<column name="page_status" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="modification_time" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+		</table>
+		<table name="dm_hadr_automatic_seeding" >
+			<column name="start_time" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="completion_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="ag_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_db_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_remote_replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="operation_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_source" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="current_state" type="nvarchar" length="4000" decimal="0" jt="12" mandatory="y" />
+			<column name="performed_seeding" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="failure_state" type="int" length="10" decimal="0" jt="4" />
+			<column name="failure_state_desc" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="error_code" type="int" length="10" decimal="0" jt="4" />
+			<column name="number_of_attempts" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+		</table>
+		<table name="dm_hadr_availability_group_states" >
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="primary_replica" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="primary_recovery_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="primary_recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="secondary_recovery_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="secondary_recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+		</table>
+		<table name="dm_hadr_availability_replica_cluster_nodes" >
+			<column name="group_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="node_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_availability_replica_cluster_states" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="join_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="join_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+		</table>
+		<table name="dm_hadr_availability_replica_states" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="role" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="role_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="operational_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="operational_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="connected_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="connected_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="recovery_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="last_connect_error_number" type="int" length="10" decimal="0" jt="4" />
+			<column name="last_connect_error_description" type="nvarchar" length="1024" decimal="0" jt="12" />
+			<column name="last_connect_error_timestamp" type="datetime" length="23" decimal="3" jt="93" />
+		</table>
+		<table name="dm_hadr_cluster" >
+			<column name="cluster_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="quorum_type" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="quorum_type_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="quorum_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="quorum_state_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_cluster_members" >
+			<column name="member_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="member_type" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="member_type_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="member_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="member_state_desc" type="nvarchar" length="60" decimal="0" jt="12" mandatory="y" />
+			<column name="number_of_quorum_votes" type="int" length="10" decimal="0" jt="4" />
+		</table>
+		<table name="dm_hadr_cluster_networks" >
+			<column name="member_name" type="nvarchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="network_subnet_ip" type="nvarchar" length="64" decimal="0" jt="12" mandatory="y" />
+			<column name="network_subnet_ipv4_mask" type="nvarchar" length="45" decimal="0" jt="12" />
+			<column name="network_subnet_prefix_length" type="int" length="10" decimal="0" jt="4" />
+			<column name="is_public" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_ipv4" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+		</table>
+		<table name="dm_hadr_database_replica_cluster_states" >
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="database_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="is_failover_ready" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_pending_secondary_suspend" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="is_database_joined" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="recovery_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+		</table>
+		<table name="dm_hadr_database_replica_states" >
+			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="is_local" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="is_primary_replica" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="synchronization_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="synchronization_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_commit_participant" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="database_state" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="database_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="is_suspended" type="bit" length="1" decimal="0" jt="-7" />
+			<column name="suspend_reason" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="suspend_reason_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<column name="recovery_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_sent_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_sent_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="last_received_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_received_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="last_hardened_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_hardened_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="last_redone_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_redone_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="log_send_queue_size" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="log_send_rate" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="redo_queue_size" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="redo_rate" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="filestream_send_rate" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="end_of_log_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_commit_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<column name="last_commit_time" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="low_water_mark_for_ghosts" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="secondary_lag_seconds" type="bigint" length="19" decimal="0" jt="-5" />
+		</table>
+		<table name="dm_hadr_instance_node_map" >
+			<column name="ag_resource_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="instance_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="node_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_name_id_map" >
+			<column name="ag_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="ag_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="ag_resource_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<column name="ag_group_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
+		</table>
+		<table name="dm_hadr_physical_seeding_stats" >
+			<column name="local_physical_seeding_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
+			<column name="remote_physical_seeding_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="local_database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="local_database_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="remote_machine_name" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="role_desc" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="internal_state_desc" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="transfer_rate_bytes_per_second" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="transferred_size_bytes" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="database_size_bytes" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="start_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="end_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="estimate_time_complete_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="total_disk_io_wait_time_ms" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="total_network_wait_time_ms" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="failure_code" type="int" length="10" decimal="0" jt="4" />
+			<column name="failure_message" type="nvarchar" length="128" decimal="0" jt="12" />
+			<column name="failure_time_utc" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="is_compression_enabled" type="bit" length="1" decimal="0" jt="-7" />
+		</table>
+	</schema>
+	<layout name="AlwaysOn" id="Layout_3a41df9" show_column_type="y" show_schema_name="y" show_relation="columns" >
+		<entity schema="sys" name="availability_replicas" color="3986C1" x="480" y="48" />
+		<entity schema="sys" name="availability_groups" color="3986C1" x="48" y="64" />
+	</layout>
+</project>
