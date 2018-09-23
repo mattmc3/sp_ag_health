@@ -44,10 +44,10 @@ include:
 - Proc parameters (additional, names, order)
 - Others changes as necessary for design, performance, features, and maintainability
 
-### Resources
+### References
 
 - Get the Microsoft System Views Map [here][ms-system-views-map]
-- Microsoft docs [here](ms-docs1) and [here][ms-docs2]
+- See Microsoft system view docs [here][ms-docs1] and [here][ms-docs2]
 
 [ms-system-views-map]: https://www.microsoft.com/en-us/download/details.aspx?id=39083
 [ms-docs1]: https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-availability-groups-transact-sql?view=sql-server-2017
