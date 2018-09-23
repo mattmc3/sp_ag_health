@@ -1,0 +1,2240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<!DOCTYPE html>
+<html lang='en-us' xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>AlwaysOn</title>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" crossorigin="anonymous" />
+<link rel="shortcut icon" href="https://www.dbschema.com/images/favicon.ico">
+<style type='text/css'>
+body {
+    font-family: 'Segoe UI', 'Lucida sans', Dialog;
+    font-size: 13px;
+    background-color:#f5f5f5;
+    margin: 10px;
+}
+</style>
+</head>
+
+<body>
+<div class='svg-container'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1728' height='1950' viewBox='0 0 1728 1950' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','scene'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#000000; font-family: System, 'Trebuchet MS', Dialog; font-size:12px; }
+  a text:hover        { fill:#94025f; text-shadow: 0px 0px 6px #d0ce00; font-size:13px; }
+  text.highlight      { fill:#94025f; text-shadow: 0px 0px 4px #eac533; font-size:13px; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#b09c7c; }
+  path                { stroke:#5c554f; stroke-width:1.15; fill:none; }
+  path                { stroke:#5c554f; stroke-width:1.15; fill:none;}
+  path.virtual        { stroke:#b7642d; }
+  path.logo           { fill:#fbeac0;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
+  path.dotted         { stroke-dasharray:4,2; }
+  path.scene          { stroke-width:10; opacity:0;}
+  path.highlight      { stroke-width:5; stroke:#c1a662; opacity:0.6;}
+  rect.entity         { fill:#ffffff; stroke:#aaa; stroke-width:1;shape-rendering:crispEdges; }
+  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
+  text.callout        { fill:#000000; font-family: System, 'Trebuchet MS', Dialog; font-size:12px; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; }
+  rect.grp            { stroke:#b1b1b1; stroke-width:1.7; opacity:0.8; }
+  path.st0            { fill:#ececec;fill-opacity:1;stroke-width:0.6;stroke:#d0d0d0; }
+</style>
+<defs>
+  <pattern id='layoutBgA' patternUnits='userSpaceOnUse'  width='10' height='20' x='0' y='0' viewBox='0 0 5 10'>  
+     <line x1='-2' y1='1' x2='7' y2='10' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='6' x2='7' y2='15' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='-4' x2='7' y2='5' stroke='#f3f3f3' stroke-width='.5'/>  
+  </pattern>  
+  <radialGradient id='layoutBgB' gradientUnits='userSpaceOnUse' cx='50%' cy='50%' r='75%' fx='46%' fy='22%'>
+     <stop offset='0%' stop-opacity='.2' stop-color='#f5f5f5' />  
+     <stop offset='100%' stop-color='#efefef' />  
+  </radialGradient>
+  <pattern id='layoutBgTr' patternUnits='userSpaceOnUse'  width='300' height='300' x='0' y='0' viewBox='0 0 300 300'>  
+  <path class='st0' d='m 62.011835,91.267143 c 3.536475,3.175214 2.262669,8.705999 -1.637711,11.015197 -3.594697,5.8423 -6.34682,-2.892623 -9.715478,-4.653898 -5.609222,-2.838926 2.050802,-6.680123 4.77004,-8.319046 2.334696,-0.724067 4.935143,0.312302 6.583149,1.957747 z m -2.720492,2.538595 c -2.698397,-3.517732 -9.282815,1.269287 -3.69635,3.568637 2.765331,5.605665 7.052809,-0.56184 3.69635,-3.568637 z' />
+  <path class='st0' d='m 72.25864,84.624638 c 4.108046,3.143003 -0.737059,6.895259 -1.994918,8.323564 -3.586718,5.561143 -6.495079,-4.197379 -10.07759,-5.582178 -4.443422,-1.088878 1.349298,-7.249213 2.503526,-2.503449 2.464639,4.517161 2.304019,-3.70697 6.291113,-1.995914 1.280083,0.137865 2.410691,0.864819 3.277869,1.757977 z m -2.646109,2.323242 c -4.797162,-3.078383 -2.810517,6.305507 0.515161,1.990646 0.296432,-0.688582 0.01209,-1.493412 -0.515161,-1.990646 z' />
+  <path class='st0' d='m 78.230641,79.436735 c 4.142121,3.027466 -2.020102,10.435276 -3.450543,5.477315 3.306312,-5.248112 -9.186019,-2.220094 -5.805994,-8.77679 -0.544141,-3.93011 6.797826,-2.102227 3.386015,0.245477 -0.181085,2.915838 4.637371,1.019311 5.870522,3.053982 z' />
+  <path class='st0' d='m 82.744502,72.597397 c -4.901605,1.926521 1.146497,6.285555 2.559694,2.225783 6.21817,3.539297 -6.640186,8.416664 -7.590325,1.997457 -2.24365,-2.914883 4.026676,-10.148618 5.030631,-4.22324 z' />
+  <path class='st0' d='m 90.727458,64.259158 c 1.583987,1.690029 3.321317,3.2696 4.81267,5.026353 -2.535706,6.849794 -6.445583,-5.918773 -8.388458,-0.167017 0.782768,2.03426 5.877405,3.752079 2.670979,5.711199 -3.315119,1.519161 -5.782422,-5.157931 -8.858893,-6.780537 -4.229842,-1.139816 1.510134,-7.074128 2.586227,-2.385939 3.141198,5.495193 1.840537,-5.598295 7.177489,-1.404062 z' />
+  <path class='st0' d='m 99.622027,58.374253 c 1.493293,1.9548 -6.281936,7.024659 -0.885258,4.740447 0.386238,-4.434477 6.131941,-1.133173 2.175851,1.618005 -4.421491,6.12739 -13.666659,-3.151506 -7.058299,-7.136537 1.785129,-1.119329 4.348209,-0.743179 5.767706,0.778085 z m -2.900824,1.89746 c -3.608188,-2.208543 -2.280489,5.00803 -0.12563,0.329531 z' />
+  <path class='st0' d='m 115.18023,50.570441 c -1.61703,5.201678 -4.6204,-0.364502 -7.01598,-1.749619 -4.40977,2.122562 4.89641,4.913939 1.89606,7.018157 -2.48061,3.877635 -4.11404,-4.060614 -7.01192,-2.6391 -1.76318,3.107252 7.28394,6.252304 0.87346,7.876177 -1.74515,-2.956649 -9.055498,-5.610518 -3.950378,-8.66062 1.696478,1.897023 1.770418,-5.43503 5.347308,-3.072411 -0.44014,-5.474701 6.11995,-4.950882 7.7846,-0.815355 0.69076,0.682329 1.39587,1.351469 2.07685,2.042771 z' />
+  <path class='st0' d='m 120.54891,39.417125 c 2.50681,1.334124 4.80466,4.941837 0.75044,5.297362 -0.46414,1.89865 -5.25369,5.602652 -8.01742,1.815475 -3.87345,-2.809139 -0.0676,-7.603869 2.3036,-8.133924 1.6795,-3.853018 3.16703,-1.199465 4.96338,1.021087 z m -2.2464,2.175828 c -4.8049,-2.992167 -3.08987,6.380358 0.42374,2.036159 0.33052,-0.677508 0.12099,-1.525836 -0.42374,-2.036159 z' />
+  <path class='st0' d='m 128.50836,24.06821 c -5.10403,3.035506 3.20535,6.383175 5.05938,9.450276 -0.91853,2.95886 -4.06493,3.650723 -5.34691,0.265618 -2.25715,-2.089033 -4.65672,-6.948595 -7.07024,-2.584686 -4.71758,-3.764394 3.81217,-5.812054 5.12382,-9.226328 0.75738,0.677487 1.38637,1.498638 2.23389,2.095175 z' />
+  <path class='st0' d='m 137.14366,22.299812 c -3.09615,2.259885 0.71537,4.412454 1.99042,6.435866 -3.08975,5.080354 -5.91384,-2.98648 -8.92144,-4.094939 1.44369,-3.219573 3.3497,-1.335928 4.27156,-4.41058 0.97822,-0.894325 1.75044,1.871047 2.65946,2.069653 z' />
+  <path class='st0' d='m 136.85093,14.890174 c 2.31562,5.283511 -7.17975,1.771993 -1.29675,-0.475107 l 0.7108,0.08973 z m 4.867,5.317354 c 2.56912,1.439678 4.26517,4.725219 0.30678,5.233637 -1.56592,-3.098864 -9.51683,-5.749448 -3.64502,-8.633714 1.17746,0.325095 2.15375,2.591149 3.33824,3.400077 z' />
+  <path class='st0' d='m 149.95578,11.976423 c 2.50679,1.334142 4.80455,4.94192 0.75041,5.297394 -0.4641,1.898604 -5.25368,5.602645 -8.0174,1.81545 -3.87347,-2.80918 -0.0676,-7.603844 2.30366,-8.133968 1.67949,-3.8530525 3.16695,-1.1993573 4.96333,1.021124 z m -2.24641,2.175828 c -4.80489,-2.992177 -3.08986,6.380343 0.42374,2.036167 0.33055,-0.677518 0.121,-1.52585 -0.42374,-2.036167 z' />
+  <path class='st0' d='m 153.26135,7.538431 c 2.60497,1.5799548 6.03999,5.944272 1.08117,6.050232 -2.53319,-3.231828 -7.20316,-6.4304525 -8.84748,-9.4582682 1.89121,-2.8664883 3.78452,-2.247699 5.38514,0.8929426 0.78017,0.8503859 1.57195,1.6911437 2.38118,2.5150667 z' />
+  </pattern>  
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f8f6d1' />
+  </radialGradient>
+  <filter id='shadow' width='120%' height='120%'> 
+      <feOffset result='offOut' in='SourceGraphic' dx='1' dy='1' /> 
+      <feColorMatrix result='matrixOut' in='offOut' type='matrix' 
+      values='0.1 0 0 0 0 0 0.4 0 0 0 0 0 0.6 0 0 0 0 0 0.3 0' /> 
+      <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' /> 
+      <feBlend in='SourceGraphic' in2='blurOut' mode='normal' /> 
+    </filter> 
+  <filter id='fkShadow' height='130%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+    <feMergeNode/> <!-- this contains the offset blurred image -->
+    <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#eefbf2' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#cff9cb' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 8,12 L 16,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+      <path d='M 0,0 L 8,12 L 16,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,16 L 8,4 L 16,16 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+      <path d='M 0,16 L 8,4 L 16,16' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='dist' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='M 0.177,11.431 12.28,11.449'/>
+      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='m 6.124,3.954 0.066,7.154 v 0'/>
+      <rect width='11.78' height='3.40' x='0.40' y='0.44' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.83'/>
+      <rect width='11.78' height='3.40' x='0.40' y='5.609' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag0' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag1' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag2' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='view' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+     <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+     <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+     <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+  <marker id='arrow01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+  </marker>
+  <marker id='arrow1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+  </marker>
+  <marker id='foot01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 1.60,4.00 L 3.20,4.00 L 4.80,4.00 L 6.40,4.00 z' />
+  </marker>
+  <marker id='foot0p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 1.60,4.00 L 3.20,4.00 L 4.80,4.00 L 6.40,4.00 z' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <marker id='foot1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+  </marker>
+  <marker id='foot1p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <linearGradient id='tbg_3986C1' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#E0EDF8' /> 
+     <stop offset='60%' stop-color='#C1DAEE' /> 
+     <stop offset='100%' stop-color='#E0EDF8' /> 
+  </linearGradient>
+  <linearGradient id='tbg_B3801A' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#F8F0E0' /> 
+     <stop offset='60%' stop-color='#EEDFC1' /> 
+     <stop offset='100%' stop-color='#F8F0E0' /> 
+  </linearGradient>
+  <linearGradient id='tbg_669999' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#E0F8F8' /> 
+     <stop offset='60%' stop-color='#C1EEEE' /> 
+     <stop offset='100%' stop-color='#E0F8F8' /> 
+  </linearGradient>
+</defs>
+
+<!-- == Desktop == -->
+<rect x='1' y='1' width='1726' height='1948' rx='8' ry='8' style='fill:url(#layoutBgB); stroke:#777777; stroke-width:0.5;' />
+<rect x='1' y='1' width='1726' height='1948' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#777777; stroke-width:0.5;' />
+
+<!-- == Legend == -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='330' height='56' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <text x='20' y='43'>AlwaysOn</text> 
+  <text x='20' y='57' style='fill:#aaaaaa; font-size:11px;'><tspan>Move the mouse over tables &amp; columns to read the comments.</tspan></text> 
+<a xlink:href='https://www.dbschema.com'> <path class='logo' d='m 32.309685,20.963194 c 0.411708,4.732616 -4.298055,7.925636 -8.723583,6.970196 -6.616967,1.8448 -2.656457,-6.434594 -3.911969,-10.01566 -2.15469,-5.89407 6.06247,-3.508505 9.167655,-2.863689 2.199228,1.054873 3.389343,3.582089 3.467897,5.909153 z m -3.720955,0.01451 c 0.434195,-4.414565 -7.644142,-5.37533 -5.137307,0.107342 -1.812268,5.992146 5.532698,4.379388 5.137307,-0.107342 z' /> <path class='logo' d='m 44.329732,23.050637 c 0.850982,5.097305 -5.250434,4.558924 -7.144836,4.752415 -6.418993,1.64391 -1.872992,-7.49274 -3.541914,-10.942842 -2.499646,-3.817859 5.939283,-4.402698 3.538545,-0.13612 -1.287874,4.989123 4.215411,-1.154796 5.956717,2.809584 0.840273,0.970849 1.168829,2.272413 1.191488,3.516963 z m -3.519477,-0.09299 c -1.398216,-5.518069 -6.361061,2.717467 -0.984368,1.810718 0.686994,-0.30388 1.029454,-1.087638 0.984368,-1.810718 z' /> <path class='logo' d='m 52.234961,23.301163 c 0.954818,5.035675 -8.606408,6.284861 -6.262292,1.674914 6.000358,-1.604717 -5.188764,-7.870044 1.75972,-10.384908 2.288682,-3.253567 6.399287,3.075831 2.304111,2.48058 -2.124941,2.016587 2.688777,3.89858 2.198472,6.229403 z' /> <path class='logo' d='m 60.204336,21.349224 c -4.894917,-1.916474 -3.458707,5.391212 0.347494,3.37231 2.120589,6.821713 -10.599623,1.664746 -6.906229,-3.691132 0.354172,-3.663246 9.875349,-4.711252 6.558735,0.318822 z' /> <path class='logo' d='m 71.730617,20.654299 c 0.0013,2.316285 0.190131,4.655698 0.07825,6.958009 -6.532419,3.303565 -0.660423,-8.722256 -6.009639,-5.821653 -0.818815,2.024533 1.726403,6.746337 -1.95327,6.005484 -3.458346,-1.137537 -0.696275,-7.713407 -1.833252,-10.994208 -2.308916,-3.710131 5.93704,-4.164951 3.518609,0.0063 -1.462376,6.166445 5.169629,-2.857523 6.19931,3.846079 z' /> <path class='logo' d='m 82.245738,22.378957 c -0.24581,2.448954 -9.386766,0.8867 -3.885979,2.877055 3.312576,-2.99157 5.250902,3.334514 0.482647,2.665545 -7.415384,1.492275 -7.823196,-11.597641 -0.275476,-10.032117 2.068161,0.391458 3.682204,2.408824 3.678808,4.489517 z m -3.414436,-0.578473 c -1.124703,-4.072004 -5.087405,2.125488 -0.316922,0.156453 z' /> <path class='logo' d='m 98.936899,27.222794 c -4.73541,2.718339 -3.1239,-3.406557 -3.92611,-6.050494 -4.66985,-1.438471 0.21621,6.932413 -3.41219,6.438039 -4.46096,1.160054 -0.22824,-5.774711 -3.31526,-6.700429 -3.410722,1.082173 1.04451,9.536575 -4.745091,6.372895 0.746632,-3.355214 -2.776394,-10.269232 3.034971,-9.038963 -0.058,2.544602 5.00686,-2.785359 6.00342,1.37844 3.42021,-4.316316 7.851251,0.524966 6.24018,4.690538 0.0379,0.969988 0.0954,1.940046 0.12008,2.909974 z' /> <path class='logo' d='m 110.47859,22.686058 c 0.91826,2.682088 0.13016,6.890551 -3.0725,4.397004 -1.63641,1.077877 -7.664291,0.541832 -7.09365,-4.114836 -0.907891,-4.692933 5.14729,-5.625578 7.24058,-4.40354 3.85932,-1.686263 3.13176,1.271515 2.92557,4.121372 z m -3.12695,0.0704 c -1.46278,-5.460062 -6.61615,2.5826 -1.08221,1.782003 0.70431,-0.272594 1.13111,-1.037444 1.08221,-1.782003 z' /> </a>
+</g>
+
+<g transform='translate(0,110)'>
+<!-- == Group 'Availability Groups' == -->
+<rect class='grp' style='fill:#C4E0F9;stroke:#CED7E0' x='32' y='509' width='752' height='466' />
+<text x='44' y='525'>Availability Groups</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='44' y='529' width='728' height='2' />
+
+<!-- == Group 'Availability Replicas' == -->
+<rect class='grp' style='fill:#C4E0F9;stroke:#CED7E0' x='880' y='493' width='816' height='562' />
+<text x='892' y='509'>Availability Replicas</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='892' y='513' width='792' height='2' />
+
+<!-- == Group 'Availability Databases' == -->
+<rect class='grp' style='fill:#C4E0F9;stroke:#CED7E0' x='256' y='1117' width='272' height='162' />
+<text x='268' y='1133'>Availability Databases</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='268' y='1137' width='248' height='2' />
+
+<!-- == Group 'Database Replicas' == -->
+<rect class='grp' style='fill:#C4E0F9;stroke:#CED7E0' x='944' y='1101' width='736' height='674' />
+<text x='956' y='1117'>Database Replicas</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='956' y='1121' width='712' height='2' />
+
+<!-- == Fk 'availability_replicas_Fk_availability_replicas_availability_groups' == -->
+<path id='availability_replicas_Fk_availability_replicas_availability_groups'  onmouseover="hghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','sys.availability_groups.group_id'])" transform='translate(8,0)' class='scene' d='M 880 560 L 768,560' >
+	<title>Fk Fk_availability_replicas_availability_groups
+availability_replicas ref availability_groups ( group_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 880 560 L 768,560' ></path>
+<text x='841' y='555' transform='rotate(0 841,555)' title='Fk Fk_availability_replicas_availability_groups
+availability_replicas ref availability_groups ( group_id )' class='relName' style='fill:#748EA7'>group_id</text>
+<!-- == Fk 'dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas' == -->
+<path id='dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas'  onmouseover="hghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','sys.availability_replicas.replica_id'])" transform='translate(8,0)' class='scene' d='M 1360 544 L 1232,544' >
+	<title>Fk Fk_dm_hadr_availability_replica_cluster_states_availability_replicas
+dm_hadr_availability_replica_cluster_states ref availability_replicas ( replica_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow01)'  class='virtual'  d='M 1360 544 L 1232,544' ></path>
+<text x='1316' y='539' transform='rotate(0 1316,539)' title='Fk Fk_dm_hadr_availability_replica_cluster_states_availability_replicas
+dm_hadr_availability_replica_cluster_states ref availability_replicas ( replica_id )' class='relName' style='fill:#748EA7'>replica_id</text>
+<!-- == Fk 'dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas' == -->
+<path id='dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas'  onmouseover="hghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','sys.availability_replicas.replica_id'])" transform='translate(8,0)' class='scene' d='M 1360 688 L 1232,688' >
+	<title>Fk Fk_dm_hadr_availability_replica_states_availability_replicas
+dm_hadr_availability_replica_states ref availability_replicas ( replica_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow01)'  class='virtual'  d='M 1360 688 L 1232,688' ></path>
+<text x='1316' y='683' transform='rotate(0 1316,683)' title='Fk Fk_dm_hadr_availability_replica_states_availability_replicas
+dm_hadr_availability_replica_states ref availability_replicas ( replica_id )' class='relName' style='fill:#748EA7'>replica_id</text>
+<!-- == Fk 'availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners' == -->
+<path id='availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners'  onmouseover="hghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listener_ip_addresses.listener_id','sys.availability_group_listeners.listener_id'])" onmouseout="uhghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listener_ip_addresses.listener_id','sys.availability_group_listeners.listener_id'])" transform='translate(8,0)' class='scene' d='M 976 288 L 784,288' >
+	<title>Fk Fk_availability_group_listener_ip_addresses_availability_group_listeners
+availability_group_listener_ip_addresses ref availability_group_listeners ( listener_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 976 288 L 784,288' ></path>
+<text x='928' y='283' transform='rotate(0 928,283)' title='Fk Fk_availability_group_listener_ip_addresses_availability_group_listeners
+availability_group_listener_ip_addresses ref availability_group_listeners ( listener_id )' class='relName' style='fill:#748EA7'>listener_id</text>
+<!-- == Fk 'availability_group_listeners_Fk_availability_group_listeners_availability_groups' == -->
+<path id='availability_group_listeners_Fk_availability_group_listeners_availability_groups'  onmouseover="hghl(['availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','sys.availability_groups.group_id'])" transform='translate(8,0)' class='scene' d='M 464 416 L 464,528' >
+	<title>Fk Fk_availability_group_listeners_availability_groups
+availability_group_listeners ref availability_groups ( group_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 464 416 L 464,528' ></path>
+<text x='479' y='417' transform='rotate(90 479,417)' title='Fk Fk_availability_group_listeners_availability_groups
+availability_group_listeners ref availability_groups ( group_id )' class='relName' style='fill:#748EA7'>group_id</text>
+<!-- == Fk 'availability_groups_cluster_Fk_availability_groups_cluster_availability_groups' == -->
+<path id='availability_groups_cluster_Fk_availability_groups_cluster_availability_groups'  onmouseover="hghl(['availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','sys.availability_groups.group_id'])" transform='translate(8,0)' class='scene' d='M 368 560 L 432,560' >
+	<title>Fk Fk_availability_groups_cluster_availability_groups
+availability_groups_cluster ref availability_groups ( group_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 368 560 L 432,560' ></path>
+<text x='377' y='555' transform='rotate(0 377,555)' title='Fk Fk_availability_groups_cluster_availability_groups
+availability_groups_cluster ref availability_groups ( group_id )' class='relName' style='fill:#748EA7'>group_id</text>
+<!-- == Fk 'dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups' == -->
+<path id='dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups'  onmouseover="hghl(['dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id','sys.availability_groups.group_id'])" onmouseout="uhghl(['dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id','sys.availability_groups.group_id'])" transform='translate(8,0)' class='scene' d='M 368 816 L 456,816 Q 464,816 464,808 L 464,800' >
+	<title>Fk Fk_dm_hadr_availability_group_states_availability_groups
+dm_hadr_availability_group_states ref availability_groups ( group_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 368 816 L 456,816 Q 464,816 464,808 L 464,800' ></path>
+<text x='377' y='811' transform='rotate(0 377,811)' title='Fk Fk_dm_hadr_availability_group_states_availability_groups
+dm_hadr_availability_group_states ref availability_groups ( group_id )' class='relName' style='fill:#748EA7'>group_id</text>
+<!-- == Fk 'availability_databases_cluster_Fk_availability_databases_cluster_availability_groups' == -->
+<path id='availability_databases_cluster_Fk_availability_databases_cluster_availability_groups'  onmouseover="hghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','sys.availability_groups.group_id'])" transform='translate(8,0)' class='scene' d='M 480 1136 L 480,800' >
+	<title>Fk Fk_availability_databases_cluster_availability_groups
+availability_databases_cluster ref availability_groups ( group_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 480 1136 L 480,800' ></path>
+<text x='483' y='1131' transform='rotate(270 483,1131)' title='Fk Fk_availability_databases_cluster_availability_groups
+availability_databases_cluster ref availability_groups ( group_id )' class='relName' style='fill:#748EA7'>group_id</text>
+<!-- == Fk 'dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster' == -->
+<path id='dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster'  onmouseover="hghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.dm_hadr_database_replica_cluster_states.group_database_id','sys.availability_databases_cluster.group_database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.dm_hadr_database_replica_cluster_states.group_database_id','sys.availability_databases_cluster.group_database_id'])" transform='translate(8,0)' class='scene' d='M 944 1168 L 512,1168' >
+	<title>Fk Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster
+dm_hadr_database_replica_cluster_states ref availability_databases_cluster ( group_database_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 944 1168 L 512,1168' ></path>
+<text x='847' y='1163' transform='rotate(0 847,1163)' title='Fk Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster
+dm_hadr_database_replica_cluster_states ref availability_databases_cluster ( group_database_id )' class='relName' style='fill:#748EA7'>group_database_id</text>
+<!-- == Fk 'dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas' == -->
+<path id='dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas'  onmouseover="hghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','sys.availability_replicas.replica_id'])" transform='translate(8,0)' class='scene' d='M 1216 1120 L 1216,912' >
+	<title>Fk Fk_dm_hadr_database_replica_cluster_states_availability_replicas
+dm_hadr_database_replica_cluster_states ref availability_replicas ( replica_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow01)'  class='virtual'  d='M 1216 1120 L 1216,912' ></path>
+<text x='1219' y='1115' transform='rotate(270 1219,1115)' title='Fk Fk_dm_hadr_database_replica_cluster_states_availability_replicas
+dm_hadr_database_replica_cluster_states ref availability_replicas ( replica_id )' class='relName' style='fill:#748EA7'>replica_id</text>
+<!-- == Fk 'dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster' == -->
+<path id='dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster'  onmouseover="hghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.dm_hadr_database_replica_states.group_database_id','sys.availability_databases_cluster.group_database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.dm_hadr_database_replica_states.group_database_id','sys.availability_databases_cluster.group_database_id'])" transform='translate(8,0)' class='scene' d='M 1376 1328 L 504,1328 Q 496,1328 496,1320 L 496,1264' >
+	<title>Fk Fk_dm_hadr_database_replica_states_availability_databases_cluster
+dm_hadr_database_replica_states ref availability_databases_cluster ( group_database_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 1376 1328 L 504,1328 Q 496,1328 496,1320 L 496,1264' ></path>
+<text x='1279' y='1323' transform='rotate(0 1279,1323)' title='Fk Fk_dm_hadr_database_replica_states_availability_databases_cluster
+dm_hadr_database_replica_states ref availability_databases_cluster ( group_database_id )' class='relName' style='fill:#748EA7'>group_database_id</text>
+<!-- == Fk 'dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states' == -->
+<path id='dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states'  onmouseover="hghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.dm_hadr_database_replica_states.database_id','sys.databases.database_id'])" transform='translate(8,0)' class='scene' d='M 1376 1616 L 848,1616' >
+	<title>Fk fk_dm_hadr_database_replica_states
+dm_hadr_database_replica_states ref databases ( database_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 1376 1616 L 848,1616' ></path>
+<text x='1318' y='1611' transform='rotate(0 1318,1611)' title='Fk fk_dm_hadr_database_replica_states
+dm_hadr_database_replica_states ref databases ( database_id )' class='relName' style='fill:#748EA7'>database_id</text>
+<!-- == Fk 'dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas' == -->
+<path id='dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas'  onmouseover="hghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id','sys.availability_replicas.replica_id'])" transform='translate(8,0)' class='scene' d='M 1376 1136 L 1256,1136 Q 1248,1136 1248,1128 L 1248,904 Q 1248,896 1240,896 L 1232,896' >
+	<title>Fk Fk_dm_hadr_database_replica_states_availability_replicas
+dm_hadr_database_replica_states ref availability_replicas ( replica_id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow01)'  class='virtual'  d='M 1376 1136 L 1256,1136 Q 1248,1136 1248,1128 L 1248,904 Q 1248,896 1240,896 L 1232,896' ></path>
+<text x='1332' y='1131' transform='rotate(0 1332,1131)' title='Fk Fk_dm_hadr_database_replica_states_availability_replicas
+dm_hadr_database_replica_states ref availability_replicas ( replica_id )' class='relName' style='fill:#748EA7'>replica_id</text>
+<!-- == Table 'availability_replicas' == -->
+<rect class='entity' x='896' y='520' width='336' height='384' rx='8' ry='8' style='stroke:none'/>
+<path d='M 896 548 L 896 528 Q 896 520 904 520 L 1224 520 Q 1232 520 1232 528 L 1232 548 L896 548 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='896' y='520' width='336' height='384' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#availability_replicas'><text x='994' y='540'>sys.availability_replicas</text><title>Table sys.availability_replicas</title></a>
+  <a xlink:href='#availability_replicas.replica_id'><text id='sys.availability_replicas.replica_id' x='915' y='567' onmouseover="hghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.dm_hadr_availability_replica_states.replica_id','dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.dm_hadr_availability_replica_cluster_states.replica_id','dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.dm_hadr_database_replica_cluster_states.replica_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.dm_hadr_database_replica_states.replica_id'])">replica_id</text><text x='1216' y='568' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+uniqueidentifier</title></a>
+<a xlink:href='#availability_replicas.replica_id'><use id='ref' x='1220' y='556' xlink:href='#ref'/><title>Referred by dm_hadr_availability_replica_states ( replica_id ) 
+Referred by dm_hadr_availability_replica_cluster_states ( replica_id ) 
+Referred by dm_hadr_database_replica_cluster_states ( replica_id ) 
+Referred by dm_hadr_database_replica_states ( replica_id ) </title></a>
+  <use id='nn' x='898' y='573' xlink:href='#nn'/><a xlink:href='#availability_replicas.group_id'><text id='sys.availability_replicas.group_id' x='915' y='583' onmouseover="hghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='1216' y='584' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_replicas.group_id'><use id='fk' x='1220' y='572' xlink:href='#fk'/><title>References availability_groups ( group_id ) </title></a>
+  <a xlink:href='#availability_replicas.replica_metadata_id'><text id='sys.availability_replicas.replica_metadata_id' x='915' y='599'>replica_metadata_id</text><text x='1216' y='600' text-anchor='end' class='colType'>int</text><title>replica_metadata_id
+int</title></a>
+  <a xlink:href='#availability_replicas.replica_server_name'><text id='sys.availability_replicas.replica_server_name' x='915' y='615'>replica_server_name</text><text x='1216' y='616' text-anchor='end' class='colType'>nvarchar(256)</text><title>replica_server_name
+nvarchar(256)</title></a>
+  <a xlink:href='#availability_replicas.owner_sid'><text id='sys.availability_replicas.owner_sid' x='915' y='631'>owner_sid</text><text x='1216' y='632' text-anchor='end' class='colType'>varbinary(85)</text><title>owner_sid
+varbinary(85)</title></a>
+  <a xlink:href='#availability_replicas.endpoint_url'><text id='sys.availability_replicas.endpoint_url' x='915' y='647'>endpoint_url</text><text x='1216' y='648' text-anchor='end' class='colType'>nvarchar(256)</text><title>endpoint_url
+nvarchar(256)</title></a>
+  <a xlink:href='#availability_replicas.availability_mode'><text id='sys.availability_replicas.availability_mode' x='915' y='663'>availability_mode</text><text x='1216' y='664' text-anchor='end' class='colType'>tinyint</text><title>availability_mode
+tinyint</title></a>
+  <a xlink:href='#availability_replicas.availability_mode_desc'><text id='sys.availability_replicas.availability_mode_desc' x='915' y='679'>availability_mode_desc</text><text x='1216' y='680' text-anchor='end' class='colType'>nvarchar(60)</text><title>availability_mode_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#availability_replicas.failover_mode'><text id='sys.availability_replicas.failover_mode' x='915' y='695'>failover_mode</text><text x='1216' y='696' text-anchor='end' class='colType'>tinyint</text><title>failover_mode
+tinyint</title></a>
+  <a xlink:href='#availability_replicas.failover_mode_desc'><text id='sys.availability_replicas.failover_mode_desc' x='915' y='711'>failover_mode_desc</text><text x='1216' y='712' text-anchor='end' class='colType'>nvarchar(60)</text><title>failover_mode_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#availability_replicas.session_timeout'><text id='sys.availability_replicas.session_timeout' x='915' y='727'>session_timeout</text><text x='1216' y='728' text-anchor='end' class='colType'>int</text><title>session_timeout
+int</title></a>
+  <a xlink:href='#availability_replicas.primary_role_allow_connections'><text id='sys.availability_replicas.primary_role_allow_connections' x='915' y='743'>primary_role_allow_connections</text><text x='1216' y='744' text-anchor='end' class='colType'>tinyint</text><title>primary_role_allow_connections
+tinyint</title></a>
+  <a xlink:href='#availability_replicas.primary_role_allow_connections_desc'><text id='sys.availability_replicas.primary_role_allow_connections_desc' x='915' y='759'>primary_role_allow_connections_desc</text><text x='1216' y='760' text-anchor='end' class='colType'>nvarchar(60)</text><title>primary_role_allow_connections_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#availability_replicas.secondary_role_allow_connections'><text id='sys.availability_replicas.secondary_role_allow_connections' x='915' y='775'>secondary_role_allow_connections</text><text x='1216' y='776' text-anchor='end' class='colType'>tinyint</text><title>secondary_role_allow_connections
+tinyint</title></a>
+  <a xlink:href='#availability_replicas.secondary_role_allow_connections_desc'><text id='sys.availability_replicas.secondary_role_allow_connections_desc' x='915' y='791'>secondary_role_allow_connections_desc</text><text x='1216' y='792' text-anchor='end' class='colType'>nvarchar(60)</text><title>secondary_role_allow_connections_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#availability_replicas.create_date'><text id='sys.availability_replicas.create_date' x='915' y='807'>create_date</text><text x='1216' y='808' text-anchor='end' class='colType'>datetime</text><title>create_date
+datetime</title></a>
+  <a xlink:href='#availability_replicas.modify_date'><text id='sys.availability_replicas.modify_date' x='915' y='823'>modify_date</text><text x='1216' y='824' text-anchor='end' class='colType'>datetime</text><title>modify_date
+datetime</title></a>
+  <a xlink:href='#availability_replicas.backup_priority'><text id='sys.availability_replicas.backup_priority' x='915' y='839'>backup_priority</text><text x='1216' y='840' text-anchor='end' class='colType'>int</text><title>backup_priority
+int</title></a>
+  <a xlink:href='#availability_replicas.read_only_routing_url'><text id='sys.availability_replicas.read_only_routing_url' x='915' y='855'>read_only_routing_url</text><text x='1216' y='856' text-anchor='end' class='colType'>nvarchar(256)</text><title>read_only_routing_url
+nvarchar(256)</title></a>
+  <a xlink:href='#availability_replicas.seeding_mode'><text id='sys.availability_replicas.seeding_mode' x='915' y='871'>seeding_mode</text><text x='1216' y='872' text-anchor='end' class='colType'>tinyint</text><title>seeding_mode
+tinyint</title></a>
+  <a xlink:href='#availability_replicas.seeding_mode_desc'><text id='sys.availability_replicas.seeding_mode_desc' x='915' y='887'>seeding_mode_desc</text><text x='1216' y='888' text-anchor='end' class='colType'>nvarchar(60)</text><title>seeding_mode_desc
+nvarchar(60)</title></a>
+
+<!-- == Table 'dm_hadr_availability_replica_cluster_states' == -->
+<rect class='entity' x='1376' y='536' width='288' height='128' rx='8' ry='8' style='stroke:none'/>
+<path d='M 1376 564 L 1376 544 Q 1376 536 1384 536 L 1656 536 Q 1664 536 1664 544 L 1664 564 L1376 564 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1376' y='536' width='288' height='128' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_availability_replica_cluster_states'><text x='1384' y='556'>sys.dm_hadr_availability_replica_cluster_states</text><title>Table sys.dm_hadr_availability_replica_cluster_states</title></a>
+  <use id='nn' x='1378' y='573' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_states.replica_id'><text id='sys.dm_hadr_availability_replica_cluster_states.replica_id' x='1395' y='583' onmouseover="hghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_cluster_states_Fk_dm_hadr_availability_replica_cluster_states_availability_replicas','sys.availability_replicas.replica_id'])">replica_id</text><text x='1648' y='584' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_availability_replica_cluster_states.replica_id'><use id='fk' x='1652' y='572' xlink:href='#fk'/><title>References availability_replicas ( replica_id ) </title></a>
+  <use id='nn' x='1378' y='589' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_states.replica_server_name'><text id='sys.dm_hadr_availability_replica_cluster_states.replica_server_name' x='1395' y='599'>replica_server_name</text><text x='1648' y='600' text-anchor='end' class='colType'>nvarchar(256)</text><title>replica_server_name
+* nvarchar(256)</title></a>
+  <use id='nn' x='1378' y='605' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_states.group_id'><text id='sys.dm_hadr_availability_replica_cluster_states.group_id' x='1395' y='615'>group_id</text><text x='1648' y='616' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+  <use id='nn' x='1378' y='621' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_states.join_state'><text id='sys.dm_hadr_availability_replica_cluster_states.join_state' x='1395' y='631'>join_state</text><text x='1648' y='632' text-anchor='end' class='colType'>tinyint</text><title>join_state
+* tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_cluster_states.join_state_desc'><text id='sys.dm_hadr_availability_replica_cluster_states.join_state_desc' x='1395' y='647'>join_state_desc</text><text x='1648' y='648' text-anchor='end' class='colType'>nvarchar(60)</text><title>join_state_desc
+nvarchar(60)</title></a>
+
+<!-- == Table 'dm_hadr_availability_replica_states' == -->
+<rect class='entity' x='1376' y='680' width='304' height='304' rx='8' ry='8' style='stroke:none'/>
+<path d='M 1376 708 L 1376 688 Q 1376 680 1384 680 L 1672 680 Q 1680 680 1680 688 L 1680 708 L1376 708 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1376' y='680' width='304' height='304' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_availability_replica_states'><text x='1414' y='700'>sys.dm_hadr_availability_replica_states</text><title>Table sys.dm_hadr_availability_replica_states</title></a>
+  <use id='nn' x='1378' y='717' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_states.replica_id'><text id='sys.dm_hadr_availability_replica_states.replica_id' x='1395' y='727' onmouseover="hghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_availability_replica_states_Fk_dm_hadr_availability_replica_states_availability_replicas','sys.availability_replicas.replica_id'])">replica_id</text><text x='1664' y='728' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_availability_replica_states.replica_id'><use id='fk' x='1668' y='716' xlink:href='#fk'/><title>References availability_replicas ( replica_id ) </title></a>
+  <use id='nn' x='1378' y='733' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_states.group_id'><text id='sys.dm_hadr_availability_replica_states.group_id' x='1395' y='743'>group_id</text><text x='1664' y='744' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+  <use id='nn' x='1378' y='749' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_states.is_local'><text id='sys.dm_hadr_availability_replica_states.is_local' x='1395' y='759'>is_local</text><text x='1664' y='760' text-anchor='end' class='colType'>bit</text><title>is_local
+* bit</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.role'><text id='sys.dm_hadr_availability_replica_states.role' x='1395' y='775'>role</text><text x='1664' y='776' text-anchor='end' class='colType'>tinyint</text><title>role
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.role_desc'><text id='sys.dm_hadr_availability_replica_states.role_desc' x='1395' y='791'>role_desc</text><text x='1664' y='792' text-anchor='end' class='colType'>nvarchar(60)</text><title>role_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.operational_state'><text id='sys.dm_hadr_availability_replica_states.operational_state' x='1395' y='807'>operational_state</text><text x='1664' y='808' text-anchor='end' class='colType'>tinyint</text><title>operational_state
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.operational_state_desc'><text id='sys.dm_hadr_availability_replica_states.operational_state_desc' x='1395' y='823'>operational_state_desc</text><text x='1664' y='824' text-anchor='end' class='colType'>nvarchar(60)</text><title>operational_state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.connected_state'><text id='sys.dm_hadr_availability_replica_states.connected_state' x='1395' y='839'>connected_state</text><text x='1664' y='840' text-anchor='end' class='colType'>tinyint</text><title>connected_state
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.connected_state_desc'><text id='sys.dm_hadr_availability_replica_states.connected_state_desc' x='1395' y='855'>connected_state_desc</text><text x='1664' y='856' text-anchor='end' class='colType'>nvarchar(60)</text><title>connected_state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.recovery_health'><text id='sys.dm_hadr_availability_replica_states.recovery_health' x='1395' y='871'>recovery_health</text><text x='1664' y='872' text-anchor='end' class='colType'>tinyint</text><title>recovery_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.recovery_health_desc'><text id='sys.dm_hadr_availability_replica_states.recovery_health_desc' x='1395' y='887'>recovery_health_desc</text><text x='1664' y='888' text-anchor='end' class='colType'>nvarchar(60)</text><title>recovery_health_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.synchronization_health'><text id='sys.dm_hadr_availability_replica_states.synchronization_health' x='1395' y='903'>synchronization_health</text><text x='1664' y='904' text-anchor='end' class='colType'>tinyint</text><title>synchronization_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.synchronization_health_desc'><text id='sys.dm_hadr_availability_replica_states.synchronization_health_desc' x='1395' y='919'>synchronization_health_desc</text><text x='1664' y='920' text-anchor='end' class='colType'>nvarchar(60)</text><title>synchronization_health_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.last_connect_error_number'><text id='sys.dm_hadr_availability_replica_states.last_connect_error_number' x='1395' y='935'>last_connect_error_number</text><text x='1664' y='936' text-anchor='end' class='colType'>int</text><title>last_connect_error_number
+int</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.last_connect_error_description'><text id='sys.dm_hadr_availability_replica_states.last_connect_error_description' x='1395' y='951'>last_connect_error_description</text><text x='1664' y='952' text-anchor='end' class='colType'>nvarchar(1024)</text><title>last_connect_error_description
+nvarchar(1024)</title></a>
+  <a xlink:href='#dm_hadr_availability_replica_states.last_connect_error_timestamp'><text id='sys.dm_hadr_availability_replica_states.last_connect_error_timestamp' x='1395' y='967'>last_connect_error_timestamp</text><text x='1664' y='968' text-anchor='end' class='colType'>datetime</text><title>last_connect_error_timestamp
+datetime</title></a>
+
+<!-- == Table 'availability_group_listener_ip_addresses' == -->
+<rect class='entity' x='992' y='264' width='272' height='192' rx='8' ry='8' style='stroke:none'/>
+<path d='M 992 292 L 992 272 Q 992 264 1000 264 L 1256 264 Q 1264 264 1264 272 L 1264 292 L992 292 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='992' y='264' width='272' height='192' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#availability_group_listener_ip_addresses'><text x='1000' y='284'>sys.availability_group_listener_ip_addresses</text><title>Table sys.availability_group_listener_ip_addresses</title></a>
+  <use id='nn' x='994' y='301' xlink:href='#nn'/><a xlink:href='#availability_group_listener_ip_addresses.listener_id'><text id='sys.availability_group_listener_ip_addresses.listener_id' x='1011' y='311' onmouseover="hghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listeners.listener_id'])" onmouseout="uhghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listeners.listener_id'])">listener_id</text><text x='1248' y='312' text-anchor='end' class='colType'>nvarchar(36)</text><title>listener_id
+* nvarchar(36)</title></a>
+<a xlink:href='#availability_group_listener_ip_addresses.listener_id'><use id='fk' x='1252' y='300' xlink:href='#fk'/><title>References availability_group_listeners ( listener_id ) </title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.ip_address'><text id='sys.availability_group_listener_ip_addresses.ip_address' x='1011' y='327'>ip_address</text><text x='1248' y='328' text-anchor='end' class='colType'>nvarchar(48)</text><title>ip_address
+nvarchar(48)</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.ip_subnet_mask'><text id='sys.availability_group_listener_ip_addresses.ip_subnet_mask' x='1011' y='343'>ip_subnet_mask</text><text x='1248' y='344' text-anchor='end' class='colType'>nvarchar(15)</text><title>ip_subnet_mask
+nvarchar(15)</title></a>
+  <use id='nn' x='994' y='349' xlink:href='#nn'/><a xlink:href='#availability_group_listener_ip_addresses.is_dhcp'><text id='sys.availability_group_listener_ip_addresses.is_dhcp' x='1011' y='359'>is_dhcp</text><text x='1248' y='360' text-anchor='end' class='colType'>bit</text><title>is_dhcp
+* bit</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.network_subnet_ip'><text id='sys.availability_group_listener_ip_addresses.network_subnet_ip' x='1011' y='375'>network_subnet_ip</text><text x='1248' y='376' text-anchor='end' class='colType'>nvarchar(48)</text><title>network_subnet_ip
+nvarchar(48)</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.network_subnet_prefix_length'><text id='sys.availability_group_listener_ip_addresses.network_subnet_prefix_length' x='1011' y='391'>network_subnet_prefix_length</text><text x='1248' y='392' text-anchor='end' class='colType'>int</text><title>network_subnet_prefix_length
+int</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.network_subnet_ipv4_mask'><text id='sys.availability_group_listener_ip_addresses.network_subnet_ipv4_mask' x='1011' y='407'>network_subnet_ipv4_mask</text><text x='1248' y='408' text-anchor='end' class='colType'>nvarchar(48)</text><title>network_subnet_ipv4_mask
+nvarchar(48)</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.state'><text id='sys.availability_group_listener_ip_addresses.state' x='1011' y='423'>state</text><text x='1248' y='424' text-anchor='end' class='colType'>tinyint</text><title>state
+tinyint</title></a>
+  <a xlink:href='#availability_group_listener_ip_addresses.state_desc'><text id='sys.availability_group_listener_ip_addresses.state_desc' x='1011' y='439'>state_desc</text><text x='1248' y='440' text-anchor='end' class='colType'>nvarchar(60)</text><title>state_desc
+nvarchar(60)</title></a>
+
+<!-- == Table 'availability_group_listeners' == -->
+<rect class='entity' x='448' y='264' width='336' height='144' rx='8' ry='8' style='stroke:none'/>
+<path d='M 448 292 L 448 272 Q 448 264 456 264 L 776 264 Q 784 264 784 272 L 784 292 L448 292 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='448' y='264' width='336' height='144' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#availability_group_listeners'><text x='525' y='284'>sys.availability_group_listeners</text><title>Table sys.availability_group_listeners</title></a>
+  <use id='nn' x='450' y='301' xlink:href='#nn'/><a xlink:href='#availability_group_listeners.group_id'><text id='sys.availability_group_listeners.group_id' x='467' y='311' onmouseover="hghl(['availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='768' y='312' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_group_listeners.group_id'><use id='fk' x='772' y='300' xlink:href='#fk'/><title>References availability_groups ( group_id ) </title></a>
+  <use id='nn' x='450' y='317' xlink:href='#nn'/><a xlink:href='#availability_group_listeners.listener_id'><text id='sys.availability_group_listeners.listener_id' x='467' y='327' onmouseover="hghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listener_ip_addresses.listener_id'])" onmouseout="uhghl(['availability_group_listener_ip_addresses_Fk_availability_group_listener_ip_addresses_availability_group_listeners','sys.availability_group_listener_ip_addresses.listener_id'])">listener_id</text><text x='768' y='328' text-anchor='end' class='colType'>nvarchar(36)</text><title>listener_id
+* nvarchar(36)</title></a>
+<a xlink:href='#availability_group_listeners.listener_id'><use id='ref' x='772' y='316' xlink:href='#ref'/><title>Referred by availability_group_listener_ip_addresses ( listener_id ) </title></a>
+  <a xlink:href='#availability_group_listeners.dns_name'><text id='sys.availability_group_listeners.dns_name' x='467' y='343'>dns_name</text><text x='768' y='344' text-anchor='end' class='colType'>nvarchar(63)</text><title>dns_name
+nvarchar(63)</title></a>
+  <a xlink:href='#availability_group_listeners.port'><text id='sys.availability_group_listeners.port' x='467' y='359'>port</text><text x='768' y='360' text-anchor='end' class='colType'>int</text><title>port
+int</title></a>
+  <use id='nn' x='450' y='365' xlink:href='#nn'/><a xlink:href='#availability_group_listeners.is_conformant'><text id='sys.availability_group_listeners.is_conformant' x='467' y='375'>is_conformant</text><text x='768' y='376' text-anchor='end' class='colType'>bit</text><title>is_conformant
+* bit</title></a>
+  <a xlink:href='#availability_group_listeners.ip_configuration_string_from_cluster'><text id='sys.availability_group_listeners.ip_configuration_string_from_cluster' x='467' y='391'>ip_configuration_string_from_cluster</text><text x='768' y='392' text-anchor='end' class='colType'>nvarchar(4000)</text><title>ip_configuration_string_from_cluster
+nvarchar(4000)</title></a>
+
+<!-- == Table 'availability_groups' == -->
+<rect class='entity' x='448' y='536' width='320' height='256' rx='8' ry='8' style='stroke:none'/>
+<path d='M 448 564 L 448 544 Q 448 536 456 536 L 760 536 Q 768 536 768 544 L 768 564 L448 564 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='448' y='536' width='320' height='256' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#availability_groups'><text x='540' y='556'>sys.availability_groups</text><title>Table sys.availability_groups</title></a>
+  <use id='nn' x='450' y='573' xlink:href='#nn'/><a xlink:href='#availability_groups.group_id'><text id='sys.availability_groups.group_id' x='467' y='583' onmouseover="hghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])" onmouseout="uhghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_databases_cluster.group_id','availability_replicas_Fk_availability_replicas_availability_groups','sys.availability_replicas.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_group_listeners_Fk_availability_group_listeners_availability_groups','sys.availability_group_listeners.group_id','availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups_cluster.group_id','dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.dm_hadr_availability_group_states.group_id'])">group_id</text><text x='752' y='584' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_groups.group_id'><use id='ref' x='756' y='572' xlink:href='#ref'/><title>Referred by availability_databases_cluster ( group_id ) 
+Referred by availability_replicas ( group_id ) 
+Referred by availability_group_listeners ( group_id ) 
+Referred by availability_group_listeners ( group_id ) 
+Referred by availability_groups_cluster ( group_id ) 
+Referred by dm_hadr_availability_group_states ( group_id ) </title></a>
+  <a xlink:href='#availability_groups.name'><text id='sys.availability_groups.name' x='467' y='599'>name</text><text x='752' y='600' text-anchor='end' class='colType'>sysname</text><title>name
+sysname</title></a>
+  <a xlink:href='#availability_groups.resource_id'><text id='sys.availability_groups.resource_id' x='467' y='615'>resource_id</text><text x='752' y='616' text-anchor='end' class='colType'>nvarchar(40)</text><title>resource_id
+nvarchar(40)</title></a>
+  <a xlink:href='#availability_groups.resource_group_id'><text id='sys.availability_groups.resource_group_id' x='467' y='631'>resource_group_id</text><text x='752' y='632' text-anchor='end' class='colType'>nvarchar(40)</text><title>resource_group_id
+nvarchar(40)</title></a>
+  <a xlink:href='#availability_groups.failure_condition_level'><text id='sys.availability_groups.failure_condition_level' x='467' y='647'>failure_condition_level</text><text x='752' y='648' text-anchor='end' class='colType'>int</text><title>failure_condition_level
+int</title></a>
+  <a xlink:href='#availability_groups.health_check_timeout'><text id='sys.availability_groups.health_check_timeout' x='467' y='663'>health_check_timeout</text><text x='752' y='664' text-anchor='end' class='colType'>int</text><title>health_check_timeout
+int</title></a>
+  <a xlink:href='#availability_groups.automated_backup_preference'><text id='sys.availability_groups.automated_backup_preference' x='467' y='679'>automated_backup_preference</text><text x='752' y='680' text-anchor='end' class='colType'>tinyint</text><title>automated_backup_preference
+tinyint</title></a>
+  <a xlink:href='#availability_groups.automated_backup_preference_desc'><text id='sys.availability_groups.automated_backup_preference_desc' x='467' y='695'>automated_backup_preference_desc</text><text x='752' y='696' text-anchor='end' class='colType'>nvarchar(60)</text><title>automated_backup_preference_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#availability_groups.version'><text id='sys.availability_groups.version' x='467' y='711'>version</text><text x='752' y='712' text-anchor='end' class='colType'>smallint</text><title>version
+smallint</title></a>
+  <a xlink:href='#availability_groups.basic_features'><text id='sys.availability_groups.basic_features' x='467' y='727'>basic_features</text><text x='752' y='728' text-anchor='end' class='colType'>bit</text><title>basic_features
+bit</title></a>
+  <a xlink:href='#availability_groups.dtc_support'><text id='sys.availability_groups.dtc_support' x='467' y='743'>dtc_support</text><text x='752' y='744' text-anchor='end' class='colType'>bit</text><title>dtc_support
+bit</title></a>
+  <a xlink:href='#availability_groups.db_failover'><text id='sys.availability_groups.db_failover' x='467' y='759'>db_failover</text><text x='752' y='760' text-anchor='end' class='colType'>bit</text><title>db_failover
+bit</title></a>
+  <a xlink:href='#availability_groups.is_distributed'><text id='sys.availability_groups.is_distributed' x='467' y='775'>is_distributed</text><text x='752' y='776' text-anchor='end' class='colType'>bit</text><title>is_distributed
+bit</title></a>
+
+<!-- == Table 'availability_groups_cluster' == -->
+<rect class='entity' x='48' y='536' width='320' height='176' rx='8' ry='8' style='stroke:none'/>
+<path d='M 48 564 L 48 544 Q 48 536 56 536 L 360 536 Q 368 536 368 544 L 368 564 L48 564 ' style='fill:url(#tbg_669999);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='48' y='536' width='320' height='176' rx='8' ry='8' style='fill:none;stroke:#669999'/>
+<a xlink:href='#availability_groups_cluster'><text x='118' y='556'>sys.availability_groups_cluster</text><title>Table sys.availability_groups_cluster</title></a>
+  <use id='nn' x='50' y='573' xlink:href='#nn'/><a xlink:href='#availability_groups_cluster.group_id'><text id='sys.availability_groups_cluster.group_id' x='67' y='583' onmouseover="hghl(['availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_groups_cluster_Fk_availability_groups_cluster_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='352' y='584' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_groups_cluster.group_id'><use id='fk' x='356' y='572' xlink:href='#fk'/><title>References availability_groups ( group_id ) </title></a>
+  <a xlink:href='#availability_groups_cluster.name'><text id='sys.availability_groups_cluster.name' x='67' y='599'>name</text><text x='352' y='600' text-anchor='end' class='colType'>sysname</text><title>name
+sysname</title></a>
+  <a xlink:href='#availability_groups_cluster.resource_id'><text id='sys.availability_groups_cluster.resource_id' x='67' y='615'>resource_id</text><text x='352' y='616' text-anchor='end' class='colType'>nvarchar(40)</text><title>resource_id
+nvarchar(40)</title></a>
+  <a xlink:href='#availability_groups_cluster.resource_group_id'><text id='sys.availability_groups_cluster.resource_group_id' x='67' y='631'>resource_group_id</text><text x='352' y='632' text-anchor='end' class='colType'>nvarchar(40)</text><title>resource_group_id
+nvarchar(40)</title></a>
+  <a xlink:href='#availability_groups_cluster.failure_condition_level'><text id='sys.availability_groups_cluster.failure_condition_level' x='67' y='647'>failure_condition_level</text><text x='352' y='648' text-anchor='end' class='colType'>int</text><title>failure_condition_level
+int</title></a>
+  <a xlink:href='#availability_groups_cluster.health_check_timeout'><text id='sys.availability_groups_cluster.health_check_timeout' x='67' y='663'>health_check_timeout</text><text x='352' y='664' text-anchor='end' class='colType'>int</text><title>health_check_timeout
+int</title></a>
+  <a xlink:href='#availability_groups_cluster.automated_backup_preference'><text id='sys.availability_groups_cluster.automated_backup_preference' x='67' y='679'>automated_backup_preference</text><text x='352' y='680' text-anchor='end' class='colType'>tinyint</text><title>automated_backup_preference
+tinyint</title></a>
+  <a xlink:href='#availability_groups_cluster.automated_backup_preference_desc'><text id='sys.availability_groups_cluster.automated_backup_preference_desc' x='67' y='695'>automated_backup_preference_desc</text><text x='352' y='696' text-anchor='end' class='colType'>nvarchar(60)</text><title>automated_backup_preference_desc
+nvarchar(60)</title></a>
+
+<!-- == Table 'dm_hadr_availability_group_states' == -->
+<rect class='entity' x='64' y='776' width='304' height='176' rx='8' ry='8' style='stroke:none'/>
+<path d='M 64 804 L 64 784 Q 64 776 72 776 L 360 776 Q 368 776 368 784 L 368 804 L64 804 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='64' y='776' width='304' height='176' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_availability_group_states'><text x='104' y='796'>sys.dm_hadr_availability_group_states</text><title>Table sys.dm_hadr_availability_group_states</title></a>
+  <use id='nn' x='66' y='813' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_group_states.group_id'><text id='sys.dm_hadr_availability_group_states.group_id' x='83' y='823' onmouseover="hghl(['dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['dm_hadr_availability_group_states_Fk_dm_hadr_availability_group_states_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='352' y='824' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_availability_group_states.group_id'><use id='fk' x='356' y='812' xlink:href='#fk'/><title>References availability_groups ( group_id ) </title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.primary_replica'><text id='sys.dm_hadr_availability_group_states.primary_replica' x='83' y='839'>primary_replica</text><text x='352' y='840' text-anchor='end' class='colType'>nvarchar(128)</text><title>primary_replica
+nvarchar(128)</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.primary_recovery_health'><text id='sys.dm_hadr_availability_group_states.primary_recovery_health' x='83' y='855'>primary_recovery_health</text><text x='352' y='856' text-anchor='end' class='colType'>tinyint</text><title>primary_recovery_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.primary_recovery_health_desc'><text id='sys.dm_hadr_availability_group_states.primary_recovery_health_desc' x='83' y='871'>primary_recovery_health_desc</text><text x='352' y='872' text-anchor='end' class='colType'>nvarchar(60)</text><title>primary_recovery_health_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.secondary_recovery_health'><text id='sys.dm_hadr_availability_group_states.secondary_recovery_health' x='83' y='887'>secondary_recovery_health</text><text x='352' y='888' text-anchor='end' class='colType'>tinyint</text><title>secondary_recovery_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.secondary_recovery_health_desc'><text id='sys.dm_hadr_availability_group_states.secondary_recovery_health_desc' x='83' y='903'>secondary_recovery_health_desc</text><text x='352' y='904' text-anchor='end' class='colType'>nvarchar(60)</text><title>secondary_recovery_health_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.synchronization_health'><text id='sys.dm_hadr_availability_group_states.synchronization_health' x='83' y='919'>synchronization_health</text><text x='352' y='920' text-anchor='end' class='colType'>tinyint</text><title>synchronization_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_availability_group_states.synchronization_health_desc'><text id='sys.dm_hadr_availability_group_states.synchronization_health_desc' x='83' y='935'>synchronization_health_desc</text><text x='352' y='936' text-anchor='end' class='colType'>nvarchar(60)</text><title>synchronization_health_desc
+nvarchar(60)</title></a>
+
+<!-- == Table 'availability_databases_cluster' == -->
+<rect class='entity' x='272' y='1144' width='240' height='112' rx='8' ry='8' style='stroke:none'/>
+<path d='M 272 1172 L 272 1152 Q 272 1144 280 1144 L 504 1144 Q 512 1144 512 1152 L 512 1172 L272 1172 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='272' y='1144' width='240' height='112' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#availability_databases_cluster'><text x='293' y='1164'>sys.availability_databases_cluster</text><title>Table sys.availability_databases_cluster</title></a>
+  <use id='nn' x='274' y='1181' xlink:href='#nn'/><a xlink:href='#availability_databases_cluster.group_id'><text id='sys.availability_databases_cluster.group_id' x='291' y='1191' onmouseover="hghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_groups.group_id'])" onmouseout="uhghl(['availability_databases_cluster_Fk_availability_databases_cluster_availability_groups','sys.availability_groups.group_id'])">group_id</text><text x='496' y='1192' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_databases_cluster.group_id'><use id='fk' x='500' y='1180' xlink:href='#fk'/><title>References availability_groups ( group_id ) </title></a>
+  <use id='nn' x='274' y='1197' xlink:href='#nn'/><a xlink:href='#availability_databases_cluster.group_database_id'><text id='sys.availability_databases_cluster.group_database_id' x='291' y='1207' onmouseover="hghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.dm_hadr_database_replica_cluster_states.group_database_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.dm_hadr_database_replica_states.group_database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.dm_hadr_database_replica_cluster_states.group_database_id','dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.dm_hadr_database_replica_states.group_database_id'])">group_database_id</text><text x='496' y='1208' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_database_id
+* uniqueidentifier</title></a>
+<a xlink:href='#availability_databases_cluster.group_database_id'><use id='ref' x='500' y='1196' xlink:href='#ref'/><title>Referred by dm_hadr_database_replica_cluster_states ( group_database_id ) 
+Referred by dm_hadr_database_replica_states ( group_database_id ) </title></a>
+  <a xlink:href='#availability_databases_cluster.database_name'><text id='sys.availability_databases_cluster.database_name' x='291' y='1223'>database_name</text><text x='496' y='1224' text-anchor='end' class='colType'>sysname</text><title>database_name
+sysname</title></a>
+  <a xlink:href='#availability_databases_cluster.truncation_lsn'><text id='sys.availability_databases_cluster.truncation_lsn' x='291' y='1239'>truncation_lsn</text><text x='496' y='1240' text-anchor='end' class='colType'>numeric(25,0)</text><title>truncation_lsn
+numeric(25,0)</title></a>
+
+<!-- == Table 'dm_hadr_availability_replica_cluster_nodes' == -->
+<rect class='entity' x='912' y='936' width='288' height='96' rx='8' ry='8' style='stroke:none'/>
+<path d='M 912 964 L 912 944 Q 912 936 920 936 L 1192 936 Q 1200 936 1200 944 L 1200 964 L912 964 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='912' y='936' width='288' height='96' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_availability_replica_cluster_nodes'><text x='920' y='956'>sys.dm_hadr_availability_replica_cluster_nodes</text><title>Table sys.dm_hadr_availability_replica_cluster_nodes</title></a>
+  <use id='nn' x='914' y='973' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_nodes.group_name'><text id='sys.dm_hadr_availability_replica_cluster_nodes.group_name' x='931' y='983'>group_name</text><text x='1184' y='984' text-anchor='end' class='colType'>nvarchar(256)</text><title>group_name
+* nvarchar(256)</title></a>
+  <use id='nn' x='914' y='989' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_nodes.replica_server_name'><text id='sys.dm_hadr_availability_replica_cluster_nodes.replica_server_name' x='931' y='999'>replica_server_name</text><text x='1184' y='1000' text-anchor='end' class='colType'>nvarchar(256)</text><title>replica_server_name
+* nvarchar(256)</title></a>
+  <use id='nn' x='914' y='1005' xlink:href='#nn'/><a xlink:href='#dm_hadr_availability_replica_cluster_nodes.node_name'><text id='sys.dm_hadr_availability_replica_cluster_nodes.node_name' x='931' y='1015'>node_name</text><text x='1184' y='1016' text-anchor='end' class='colType'>nvarchar(256)</text><title>node_name
+* nvarchar(256)</title></a>
+
+<!-- == Table 'dm_hadr_database_replica_cluster_states' == -->
+<rect class='entity' x='960' y='1128' width='272' height='176' rx='8' ry='8' style='stroke:none'/>
+<path d='M 960 1156 L 960 1136 Q 960 1128 968 1128 L 1224 1128 Q 1232 1128 1232 1136 L 1232 1156 L960 1156 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='960' y='1128' width='272' height='176' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_database_replica_cluster_states'><text x='964' y='1148'>sys.dm_hadr_database_replica_cluster_states</text><title>Table sys.dm_hadr_database_replica_cluster_states</title></a>
+  <use id='nn' x='962' y='1165' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_cluster_states.replica_id'><text id='sys.dm_hadr_database_replica_cluster_states.replica_id' x='979' y='1175' onmouseover="hghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_replicas','sys.availability_replicas.replica_id'])">replica_id</text><text x='1216' y='1176' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_database_replica_cluster_states.replica_id'><use id='fk' x='1220' y='1164' xlink:href='#fk'/><title>References availability_replicas ( replica_id ) </title></a>
+  <use id='nn' x='962' y='1181' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_cluster_states.group_database_id'><text id='sys.dm_hadr_database_replica_cluster_states.group_database_id' x='979' y='1191' onmouseover="hghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.availability_databases_cluster.group_database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_cluster_states_Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster','sys.availability_databases_cluster.group_database_id'])">group_database_id</text><text x='1216' y='1192' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_database_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_database_replica_cluster_states.group_database_id'><use id='fk' x='1220' y='1180' xlink:href='#fk'/><title>References availability_databases_cluster ( group_database_id ) </title></a>
+  <a xlink:href='#dm_hadr_database_replica_cluster_states.database_name'><text id='sys.dm_hadr_database_replica_cluster_states.database_name' x='979' y='1207'>database_name</text><text x='1216' y='1208' text-anchor='end' class='colType'>nvarchar(128)</text><title>database_name
+nvarchar(128)</title></a>
+  <use id='nn' x='962' y='1213' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_cluster_states.is_failover_ready'><text id='sys.dm_hadr_database_replica_cluster_states.is_failover_ready' x='979' y='1223'>is_failover_ready</text><text x='1216' y='1224' text-anchor='end' class='colType'>bit</text><title>is_failover_ready
+* bit</title></a>
+  <use id='nn' x='962' y='1229' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_cluster_states.is_pending_secondary_suspend'><text id='sys.dm_hadr_database_replica_cluster_states.is_pending_secondary_suspend' x='979' y='1239'>is_pending_secondary_suspend</text><text x='1216' y='1240' text-anchor='end' class='colType'>bit</text><title>is_pending_secondary_suspend
+* bit</title></a>
+  <use id='nn' x='962' y='1245' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_cluster_states.is_database_joined'><text id='sys.dm_hadr_database_replica_cluster_states.is_database_joined' x='979' y='1255'>is_database_joined</text><text x='1216' y='1256' text-anchor='end' class='colType'>bit</text><title>is_database_joined
+* bit</title></a>
+  <a xlink:href='#dm_hadr_database_replica_cluster_states.recovery_lsn'><text id='sys.dm_hadr_database_replica_cluster_states.recovery_lsn' x='979' y='1271'>recovery_lsn</text><text x='1216' y='1272' text-anchor='end' class='colType'>numeric(25,0)</text><title>recovery_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_cluster_states.truncation_lsn'><text id='sys.dm_hadr_database_replica_cluster_states.truncation_lsn' x='979' y='1287'>truncation_lsn</text><text x='1216' y='1288' text-anchor='end' class='colType'>numeric(25,0)</text><title>truncation_lsn
+numeric(25,0)</title></a>
+
+<!-- == Table 'dm_hadr_database_replica_states' == -->
+<rect class='entity' x='1392' y='1128' width='272' height='624' rx='8' ry='8' style='stroke:none'/>
+<path d='M 1392 1156 L 1392 1136 Q 1392 1128 1400 1128 L 1656 1128 Q 1664 1128 1664 1136 L 1664 1156 L1392 1156 ' style='fill:url(#tbg_B3801A);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1392' y='1128' width='272' height='624' rx='8' ry='8' style='fill:none;stroke:#B3801A'/>
+<a xlink:href='#dm_hadr_database_replica_states'><text x='1418' y='1148'>sys.dm_hadr_database_replica_states</text><title>Table sys.dm_hadr_database_replica_states</title></a>
+  <use id='nn' x='1394' y='1165' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_states.database_id'><use id='idx' x='1394' y='1164' xlink:href='#idx'/><title>Idx_dm_hadr_database_replica_states_database_id ( database_id ) </title></a>
+<a xlink:href='#dm_hadr_database_replica_states.database_id'><text id='sys.dm_hadr_database_replica_states.database_id' x='1411' y='1175' onmouseover="hghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.databases.database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_fk_dm_hadr_database_replica_states','sys.databases.database_id'])">database_id</text><text x='1648' y='1176' text-anchor='end' class='colType'>int</text><title>database_id
+* int</title></a>
+<a xlink:href='#dm_hadr_database_replica_states.database_id'><use id='fk' x='1652' y='1164' xlink:href='#fk'/><title>References databases ( database_id ) </title></a>
+  <use id='nn' x='1394' y='1181' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_states.group_id'><text id='sys.dm_hadr_database_replica_states.group_id' x='1411' y='1191'>group_id</text><text x='1648' y='1192' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_id
+* uniqueidentifier</title></a>
+  <use id='nn' x='1394' y='1197' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_states.replica_id'><text id='sys.dm_hadr_database_replica_states.replica_id' x='1411' y='1207' onmouseover="hghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.availability_replicas.replica_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_replicas','sys.availability_replicas.replica_id'])">replica_id</text><text x='1648' y='1208' text-anchor='end' class='colType'>uniqueidentifier</text><title>replica_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_database_replica_states.replica_id'><use id='fk' x='1652' y='1196' xlink:href='#fk'/><title>References availability_replicas ( replica_id ) </title></a>
+  <use id='nn' x='1394' y='1213' xlink:href='#nn'/><a xlink:href='#dm_hadr_database_replica_states.group_database_id'><text id='sys.dm_hadr_database_replica_states.group_database_id' x='1411' y='1223' onmouseover="hghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.availability_databases_cluster.group_database_id'])" onmouseout="uhghl(['dm_hadr_database_replica_states_Fk_dm_hadr_database_replica_states_availability_databases_cluster','sys.availability_databases_cluster.group_database_id'])">group_database_id</text><text x='1648' y='1224' text-anchor='end' class='colType'>uniqueidentifier</text><title>group_database_id
+* uniqueidentifier</title></a>
+<a xlink:href='#dm_hadr_database_replica_states.group_database_id'><use id='fk' x='1652' y='1212' xlink:href='#fk'/><title>References availability_databases_cluster ( group_database_id ) </title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.is_local'><text id='sys.dm_hadr_database_replica_states.is_local' x='1411' y='1239'>is_local</text><text x='1648' y='1240' text-anchor='end' class='colType'>bit</text><title>is_local
+bit</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.is_primary_replica'><text id='sys.dm_hadr_database_replica_states.is_primary_replica' x='1411' y='1255'>is_primary_replica</text><text x='1648' y='1256' text-anchor='end' class='colType'>bit</text><title>is_primary_replica
+bit</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.synchronization_state'><text id='sys.dm_hadr_database_replica_states.synchronization_state' x='1411' y='1271'>synchronization_state</text><text x='1648' y='1272' text-anchor='end' class='colType'>tinyint</text><title>synchronization_state
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.synchronization_state_desc'><text id='sys.dm_hadr_database_replica_states.synchronization_state_desc' x='1411' y='1287'>synchronization_state_desc</text><text x='1648' y='1288' text-anchor='end' class='colType'>nvarchar(60)</text><title>synchronization_state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.is_commit_participant'><text id='sys.dm_hadr_database_replica_states.is_commit_participant' x='1411' y='1303'>is_commit_participant</text><text x='1648' y='1304' text-anchor='end' class='colType'>bit</text><title>is_commit_participant
+bit</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.synchronization_health'><text id='sys.dm_hadr_database_replica_states.synchronization_health' x='1411' y='1319'>synchronization_health</text><text x='1648' y='1320' text-anchor='end' class='colType'>tinyint</text><title>synchronization_health
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.synchronization_health_desc'><text id='sys.dm_hadr_database_replica_states.synchronization_health_desc' x='1411' y='1335'>synchronization_health_desc</text><text x='1648' y='1336' text-anchor='end' class='colType'>nvarchar(60)</text><title>synchronization_health_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.database_state'><text id='sys.dm_hadr_database_replica_states.database_state' x='1411' y='1351'>database_state</text><text x='1648' y='1352' text-anchor='end' class='colType'>tinyint</text><title>database_state
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.database_state_desc'><text id='sys.dm_hadr_database_replica_states.database_state_desc' x='1411' y='1367'>database_state_desc</text><text x='1648' y='1368' text-anchor='end' class='colType'>nvarchar(60)</text><title>database_state_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.is_suspended'><text id='sys.dm_hadr_database_replica_states.is_suspended' x='1411' y='1383'>is_suspended</text><text x='1648' y='1384' text-anchor='end' class='colType'>bit</text><title>is_suspended
+bit</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.suspend_reason'><text id='sys.dm_hadr_database_replica_states.suspend_reason' x='1411' y='1399'>suspend_reason</text><text x='1648' y='1400' text-anchor='end' class='colType'>tinyint</text><title>suspend_reason
+tinyint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.suspend_reason_desc'><text id='sys.dm_hadr_database_replica_states.suspend_reason_desc' x='1411' y='1415'>suspend_reason_desc</text><text x='1648' y='1416' text-anchor='end' class='colType'>nvarchar(60)</text><title>suspend_reason_desc
+nvarchar(60)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.recovery_lsn'><text id='sys.dm_hadr_database_replica_states.recovery_lsn' x='1411' y='1431'>recovery_lsn</text><text x='1648' y='1432' text-anchor='end' class='colType'>numeric(25,0)</text><title>recovery_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.truncation_lsn'><text id='sys.dm_hadr_database_replica_states.truncation_lsn' x='1411' y='1447'>truncation_lsn</text><text x='1648' y='1448' text-anchor='end' class='colType'>numeric(25,0)</text><title>truncation_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_sent_lsn'><text id='sys.dm_hadr_database_replica_states.last_sent_lsn' x='1411' y='1463'>last_sent_lsn</text><text x='1648' y='1464' text-anchor='end' class='colType'>numeric(25,0)</text><title>last_sent_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_sent_time'><text id='sys.dm_hadr_database_replica_states.last_sent_time' x='1411' y='1479'>last_sent_time</text><text x='1648' y='1480' text-anchor='end' class='colType'>datetime</text><title>last_sent_time
+datetime</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_received_lsn'><text id='sys.dm_hadr_database_replica_states.last_received_lsn' x='1411' y='1495'>last_received_lsn</text><text x='1648' y='1496' text-anchor='end' class='colType'>numeric(25,0)</text><title>last_received_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_received_time'><text id='sys.dm_hadr_database_replica_states.last_received_time' x='1411' y='1511'>last_received_time</text><text x='1648' y='1512' text-anchor='end' class='colType'>datetime</text><title>last_received_time
+datetime</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_hardened_lsn'><text id='sys.dm_hadr_database_replica_states.last_hardened_lsn' x='1411' y='1527'>last_hardened_lsn</text><text x='1648' y='1528' text-anchor='end' class='colType'>numeric(25,0)</text><title>last_hardened_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_hardened_time'><text id='sys.dm_hadr_database_replica_states.last_hardened_time' x='1411' y='1543'>last_hardened_time</text><text x='1648' y='1544' text-anchor='end' class='colType'>datetime</text><title>last_hardened_time
+datetime</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_redone_lsn'><text id='sys.dm_hadr_database_replica_states.last_redone_lsn' x='1411' y='1559'>last_redone_lsn</text><text x='1648' y='1560' text-anchor='end' class='colType'>numeric(25,0)</text><title>last_redone_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_redone_time'><text id='sys.dm_hadr_database_replica_states.last_redone_time' x='1411' y='1575'>last_redone_time</text><text x='1648' y='1576' text-anchor='end' class='colType'>datetime</text><title>last_redone_time
+datetime</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.log_send_queue_size'><text id='sys.dm_hadr_database_replica_states.log_send_queue_size' x='1411' y='1591'>log_send_queue_size</text><text x='1648' y='1592' text-anchor='end' class='colType'>bigint</text><title>log_send_queue_size
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.log_send_rate'><text id='sys.dm_hadr_database_replica_states.log_send_rate' x='1411' y='1607'>log_send_rate</text><text x='1648' y='1608' text-anchor='end' class='colType'>bigint</text><title>log_send_rate
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.redo_queue_size'><text id='sys.dm_hadr_database_replica_states.redo_queue_size' x='1411' y='1623'>redo_queue_size</text><text x='1648' y='1624' text-anchor='end' class='colType'>bigint</text><title>redo_queue_size
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.redo_rate'><text id='sys.dm_hadr_database_replica_states.redo_rate' x='1411' y='1639'>redo_rate</text><text x='1648' y='1640' text-anchor='end' class='colType'>bigint</text><title>redo_rate
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.filestream_send_rate'><text id='sys.dm_hadr_database_replica_states.filestream_send_rate' x='1411' y='1655'>filestream_send_rate</text><text x='1648' y='1656' text-anchor='end' class='colType'>bigint</text><title>filestream_send_rate
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.end_of_log_lsn'><text id='sys.dm_hadr_database_replica_states.end_of_log_lsn' x='1411' y='1671'>end_of_log_lsn</text><text x='1648' y='1672' text-anchor='end' class='colType'>numeric(25,0)</text><title>end_of_log_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_commit_lsn'><text id='sys.dm_hadr_database_replica_states.last_commit_lsn' x='1411' y='1687'>last_commit_lsn</text><text x='1648' y='1688' text-anchor='end' class='colType'>numeric(25,0)</text><title>last_commit_lsn
+numeric(25,0)</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.last_commit_time'><text id='sys.dm_hadr_database_replica_states.last_commit_time' x='1411' y='1703'>last_commit_time</text><text x='1648' y='1704' text-anchor='end' class='colType'>datetime</text><title>last_commit_time
+datetime</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.low_water_mark_for_ghosts'><text id='sys.dm_hadr_database_replica_states.low_water_mark_for_ghosts' x='1411' y='1719'>low_water_mark_for_ghosts</text><text x='1648' y='1720' text-anchor='end' class='colType'>bigint</text><title>low_water_mark_for_ghosts
+bigint</title></a>
+  <a xlink:href='#dm_hadr_database_replica_states.secondary_lag_seconds'><text id='sys.dm_hadr_database_replica_states.secondary_lag_seconds' x='1411' y='1735'>secondary_lag_seconds</text><text x='1648' y='1736' text-anchor='end' class='colType'>bigint</text><title>secondary_lag_seconds
+bigint</title></a>
+
+<!-- == Table 'databases' == -->
+<rect class='entity' x='752' y='1592' width='96' height='48' rx='8' ry='8' style='stroke:none'/>
+<path d='M 752 1620 L 752 1600 Q 752 1592 760 1592 L 840 1592 Q 848 1592 848 1600 L 848 1620 L752 1620 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='752' y='1592' width='96' height='48' rx='8' ry='8' style='fill:none;stroke:#3986C1'/>
+<a xlink:href='#databases'><text x='755' y='1612'>sys.databases</text><title>Table sys.databases</title></a>
+<text x='768' y='1636'>--more--</text>
+
+<!-- == Callout == -->
+<rect class='callout' x='688' y='64' width='320' height='117' rx='16' ry='16'  />
+<text x='712' y='64' class='callout'>
+    <tspan x='692' dx='8' dy='17'>SQL Server 2017 Availability Groups Schema   </tspan>
+    <tspan x='692' dx='8' dy='17'>&nbsp;</tspan>
+    <tspan x='692' dx='8' dy='17'>author&#58; mattmc3</tspan>
+    <tspan x='692' dx='8' dy='17'>homepage&#58; https&#58;&#47;&#47;github&#46;com&#47;mattmc3&#47;sp&#95;ag&#95;health</tspan>
+    <tspan x='692' dx='8' dy='17'>&nbsp;</tspan>
+    <tspan x='692' dx='8' dy='17'>MS docs&#58; https&#58;&#47;&#47;bit&#46;ly&#47;2xGe3BK</tspan>
+</text>
+</g></svg></div>
+
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_databases_cluster' onclick='window.scrollTo(72, 1152);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_databases_cluster</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='availability_databases_cluster.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='availability_databases_cluster.group_database_id'>group&#95;database&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_databases_cluster.database_name'>database&#95;name</a></td>
+		<td> sysname   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_databases_cluster.truncation_lsn'>truncation&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_databases_cluster_availability_groups</td>
+		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_group_listener_ip_addresses' onclick='window.scrollTo(792, 272);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_group_listener_ip_addresses</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='availability_group_listener_ip_addresses.listener_id'>listener&#95;id</a></td>
+		<td> nvarchar&#40; 36 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.ip_address'>ip&#95;address</a></td>
+		<td> nvarchar&#40; 48 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.ip_subnet_mask'>ip&#95;subnet&#95;mask</a></td>
+		<td> nvarchar&#40; 15 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='availability_group_listener_ip_addresses.is_dhcp'>is&#95;dhcp</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.network_subnet_ip'>network&#95;subnet&#95;ip</a></td>
+		<td> nvarchar&#40; 48 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.network_subnet_prefix_length'>network&#95;subnet&#95;prefix&#95;length</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.network_subnet_ipv4_mask'>network&#95;subnet&#95;ipv4&#95;mask</a></td>
+		<td> nvarchar&#40; 48 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.state'>state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listener_ip_addresses.state_desc'>state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_group_listener_ip_addresses_availability_group_listeners</td>
+		<td > ( listener&#95;id ) ref <a href='#availability&#95;group&#95;listeners'>availability&#95;group&#95;listeners</a> (listener&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_group_listeners' onclick='window.scrollTo(248, 272);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_group_listeners</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='availability_group_listeners.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='availability_group_listeners.listener_id'>listener&#95;id</a></td>
+		<td> nvarchar&#40; 36 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listeners.dns_name'>dns&#95;name</a></td>
+		<td> nvarchar&#40; 63 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listeners.port'>port</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='availability_group_listeners.is_conformant'>is&#95;conformant</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_group_listeners.ip_configuration_string_from_cluster'>ip&#95;configuration&#95;string&#95;from&#95;cluster</a></td>
+		<td> nvarchar&#40; 4000 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_group_listeners_availability_groups</td>
+		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_groups' onclick='window.scrollTo(248, 544);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_groups</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='availability_groups.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.name'>name</a></td>
+		<td> sysname   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.resource_id'>resource&#95;id</a></td>
+		<td> nvarchar&#40; 40 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.resource_group_id'>resource&#95;group&#95;id</a></td>
+		<td> nvarchar&#40; 40 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.failure_condition_level'>failure&#95;condition&#95;level</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.health_check_timeout'>health&#95;check&#95;timeout</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.automated_backup_preference'>automated&#95;backup&#95;preference</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.automated_backup_preference_desc'>automated&#95;backup&#95;preference&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.version'>version</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.basic_features'>basic&#95;features</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.dtc_support'>dtc&#95;support</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.db_failover'>db&#95;failover</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups.is_distributed'>is&#95;distributed</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_groups_cluster' onclick='window.scrollTo(60, 544);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_groups_cluster</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='availability_groups_cluster.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.name'>name</a></td>
+		<td> sysname   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.resource_id'>resource&#95;id</a></td>
+		<td> nvarchar&#40; 40 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.resource_group_id'>resource&#95;group&#95;id</a></td>
+		<td> nvarchar&#40; 40 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.failure_condition_level'>failure&#95;condition&#95;level</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.health_check_timeout'>health&#95;check&#95;timeout</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.automated_backup_preference'>automated&#95;backup&#95;preference</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_groups_cluster.automated_backup_preference_desc'>automated&#95;backup&#95;preference&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_groups_cluster_availability_groups</td>
+		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='availability_replicas' onclick='window.scrollTo(696, 528);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.availability_replicas</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='availability_replicas.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='availability_replicas.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.replica_metadata_id'>replica&#95;metadata&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.replica_server_name'>replica&#95;server&#95;name</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.owner_sid'>owner&#95;sid</a></td>
+		<td> varbinary&#40; 85 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.endpoint_url'>endpoint&#95;url</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.availability_mode'>availability&#95;mode</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.availability_mode_desc'>availability&#95;mode&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.failover_mode'>failover&#95;mode</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.failover_mode_desc'>failover&#95;mode&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.session_timeout'>session&#95;timeout</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.primary_role_allow_connections'>primary&#95;role&#95;allow&#95;connections</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.primary_role_allow_connections_desc'>primary&#95;role&#95;allow&#95;connections&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.secondary_role_allow_connections'>secondary&#95;role&#95;allow&#95;connections</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.secondary_role_allow_connections_desc'>secondary&#95;role&#95;allow&#95;connections&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.create_date'>create&#95;date</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.modify_date'>modify&#95;date</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.backup_priority'>backup&#95;priority</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.read_only_routing_url'>read&#95;only&#95;routing&#95;url</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.seeding_mode'>seeding&#95;mode</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='availability_replicas.seeding_mode_desc'>seeding&#95;mode&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_availability_replicas_availability_groups</td>
+		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='databases' onclick='window.scrollTo(552, 1600);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.databases</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.name'>name</a></td>
+		<td> sysname   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#unq'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='databases.database_id'>database&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.source_database_id'>source&#95;database&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.owner_sid'>owner&#95;sid</a></td>
+		<td> varbinary&#40; 85 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.create_date'>create&#95;date</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.compatibility_level'>compatibility&#95;level</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.collation_name'>collation&#95;name</a></td>
+		<td> sysname   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.user_access'>user&#95;access</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.user_access_desc'>user&#95;access&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_read_only'>is&#95;read&#95;only</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_auto_close_on'>is&#95;auto&#95;close&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_auto_shrink_on'>is&#95;auto&#95;shrink&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.state'>state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.state_desc'>state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_in_standby'>is&#95;in&#95;standby</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_cleanly_shutdown'>is&#95;cleanly&#95;shutdown</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_supplemental_logging_enabled'>is&#95;supplemental&#95;logging&#95;enabled</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.snapshot_isolation_state'>snapshot&#95;isolation&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.snapshot_isolation_state_desc'>snapshot&#95;isolation&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_read_committed_snapshot_on'>is&#95;read&#95;committed&#95;snapshot&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.recovery_model'>recovery&#95;model</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.recovery_model_desc'>recovery&#95;model&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.page_verify_option'>page&#95;verify&#95;option</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.page_verify_option_desc'>page&#95;verify&#95;option&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_auto_create_stats_on'>is&#95;auto&#95;create&#95;stats&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_auto_create_stats_incremental_on'>is&#95;auto&#95;create&#95;stats&#95;incremental&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_auto_update_stats_on'>is&#95;auto&#95;update&#95;stats&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_auto_update_stats_async_on'>is&#95;auto&#95;update&#95;stats&#95;async&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_ansi_null_default_on'>is&#95;ansi&#95;null&#95;default&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_ansi_nulls_on'>is&#95;ansi&#95;nulls&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_ansi_padding_on'>is&#95;ansi&#95;padding&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_ansi_warnings_on'>is&#95;ansi&#95;warnings&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_arithabort_on'>is&#95;arithabort&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_concat_null_yields_null_on'>is&#95;concat&#95;null&#95;yields&#95;null&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_numeric_roundabort_on'>is&#95;numeric&#95;roundabort&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_quoted_identifier_on'>is&#95;quoted&#95;identifier&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_recursive_triggers_on'>is&#95;recursive&#95;triggers&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_cursor_close_on_commit_on'>is&#95;cursor&#95;close&#95;on&#95;commit&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_local_cursor_default'>is&#95;local&#95;cursor&#95;default</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_fulltext_enabled'>is&#95;fulltext&#95;enabled</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_trustworthy_on'>is&#95;trustworthy&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_db_chaining_on'>is&#95;db&#95;chaining&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_parameterization_forced'>is&#95;parameterization&#95;forced</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_master_key_encrypted_by_server'>is&#95;master&#95;key&#95;encrypted&#95;by&#95;server</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_query_store_on'>is&#95;query&#95;store&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_published'>is&#95;published</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_subscribed'>is&#95;subscribed</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_merge_published'>is&#95;merge&#95;published</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_distributor'>is&#95;distributor</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_sync_with_backup'>is&#95;sync&#95;with&#95;backup</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.service_broker_guid'>service&#95;broker&#95;guid</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_broker_enabled'>is&#95;broker&#95;enabled</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.log_reuse_wait'>log&#95;reuse&#95;wait</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.log_reuse_wait_desc'>log&#95;reuse&#95;wait&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_date_correlation_on'>is&#95;date&#95;correlation&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='databases.is_cdc_enabled'>is&#95;cdc&#95;enabled</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_encrypted'>is&#95;encrypted</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_honor_broker_priority_on'>is&#95;honor&#95;broker&#95;priority&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.group_database_id'>group&#95;database&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.resource_pool_id'>resource&#95;pool&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.default_language_lcid'>default&#95;language&#95;lcid</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.default_language_name'>default&#95;language&#95;name</a></td>
+		<td> nvarchar&#40; 128 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.default_fulltext_language_lcid'>default&#95;fulltext&#95;language&#95;lcid</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.default_fulltext_language_name'>default&#95;fulltext&#95;language&#95;name</a></td>
+		<td> nvarchar&#40; 128 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_nested_triggers_on'>is&#95;nested&#95;triggers&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_transform_noise_words_on'>is&#95;transform&#95;noise&#95;words&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.two_digit_year_cutoff'>two&#95;digit&#95;year&#95;cutoff</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.containment'>containment</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.containment_desc'>containment&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.target_recovery_time_in_seconds'>target&#95;recovery&#95;time&#95;in&#95;seconds</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.delayed_durability'>delayed&#95;durability</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.delayed_durability_desc'>delayed&#95;durability&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_memory_optimized_elevate_to_snapshot_on'>is&#95;memory&#95;optimized&#95;elevate&#95;to&#95;snapshot&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_federation_member'>is&#95;federation&#95;member</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_remote_data_archive_enabled'>is&#95;remote&#95;data&#95;archive&#95;enabled</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='databases.is_mixed_page_allocation_on'>is&#95;mixed&#95;page&#95;allocation&#95;on</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#unq'/></svg></td><td>Unq&#95;databases&#95;database&#95;id</td>
+		<td> ON database&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_availability_group_states' onclick='window.scrollTo(60, 784);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_availability_group_states</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_availability_group_states.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.primary_replica'>primary&#95;replica</a></td>
+		<td> nvarchar&#40; 128 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.primary_recovery_health'>primary&#95;recovery&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.primary_recovery_health_desc'>primary&#95;recovery&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.secondary_recovery_health'>secondary&#95;recovery&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.secondary_recovery_health_desc'>secondary&#95;recovery&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.synchronization_health'>synchronization&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_group_states.synchronization_health_desc'>synchronization&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_group_states_availability_groups</td>
+		<td > ( group&#95;id ) ref <a href='#availability&#95;groups'>availability&#95;groups</a> (group&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_availability_replica_cluster_nodes' onclick='window.scrollTo(712, 944);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_availability_replica_cluster_nodes</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_nodes.group_name'>group&#95;name</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_nodes.replica_server_name'>replica&#95;server&#95;name</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_nodes.node_name'>node&#95;name</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_availability_replica_cluster_states' onclick='window.scrollTo(1176, 544);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_availability_replica_cluster_states</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_availability_replica_cluster_states.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_states.replica_server_name'>replica&#95;server&#95;name</a></td>
+		<td> nvarchar&#40; 256 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_states.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_cluster_states.join_state'>join&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_cluster_states.join_state_desc'>join&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_replica_cluster_states_availability_replicas</td>
+		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_availability_replica_states' onclick='window.scrollTo(1176, 688);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_availability_replica_states</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_availability_replica_states.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_states.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_availability_replica_states.is_local'>is&#95;local</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.role'>role</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.role_desc'>role&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.operational_state'>operational&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.operational_state_desc'>operational&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.connected_state'>connected&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.connected_state_desc'>connected&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.recovery_health'>recovery&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.recovery_health_desc'>recovery&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.synchronization_health'>synchronization&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.synchronization_health_desc'>synchronization&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.last_connect_error_number'>last&#95;connect&#95;error&#95;number</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.last_connect_error_description'>last&#95;connect&#95;error&#95;description</a></td>
+		<td> nvarchar&#40; 1024 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_availability_replica_states.last_connect_error_timestamp'>last&#95;connect&#95;error&#95;timestamp</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_availability_replica_states_availability_replicas</td>
+		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_database_replica_cluster_states' onclick='window.scrollTo(760, 1136);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_database_replica_cluster_states</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_database_replica_cluster_states.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_database_replica_cluster_states.group_database_id'>group&#95;database&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.database_name'>database&#95;name</a></td>
+		<td> nvarchar&#40; 128 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.is_failover_ready'>is&#95;failover&#95;ready</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.is_pending_secondary_suspend'>is&#95;pending&#95;secondary&#95;suspend</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.is_database_joined'>is&#95;database&#95;joined</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.recovery_lsn'>recovery&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_cluster_states.truncation_lsn'>truncation&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster</td>
+		<td > ( group&#95;database&#95;id ) ref <a href='#availability&#95;databases&#95;cluster'>availability&#95;databases&#95;cluster</a> (group&#95;database&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_cluster_states_availability_replicas</td>
+		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br><br>
+<div class='card'><div class='card-body'><a name='dm_hadr_database_replica_states' onclick='window.scrollTo(1192, 1136);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys.dm_hadr_database_replica_states</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_database_replica_states.database_id'>database&#95;id</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='dm_hadr_database_replica_states.group_id'>group&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_database_replica_states.replica_id'>replica&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='dm_hadr_database_replica_states.group_database_id'>group&#95;database&#95;id</a></td>
+		<td> uniqueidentifier   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.is_local'>is&#95;local</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.is_primary_replica'>is&#95;primary&#95;replica</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.synchronization_state'>synchronization&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.synchronization_state_desc'>synchronization&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.is_commit_participant'>is&#95;commit&#95;participant</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.synchronization_health'>synchronization&#95;health</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.synchronization_health_desc'>synchronization&#95;health&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.database_state'>database&#95;state</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.database_state_desc'>database&#95;state&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.is_suspended'>is&#95;suspended</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.suspend_reason'>suspend&#95;reason</a></td>
+		<td> tinyint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.suspend_reason_desc'>suspend&#95;reason&#95;desc</a></td>
+		<td> nvarchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.recovery_lsn'>recovery&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.truncation_lsn'>truncation&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_sent_lsn'>last&#95;sent&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_sent_time'>last&#95;sent&#95;time</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_received_lsn'>last&#95;received&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_received_time'>last&#95;received&#95;time</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_hardened_lsn'>last&#95;hardened&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_hardened_time'>last&#95;hardened&#95;time</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_redone_lsn'>last&#95;redone&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_redone_time'>last&#95;redone&#95;time</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.log_send_queue_size'>log&#95;send&#95;queue&#95;size</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.log_send_rate'>log&#95;send&#95;rate</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.redo_queue_size'>redo&#95;queue&#95;size</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.redo_rate'>redo&#95;rate</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.filestream_send_rate'>filestream&#95;send&#95;rate</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.end_of_log_lsn'>end&#95;of&#95;log&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_commit_lsn'>last&#95;commit&#95;lsn</a></td>
+		<td> numeric&#40; 25&#44; 0 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.last_commit_time'>last&#95;commit&#95;time</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.low_water_mark_for_ghosts'>low&#95;water&#95;mark&#95;for&#95;ghosts</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='dm_hadr_database_replica_states.secondary_lag_seconds'>secondary&#95;lag&#95;seconds</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>Idx&#95;dm&#95;hadr&#95;database&#95;replica&#95;states&#95;database&#95;id</td>
+		<td> ON database&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_states_availability_databases_cluster</td>
+		<td > ( group&#95;database&#95;id ) ref <a href='#availability&#95;databases&#95;cluster'>availability&#95;databases&#95;cluster</a> (group&#95;database&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>fk_dm_hadr_database_replica_states</td>
+		<td > ( database&#95;id ) ref <a href='#databases'>databases</a> (database&#95;id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_dm_hadr_database_replica_states_availability_replicas</td>
+		<td > ( replica&#95;id ) ref <a href='#availability&#95;replicas'>availability&#95;replicas</a> (replica&#95;id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<p align='right'><a href='https://www.dbschema.com' style='color:#aaa'>Powered by DbSchema</a></p></body></html>

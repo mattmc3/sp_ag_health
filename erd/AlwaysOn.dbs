@@ -6,9 +6,12 @@
 			<column name="group_database_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
 			<column name="database_name" type="sysname" length="128" decimal="0" jt="12" />
 			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<fk name="Fk_availability_databases_cluster_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
 		</table>
 		<table name="availability_group_listener_ip_addresses" >
-			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" />
+			<column name="listener_id" type="nvarchar" length="36" jt="12" mandatory="y" />
 			<column name="ip_address" type="nvarchar" length="48" decimal="0" jt="12" />
 			<column name="ip_subnet_mask" type="nvarchar" length="15" decimal="0" jt="12" />
 			<column name="is_dhcp" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
@@ -17,14 +20,20 @@
 			<column name="network_subnet_ipv4_mask" type="nvarchar" length="48" decimal="0" jt="12" />
 			<column name="state" type="tinyint" length="3" decimal="0" jt="-6" />
 			<column name="state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_availability_group_listener_ip_addresses_availability_group_listeners" virtual="y" to_schema="sys" to_table="availability_group_listeners" >
+				<fk_column name="listener_id" pk="listener_id" />
+			</fk>
 		</table>
 		<table name="availability_group_listeners" >
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
-			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" />
+			<column name="listener_id" type="nvarchar" length="36" decimal="0" jt="12" mandatory="y" />
 			<column name="dns_name" type="nvarchar" length="63" decimal="0" jt="12" />
 			<column name="port" type="int" length="10" decimal="0" jt="4" />
 			<column name="is_conformant" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<column name="ip_configuration_string_from_cluster" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<fk name="Fk_availability_group_listeners_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
 		</table>
 		<table name="availability_groups" >
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
@@ -50,6 +59,9 @@
 			<column name="health_check_timeout" type="int" length="10" decimal="0" jt="4" />
 			<column name="automated_backup_preference" type="tinyint" length="3" decimal="0" jt="-6" />
 			<column name="automated_backup_preference_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_availability_groups_cluster_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
 		</table>
 		<table name="availability_read_only_routing_lists" >
 			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
@@ -58,7 +70,7 @@
 		</table>
 		<table name="availability_replicas" >
 			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
-			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" />
+			<column name="group_id" type="uniqueidentifier" jt="1" mandatory="y" />
 			<column name="replica_metadata_id" type="int" length="10" decimal="0" jt="4" />
 			<column name="replica_server_name" type="nvarchar" length="256" decimal="0" jt="12" />
 			<column name="owner_sid" type="varbinary" length="85" decimal="0" jt="-3" />
@@ -78,6 +90,9 @@
 			<column name="read_only_routing_url" type="nvarchar" length="256" decimal="0" jt="12" />
 			<column name="seeding_mode" type="tinyint" length="3" decimal="0" jt="-6" />
 			<column name="seeding_mode_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_availability_replicas_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
 		</table>
 		<table name="databases" >
 			<column name="name" type="sysname" length="128" decimal="0" jt="12" mandatory="y" />
@@ -157,6 +172,9 @@
 			<column name="is_federation_member" type="bit" length="1" decimal="0" jt="-7" />
 			<column name="is_remote_data_archive_enabled" type="bit" length="1" decimal="0" jt="-7" />
 			<column name="is_mixed_page_allocation_on" type="bit" length="1" decimal="0" jt="-7" />
+			<index name="Unq_databases_database_id" unique="UNIQUE" >
+				<column name="database_id" />
+			</index>
 		</table>
 		<table name="dm_hadr_auto_page_repair" >
 			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
@@ -190,6 +208,9 @@
 			<column name="secondary_recovery_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
 			<column name="synchronization_health" type="tinyint" length="3" decimal="0" jt="-6" />
 			<column name="synchronization_health_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_dm_hadr_availability_group_states_availability_groups" virtual="y" to_schema="sys" to_table="availability_groups" >
+				<fk_column name="group_id" pk="group_id" />
+			</fk>
 		</table>
 		<table name="dm_hadr_availability_replica_cluster_nodes" >
 			<column name="group_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
@@ -202,6 +223,9 @@
 			<column name="group_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
 			<column name="join_state" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
 			<column name="join_state_desc" type="nvarchar" length="60" decimal="0" jt="12" />
+			<fk name="Fk_dm_hadr_availability_replica_cluster_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
 		</table>
 		<table name="dm_hadr_availability_replica_states" >
 			<column name="replica_id" type="uniqueidentifier" length="36" decimal="0" jt="1" mandatory="y" />
@@ -220,6 +244,9 @@
 			<column name="last_connect_error_number" type="int" length="10" decimal="0" jt="4" />
 			<column name="last_connect_error_description" type="nvarchar" length="1024" decimal="0" jt="12" />
 			<column name="last_connect_error_timestamp" type="datetime" length="23" decimal="3" jt="93" />
+			<fk name="Fk_dm_hadr_availability_replica_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
 		</table>
 		<table name="dm_hadr_cluster" >
 			<column name="cluster_name" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
@@ -253,6 +280,12 @@
 			<column name="is_database_joined" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<column name="recovery_lsn" type="numeric" length="25" decimal="0" jt="2" />
 			<column name="truncation_lsn" type="numeric" length="25" decimal="0" jt="2" />
+			<fk name="Fk_dm_hadr_database_replica_cluster_states_availability_databases_cluster" virtual="y" to_schema="sys" to_table="availability_databases_cluster" >
+				<fk_column name="group_database_id" pk="group_database_id" />
+			</fk>
+			<fk name="Fk_dm_hadr_database_replica_cluster_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
 		</table>
 		<table name="dm_hadr_database_replica_states" >
 			<column name="database_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
@@ -291,6 +324,18 @@
 			<column name="last_commit_time" type="datetime" length="23" decimal="3" jt="93" />
 			<column name="low_water_mark_for_ghosts" type="bigint" length="19" decimal="0" jt="-5" />
 			<column name="secondary_lag_seconds" type="bigint" length="19" decimal="0" jt="-5" />
+			<index name="Idx_dm_hadr_database_replica_states_database_id" unique="NORMAL" >
+				<column name="database_id" />
+			</index>
+			<fk name="Fk_dm_hadr_database_replica_states_availability_databases_cluster" virtual="y" to_schema="sys" to_table="availability_databases_cluster" >
+				<fk_column name="group_database_id" pk="group_database_id" />
+			</fk>
+			<fk name="fk_dm_hadr_database_replica_states" to_schema="sys" to_table="databases" >
+				<fk_column name="database_id" pk="database_id" />
+			</fk>
+			<fk name="Fk_dm_hadr_database_replica_states_availability_replicas" virtual="y" to_schema="sys" to_table="availability_replicas" >
+				<fk_column name="replica_id" pk="replica_id" />
+			</fk>
 		</table>
 		<table name="dm_hadr_instance_node_map" >
 			<column name="ag_resource_id" type="nvarchar" length="256" decimal="0" jt="12" mandatory="y" />
@@ -326,7 +371,45 @@
 		</table>
 	</schema>
 	<layout name="AlwaysOn" id="Layout_3a41df9" show_column_type="y" show_schema_name="y" show_relation="columns" >
-		<entity schema="sys" name="availability_replicas" color="3986C1" x="480" y="48" />
-		<entity schema="sys" name="availability_groups" color="3986C1" x="48" y="64" />
+		<entity schema="sys" name="availability_replicas" color="3986C1" x="896" y="528" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" color="B3801A" x="1376" y="544" />
+		<entity schema="sys" name="dm_hadr_availability_replica_states" color="B3801A" x="1376" y="688" />
+		<entity schema="sys" name="availability_group_listener_ip_addresses" color="B3801A" x="992" y="272" />
+		<entity schema="sys" name="availability_group_listeners" color="3986C1" x="448" y="272" />
+		<entity schema="sys" name="availability_groups" color="3986C1" x="448" y="544" />
+		<entity schema="sys" name="availability_groups_cluster" color="669999" x="48" y="544" />
+		<entity schema="sys" name="dm_hadr_availability_group_states" color="B3801A" x="64" y="784" />
+		<entity schema="sys" name="availability_databases_cluster" color="3986C1" x="272" y="1152" />
+		<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" color="B3801A" x="912" y="944" />
+		<entity schema="sys" name="dm_hadr_database_replica_cluster_states" color="B3801A" x="960" y="1136" />
+		<entity schema="sys" name="dm_hadr_database_replica_states" color="B3801A" x="1392" y="1136" />
+		<entity schema="sys" name="databases" color="3986C1" x="752" y="1600" />
+		<callout x="688" y="80" pointer="Round" >
+			<comment><![CDATA[SQL Server 2017 Availability Groups Schema   
+
+author: mattmc3
+homepage: https://github.com/mattmc3/sp_ag_health
+
+MS docs: https://bit.ly/2xGe3BK
+]]></comment>
+		</callout>
+		<group name="Availability Groups" color="C4E0F9" >
+			<entity schema="sys" name="availability_groups" />
+			<entity schema="sys" name="availability_groups_cluster" />
+			<entity schema="sys" name="dm_hadr_availability_group_states" />
+		</group>
+		<group name="Availability Replicas" color="C4E0F9" >
+			<entity schema="sys" name="availability_replicas" />
+			<entity schema="sys" name="dm_hadr_availability_replica_cluster_nodes" />
+			<entity schema="sys" name="dm_hadr_availability_replica_cluster_states" />
+			<entity schema="sys" name="dm_hadr_availability_replica_states" />
+		</group>
+		<group name="Availability Databases" color="C4E0F9" >
+			<entity schema="sys" name="availability_databases_cluster" />
+		</group>
+		<group name="Database Replicas" color="C4E0F9" >
+			<entity schema="sys" name="dm_hadr_database_replica_cluster_states" />
+			<entity schema="sys" name="dm_hadr_database_replica_states" />
+		</group>
 	</layout>
 </project>
