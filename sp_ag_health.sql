@@ -21,14 +21,42 @@ alter proc [dbo].[sp_ag_health]
     ,@select_columns nvarchar(max) = null
     -- the columns to order by in the result set
     ,@orderby_columns nvarchar(max) = null
+    -- shortcut to aid certain kinds of monitoring.
+    -- Supported modes: 'QUEUE SIZE', 'VERSION'
+    ,@mode nvarchar(100) = null
 as
 ------------------------------------------------------------------------------
 -- author:   mattmc3
--- version:  0.2.0
+-- version:  0.2.1
 -- homepage: https://github.com/mattmc3/sp_ag_health
 -- purpose:  report availability group health
 ------------------------------------------------------------------------------
 set nocount on
+
+if @mode = 'VERSION' begin
+    select '0.2.1'
+end
+else if @mode = 'QUEUE SIZE' begin
+    set @select_columns =
+        'alerts' +
+        ',database_name' +
+        ',log_send_queue_size_kb' +
+        ',redo_queue_size_kb' +
+        ',ag_name' +
+        ',ag_replica_server' +
+        ',is_ag_replica_local' +
+        ',ag_replica_role' +
+        ',primary_replica' +
+        ',synchronization_health_desc' +
+        ',connected_state_desc' +
+        ',availability_mode_desc' +
+        ',is_readable_secondary' +
+        ',synchronization_state_desc' +
+        ',is_suspended' +
+        ',is_joined' +
+        ',log_send_rate_kb_per_sec' +
+        ',redo_rate_kb_per_sec'
+end
 
 if object_id('tempdb..#ag') is not null drop table #ag
 select id = identity(int, 1, 1)
@@ -58,23 +86,23 @@ select id = identity(int, 1, 1)
      , dr_state.log_send_rate as log_send_rate_kb_per_sec
      , dr_state.redo_queue_size as redo_queue_size_kb
      , dr_state.redo_rate as redo_rate_kb_per_sec
-into #ag
-from sys.availability_groups as ag
-join sys.availability_replicas as ar
-  on ag.group_id = ar.group_id
-join sys.dm_hadr_availability_replica_states as ar_state
-  on ar.replica_id = ar_state.replica_id
-join sys.dm_hadr_database_replica_states dr_state
-  on ag.group_id = dr_state.group_id
- and dr_state.replica_id = ar_state.replica_id
-join sys.dm_hadr_database_replica_cluster_states as dbcs
-  on dr_state.replica_id = dbcs.replica_id
- and dr_state.group_database_id = dbcs.group_database_id
-join sys.dm_hadr_availability_group_states ag_state
-  on ag.group_id = ag_state.group_id
-where db_name(dr_state.database_id) = isnull(@dbname, db_name(dr_state.database_id))
-  and ar_state.is_local = isnull(@filter_is_local_value, ar_state.is_local)
-  and ar_state.role = isnull(@filter_role_value, ar_state.role)
+  into #ag
+  from sys.availability_groups as ag
+  join sys.availability_replicas as ar
+    on ag.group_id = ar.group_id
+  join sys.dm_hadr_availability_replica_states as ar_state
+    on ar.replica_id = ar_state.replica_id
+  join sys.dm_hadr_database_replica_states dr_state
+    on ag.group_id = dr_state.group_id
+   and dr_state.replica_id = ar_state.replica_id
+  join sys.dm_hadr_database_replica_cluster_states as dbcs
+    on dr_state.replica_id = dbcs.replica_id
+   and dr_state.group_database_id = dbcs.group_database_id
+  join sys.dm_hadr_availability_group_states ag_state
+    on ag.group_id = ag_state.group_id
+ where db_name(dr_state.database_id) = isnull(@dbname, db_name(dr_state.database_id))
+   and ar_state.is_local = isnull(@filter_is_local_value, ar_state.is_local)
+   and ar_state.role = isnull(@filter_role_value, ar_state.role)
 
 if object_id('tempdb..#alert') is not null drop table #alert
 select ag.id as ag_id
@@ -101,30 +129,30 @@ select ag.id as ag_id
        case when ag.synchronization_state_desc not in ('SYNCHRONIZED', 'SYNCHRONIZING') then 'AG sync state is: ' + ag.synchronization_state_desc + '; '
             else ''
        end)), '') as alerts
-into #alert
-from #ag ag
+  into #alert
+  from #ag ag
 
 -- sort by AGs with an alert, then the alert itself, then the db name, whether it's local, and finally the server
 if object_id('tempdb..#result') is not null drop table #result
 select ord = identity(int,1,1)
      , al.alerts
      , ag.*
-into #result
-from #ag ag
-join #alert al
-  on ag.id = al.ag_id
-order by
-    case when exists (
-        select top 1 ''
-        from #alert x
-        where x.ag_name = ag.ag_name
-        and x.alerts is not null
-     ) then 0 else 1 end
-    ,case when al.alerts is null then 1 else 0 end
-    ,al.alerts
-    ,ag.[database_name]
-    ,ag.is_ag_replica_local
-    ,ag.ag_replica_server
+  into #result
+  from #ag ag
+  join #alert al
+    on ag.id = al.ag_id
+ order by case when exists (select top 1 ''
+                              from #alert x
+                             where x.ag_name = ag.ag_name
+                               and x.alerts is not null)
+               then 0
+               else 1
+          end
+     , case when al.alerts is null then 1 else 0 end
+     , al.alerts
+     , ag.[database_name]
+     , ag.is_ag_replica_local
+     , ag.ag_replica_server
 
 -- get the results
 -- notice that we don't trust @select_columns and @orderby_columns and
